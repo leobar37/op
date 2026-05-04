@@ -32,7 +32,6 @@ const slowTests = [
   'tests/unit/targets/codex-runtime-integration.test.ts',
   'tests/unit/targets/codex-settings-bridge-launch.test.ts',
   'tests/unit/targets/droid-command-routing-integration.test.ts',
-  'tests/unit/targets/droid-config-manager.test.ts',
   'tests/unit/targets/native-claude-effort-launch.test.ts',
   'tests/unit/targets/settings-profile-browser-launch.test.ts',
   'tests/unit/targets/settings-profile-image-analysis-launch.test.ts',
