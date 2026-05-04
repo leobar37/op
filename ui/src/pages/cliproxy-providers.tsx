@@ -35,6 +35,7 @@ import {
 } from '@/hooks/use-cliproxy-providers';
 import { useDroid } from '@/hooks/use-droid';
 import type { DroidCustomModelEntry } from '@/lib/api-client';
+import { resolveDroidProviderForModel } from '@/lib/provider-mapping';
 import { cn } from '@/lib/utils';
 import { useTranslation } from 'react-i18next';
 
@@ -241,7 +242,7 @@ export function CliproxyProvidersPage() {
       apiKey,
       displayName: displayName || selectedModel,
       noImageSupport,
-      provider: 'anthropic',
+      provider: resolveDroidProviderForModel(selectedProvider, selectedModel),
     };
 
     return entry;
