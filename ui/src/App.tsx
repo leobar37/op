@@ -20,15 +20,12 @@ const AnalyticsPage = lazy(() =>
   import('@/pages/analytics').then((m) => ({ default: m.AnalyticsPage }))
 );
 const ApiPage = lazy(() => import('@/pages/api').then((m) => ({ default: m.ApiPage })));
-const CliproxyPage = lazy(() =>
-  import('@/pages/cliproxy').then((m) => ({ default: m.CliproxyPage }))
-);
-
 const CliproxyProvidersPage = lazy(() =>
   import('@/pages/cliproxy-providers').then((m) => ({ default: m.CliproxyProvidersPage }))
 );
-const CopilotPage = lazy(() => import('@/pages/copilot').then((m) => ({ default: m.CopilotPage })));
-const CursorPage = lazy(() => import('@/pages/cursor').then((m) => ({ default: m.CursorPage })));
+const DeprecatedRedirectPage = lazy(() =>
+  import('@/pages/deprecated-redirect').then((m) => ({ default: m.DeprecatedRedirectPage }))
+);
 const ClaudeExtensionPage = lazy(() =>
   import('@/pages/claude-extension').then((m) => ({ default: m.ClaudeExtensionPage }))
 );
@@ -102,7 +99,10 @@ export default function App() {
                       path="/cliproxy"
                       element={
                         <Suspense fallback={<PageLoader />}>
-                          <CliproxyPage />
+                          <DeprecatedRedirectPage
+                            target="/provider-models"
+                            title="CLI Proxy Plus"
+                          />
                         </Suspense>
                       }
                     />
@@ -112,6 +112,10 @@ export default function App() {
                     />
                     <Route
                       path="/cliproxy/control-panel"
+                      element={<Navigate to="/provider-models" replace />}
+                    />
+                    <Route
+                      path="/cliproxy/*"
                       element={<Navigate to="/provider-models" replace />}
                     />
                     <Route
@@ -126,7 +130,7 @@ export default function App() {
                       path="/copilot"
                       element={
                         <Suspense fallback={<PageLoader />}>
-                          <CopilotPage />
+                          <DeprecatedRedirectPage target="/providers" title="GitHub Copilot" />
                         </Suspense>
                       }
                     />
@@ -138,7 +142,7 @@ export default function App() {
                       path="/legacy/cursor"
                       element={
                         <Suspense fallback={<PageLoader />}>
-                          <CursorPage />
+                          <DeprecatedRedirectPage target="/providers" title="Cursor IDE" />
                         </Suspense>
                       }
                     />
