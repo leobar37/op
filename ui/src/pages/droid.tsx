@@ -292,7 +292,7 @@ export function DroidPage() {
             {t('droidPage.customModelsSubtitle')}
           </p>
         </div>
-        <Button onClick={() => navigate('/cliproxy/providers')}>
+        <Button onClick={() => navigate('/provider-models')}>
           <Plus className="w-4 h-4 mr-2" />
           {t('droidPage.addNewModel')}
         </Button>
@@ -307,7 +307,7 @@ export function DroidPage() {
         <EmptyState
           message={t('droidPage.noCustomModels')}
           action={
-            <Button onClick={() => navigate('/cliproxy/providers')}>
+            <Button onClick={() => navigate('/provider-models')}>
               <Plus className="w-4 h-4 mr-2" />
               {t('droidPage.addFirstModel')}
             </Button>

@@ -47,8 +47,8 @@ export function AccountsPage() {
   const legacyTargetCount = legacyTargets.length;
   const hasLegacyFollowUp = legacyTargetCount > 0;
 
-  const handleOpenClaudePool = () => navigate('/cliproxy?provider=claude');
-  const handleOpenClaudePoolAuth = () => navigate('/cliproxy?provider=claude&action=auth');
+  const handleOpenClaudePool = () => navigate('/provider-models?provider=claude');
+  const handleOpenClaudePoolAuth = () => navigate('/provider-models?provider=claude&action=auth');
   const handleConfirmLegacy = () => confirmLegacyMutation.mutate(legacyTargets);
 
   return (

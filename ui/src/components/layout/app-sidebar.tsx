@@ -9,7 +9,6 @@ import {
   FolderOpen,
   ChevronRight,
   BarChart3,
-  Gauge,
   ScrollText,
   Puzzle,
   TerminalSquare,
@@ -33,7 +32,6 @@ import {
 } from '@/components/ui/sidebar';
 import { CcsLogo } from '@/components/shared/ccs-logo';
 import { useSidebar } from '@/hooks/use-sidebar';
-import { useCliproxyUpdateCheck } from '@/hooks/use-cliproxy';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { useTranslation } from 'react-i18next';
@@ -92,17 +90,6 @@ function buildNavGroups(t: (key: string) => string): SidebarGroupDef[] {
           label: 'Providers',
         },
         {
-          path: '/cliproxy',
-          icon: Zap,
-          label: t('nav.cliproxyPlus'),
-          isCollapsible: true,
-          children: [
-            { path: '/cliproxy', label: t('nav.cliproxyOverview') },
-            { path: '/cliproxy/ai-providers', icon: Key, label: 'AI Providers' },
-            { path: '/cliproxy/control-panel', icon: Gauge, label: t('nav.controlPanel') },
-          ],
-        },
-        {
           path: '/accounts',
           icon: Users,
           label: t('nav.accounts'),
@@ -138,17 +125,10 @@ export function AppSidebar() {
   const location = useLocation();
   const navigate = useNavigate();
   const { state } = useSidebar();
-  const { data: updateCheck } = useCliproxyUpdateCheck();
   const navGroups = buildNavGroups(t);
 
-  // Dynamic label for CLIProxy based on backend
-  const cliproxyLabel = updateCheck?.backendLabel ?? 'CLIProxy';
-
-  // Helper to get dynamic label (for CLIProxy route)
+  // Helper to get dynamic label
   const getItemLabel = (item: { path: string; label: string }) => {
-    if (item.path === '/cliproxy') {
-      return cliproxyLabel;
-    }
     return item.label;
   };
 
