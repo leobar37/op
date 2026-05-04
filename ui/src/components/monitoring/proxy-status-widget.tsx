@@ -49,23 +49,9 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { useQuery, useIsMutating } from '@tanstack/react-query';
-import { api, type CliproxyServerConfig } from '@/lib/api-client';
+
 import { Trans, useTranslation } from 'react-i18next';
-import {
-  useProxyStatus,
-  useStartProxy,
-  useStopProxy,
-  useCliproxyUpdateCheck,
-  useCliproxyVersions,
-  useInstallVersion,
-  useRestartProxy,
-  useCliproxyRoutingStrategy,
-  useCliproxySessionAffinity,
-  useUpdateCliproxyRoutingStrategy,
-  useUpdateCliproxySessionAffinity,
-} from '@/hooks/use-cliproxy';
-import { useSyncStatus, useExecuteSync } from '@/hooks/use-cliproxy-sync';
+import { useCliproxyStatusSuite } from '@/hooks/use-cliproxy-status-suite';
 import { cn } from '@/lib/utils';
 import {
   isCliproxyVersionExperimental,
@@ -152,31 +138,33 @@ function IconButton({
 
 export function ProxyStatusWidget() {
   const { t } = useTranslation();
-  const { data: status, isLoading } = useProxyStatus();
-  const { data: updateCheck } = useCliproxyUpdateCheck();
-  const { data: versionsData, isLoading: versionsLoading } = useCliproxyVersions();
+  const suite = useCliproxyStatusSuite();
   const {
-    data: routingState,
-    isLoading: routingLoading,
-    error: routingError,
-  } = useCliproxyRoutingStrategy();
-  const updateRouting = useUpdateCliproxyRoutingStrategy();
-  const {
-    data: sessionAffinityState,
-    isLoading: sessionAffinityLoading,
-    error: sessionAffinityError,
-  } = useCliproxySessionAffinity();
-  const updateSessionAffinity = useUpdateCliproxySessionAffinity();
-  const isSavingRoutingConfig = updateRouting.isPending || updateSessionAffinity.isPending;
-  const routingConfigError = routingError instanceof Error ? routingError : null;
-  const startProxy = useStartProxy();
-  const stopProxy = useStopProxy();
-  const restartProxy = useRestartProxy();
-  const installVersion = useInstallVersion();
-
-  // Sync functionality
-  const { data: syncStatus } = useSyncStatus();
-  const { mutate: executeSync, isPending: isSyncing } = useExecuteSync();
+    status,
+    isLoading,
+    updateCheck,
+    versionsData,
+    versionsLoading,
+    routingState,
+    routingLoading,
+    routingError,
+    sessionAffinityState,
+    sessionAffinityLoading,
+    syncStatus,
+    isRemoteMode,
+    remoteConfig,
+    isRunning,
+    isActioning,
+    isSavingRoutingConfig,
+    isSyncing,
+    startProxy,
+    stopProxy,
+    restartProxy,
+    installVersion,
+    executeSync,
+    updateRouting,
+    updateSessionAffinity,
+  } = suite;
 
   // Version picker state (expanded section)
   const [isExpanded, setIsExpanded] = useState(false);
@@ -187,41 +175,6 @@ export function ProxyStatusWidget() {
   const [pendingInstallVersion, setPendingInstallVersion] = useState<string | null>(null);
   const [pendingInstallRisk, setPendingInstallRisk] = useState<PendingInstallRisk | null>(null);
 
-  // Fetch cliproxy_server config for remote mode detection
-  const { data: cliproxyConfig } = useQuery<CliproxyServerConfig>({
-    queryKey: ['cliproxy-server-config'],
-    queryFn: () => api.cliproxyServer.get(),
-    staleTime: 30000, // 30 seconds
-  });
-
-  // Detect if backend switch is in progress (prevents race condition)
-  const isBackendSwitching = useIsMutating({ mutationKey: ['update-backend'] }) > 0;
-
-  // Determine if remote mode is enabled
-  const remoteConfig = cliproxyConfig?.remote;
-  const isRemoteMode = remoteConfig?.enabled && remoteConfig?.host;
-  const effectiveSessionAffinityState =
-    sessionAffinityState ??
-    (sessionAffinityError instanceof Error
-      ? {
-          source: 'unsupported' as const,
-          target: (routingState?.target ?? (isRemoteMode ? 'remote' : 'local')) as
-            | 'local'
-            | 'remote',
-          reachable: false,
-          manageable: false,
-          message: sessionAffinityError.message,
-        }
-      : undefined);
-
-  const isRunning = status?.running ?? false;
-  const isActioning =
-    startProxy.isPending ||
-    stopProxy.isPending ||
-    restartProxy.isPending ||
-    installVersion.isPending ||
-    isBackendSwitching ||
-    isSyncing;
   const hasUpdate = updateCheck?.hasUpdate ?? false;
   const isUnstable = updateCheck?.isStable === false;
   const currentVersion = updateCheck?.currentVersion;
@@ -338,14 +291,14 @@ export function ProxyStatusWidget() {
         </div>
 
         <RoutingGuidanceCard
-          key={`remote:${routingState?.strategy ?? 'round-robin'}:${effectiveSessionAffinityState?.enabled ?? 'na'}:${effectiveSessionAffinityState?.ttl ?? 'na'}:${effectiveSessionAffinityState?.manageable ?? 'na'}`}
+          key={`remote:${routingState?.strategy ?? 'round-robin'}:${sessionAffinityState?.enabled ?? 'na'}:${sessionAffinityState?.ttl ?? 'na'}:${sessionAffinityState?.manageable ?? 'na'}`}
           compact
           className="mt-3"
           state={routingState}
-          sessionAffinityState={effectiveSessionAffinityState}
+          sessionAffinityState={sessionAffinityState}
           isLoading={routingLoading || sessionAffinityLoading}
           isSaving={isSavingRoutingConfig}
-          error={routingConfigError}
+          error={routingError}
           onApply={(strategy) => updateRouting.mutate(strategy)}
           onApplyAffinity={(data) => updateSessionAffinity.mutate(data)}
         />
@@ -496,14 +449,14 @@ export function ProxyStatusWidget() {
         </div>
 
         <RoutingGuidanceCard
-          key={`local:${routingState?.strategy ?? 'round-robin'}:${effectiveSessionAffinityState?.enabled ?? 'na'}:${effectiveSessionAffinityState?.ttl ?? 'na'}:${effectiveSessionAffinityState?.manageable ?? 'na'}`}
+          key={`local:${routingState?.strategy ?? 'round-robin'}:${sessionAffinityState?.enabled ?? 'na'}:${sessionAffinityState?.ttl ?? 'na'}:${sessionAffinityState?.manageable ?? 'na'}`}
           compact
           className="mt-3"
           state={routingState}
-          sessionAffinityState={effectiveSessionAffinityState}
+          sessionAffinityState={sessionAffinityState}
           isLoading={routingLoading || sessionAffinityLoading}
           isSaving={isSavingRoutingConfig}
-          error={routingConfigError}
+          error={routingError}
           onApply={(strategy) => updateRouting.mutate(strategy)}
           onApplyAffinity={(data) => updateSessionAffinity.mutate(data)}
         />

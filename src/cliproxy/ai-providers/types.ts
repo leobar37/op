@@ -147,7 +147,7 @@ export const AI_PROVIDER_FAMILY_DEFINITIONS: Record<
   'openai-compatibility': {
     id: 'openai-compatibility',
     displayName: 'OpenAI-Compatible',
-    description: 'Named connectors for OpenRouter, Together, and custom OpenAI-style APIs',
+    description: 'Named connectors for Together and custom OpenAI-style APIs',
     authMode: 'connector',
     supportsNamedEntries: true,
     routePath: '/api/provider/openai-compat',

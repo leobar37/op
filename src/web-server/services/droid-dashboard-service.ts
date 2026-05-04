@@ -1,4 +1,3 @@
-import * as os from 'os';
 import * as path from 'path';
 import { execFileSync } from 'child_process';
 import { detectDroidCli } from '../../targets/droid-detector';
@@ -15,6 +14,7 @@ import {
   writeJsonObjectFileAtomic,
 } from './compatible-cli-json-file-service';
 import { getCompatibleCliDocsReference } from './compatible-cli-docs-registry';
+import { resolveDroidConfigPaths as resolvePathsFromLib } from '../../droid-settings/paths';
 
 interface DroidConfigPaths {
   settingsPath: string;
@@ -79,18 +79,12 @@ export function resolveDroidConfigPaths(
     homeDir?: string;
   } = {}
 ): DroidConfigPaths {
-  const env = options.env ?? process.env;
-  const homeDir = options.homeDir ?? os.homedir();
-
-  const byokBase = env.CCS_HOME || homeDir;
-  const settingsPath = path.join(byokBase, '.factory', 'settings.json');
-  const legacyConfigPath = path.join(byokBase, '.factory', 'config.json');
-
+  const resolved = resolvePathsFromLib({ env: options.env, homeDir: options.homeDir });
   return {
-    settingsPath,
-    settingsDisplayPath: '~/.factory/settings.json',
-    legacyConfigPath,
-    legacyConfigDisplayPath: '~/.factory/config.json',
+    settingsPath: resolved.settingsPath,
+    settingsDisplayPath: resolved.settingsDisplayPath,
+    legacyConfigPath: resolved.legacyConfigPath,
+    legacyConfigDisplayPath: resolved.legacyConfigDisplayPath,
   };
 }
 
@@ -120,7 +114,8 @@ export function summarizeDroidCustomModels(customModelsValue: unknown): DroidByo
       ? Object.values(customModelsValue)
       : [];
 
-  for (const item of source) {
+  for (let i = 0; i < source.length; i++) {
+    const item = source[i];
     if (!isObject(item)) {
       invalidModelEntryCount += 1;
       continue;
@@ -141,6 +136,7 @@ export function summarizeDroidCustomModels(customModelsValue: unknown): DroidByo
     providerBreakdown[provider] = (providerBreakdown[provider] ?? 0) + 1;
 
     rows.push({
+      index: i,
       displayName,
       model,
       provider,

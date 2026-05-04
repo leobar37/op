@@ -12,7 +12,6 @@ export { DeviceCodeDialog } from './device-code-dialog';
 export { DocsLink } from './docs-link';
 export { GitHubLink } from './github-link';
 export { GlobalEnvIndicator } from './global-env-indicator';
-export { LocalhostDisclaimer } from './localhost-disclaimer';
 export { PrivacyToggle } from './privacy-toggle';
 export { ProjectSelectionDialog } from './project-selection-dialog';
 export { ProviderIcon } from './provider-icon';

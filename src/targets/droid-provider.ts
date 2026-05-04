@@ -81,7 +81,6 @@ export function inferDroidProviderFromBaseUrl(
   }
 
   if (
-    host.includes('openrouter.ai') ||
     host.includes('api.groq.com') ||
     host.includes('api.deepinfra.com') ||
     host.includes('api.fireworks.ai') ||

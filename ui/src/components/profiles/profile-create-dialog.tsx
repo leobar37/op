@@ -30,8 +30,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { ProviderLogo } from '@/components/cliproxy/provider-logo';
 import { useCreateProfile } from '@/hooks/use-profiles';
-import { useOpenRouterCatalog } from '@/hooks/use-openrouter-models';
-import { Loader2, Plus, AlertTriangle, Info, Eye, EyeOff, Settings2, Sparkles } from 'lucide-react';
+import { Loader2, Plus, AlertTriangle, Info, Eye, EyeOff, Settings2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
@@ -42,14 +41,6 @@ import {
   resolvePresetApiKeyValue,
   type ProviderPreset,
 } from '@/lib/provider-presets';
-import {
-  searchModels,
-  formatPricingPair,
-  formatContextLength,
-  formatModelAge,
-  getNewestModelsPerProvider,
-} from '@/lib/openrouter-utils';
-import type { CategorizedModel } from '@/lib/openrouter-types';
 import type { CliTarget } from '@/lib/api-client';
 import i18n from '@/lib/i18n';
 
@@ -86,7 +77,7 @@ interface ProfileCreateDialogProps {
 // Common URL mistakes to warn about
 const PROBLEMATIC_PATHS = ['/chat/completions', '/v1/messages', '/messages', '/completions'];
 const CUSTOM_PRESET_ID = 'custom';
-const DEFAULT_PRESET_ID: ProviderPreset['id'] = 'openrouter';
+const DEFAULT_PRESET_ID: ProviderPreset['id'] = 'anthropic';
 const LOCAL_PRESET_IDS = new Set<ProviderPreset['id']>(['ollama', 'llamacpp']);
 
 const EMPTY_FORM_VALUES: FormData = {
@@ -115,7 +106,7 @@ export function ProfileCreateDialog({
   open,
   onOpenChange,
   onSuccess,
-  initialMode = 'openrouter',
+  initialMode = 'normal',
 }: ProfileCreateDialogProps) {
   const { t } = useTranslation();
   const createMutation = useCreateProfile();
@@ -123,10 +114,6 @@ export function ProfileCreateDialog({
   const [urlWarning, setUrlWarning] = useState<string | null>(null);
   const [showApiKey, setShowApiKey] = useState(false);
   const [selectedPreset, setSelectedPreset] = useState<PresetSelection>(DEFAULT_PRESET_ID);
-  const [modelSearch, setModelSearch] = useState('');
-
-  // OpenRouter models for model picker
-  const { models: openRouterModels } = useOpenRouterCatalog();
 
   const {
     register,
@@ -169,32 +156,19 @@ export function ProfileCreateDialog({
     return getPresetById(selectedPreset) ?? null;
   }, [selectedPreset]);
 
-  // Filter models for OpenRouter search (newest first)
-  const filteredModels = useMemo(() => {
-    if (!modelSearch.trim()) {
-      // Show newest models when no search
-      return getNewestModelsPerProvider(openRouterModels, 2);
-    }
-    // Search and sort by created date (newest first)
-    const results = searchModels(openRouterModels, modelSearch);
-    return [...results].sort((a, b) => (b.created ?? 0) - (a.created ?? 0)).slice(0, 20);
-  }, [openRouterModels, modelSearch]);
-
   // Reset form when dialog opens
   useEffect(() => {
     if (open) {
       setActiveTab('basic');
       setUrlWarning(null);
       setShowApiKey(false);
-      setModelSearch('');
 
       // Set initial preset based on initialMode
       if (initialMode === 'normal') {
         setSelectedPreset(CUSTOM_PRESET_ID);
         applyPresetToForm(null);
       } else {
-        const presetId = initialMode === 'openrouter' ? DEFAULT_PRESET_ID : initialMode;
-        const defaultPreset = getPresetById(presetId);
+        const defaultPreset = getPresetById(initialMode);
         if (defaultPreset) {
           setSelectedPreset(defaultPreset.id);
           applyPresetToForm(defaultPreset);
@@ -222,21 +196,8 @@ export function ProfileCreateDialog({
     applyPresetToForm(null);
   };
 
-  // Handle model selection from picker - applies to all 4 model tiers
-  const handleModelSelect = (model: CategorizedModel) => {
-    setValue('model', model.id);
-    setValue('opusModel', model.id);
-    setValue('sonnetModel', model.id);
-    setValue('haikuModel', model.id);
-    setModelSearch(model.name);
-    // Show feedback that model was applied to all tiers
-    toast.success(t('profileCreateDialog.appliedModelToTiers', { model: model.name }), {
-      duration: 2000,
-    });
-  };
-
   // Check for common URL mistakes - only for truly custom URLs
-  // Presets (OpenRouter, GLM, Kimi) have vetted URLs that may require full paths
+  // Presets (GLM, Kimi) have vetted URLs that may require full paths
   useEffect(() => {
     // Only warn for custom URLs, not preset-selected ones
     const isCustomUrl = selectedPreset === CUSTOM_PRESET_ID;
@@ -280,8 +241,6 @@ export function ProfileCreateDialog({
   const hasModelErrors =
     !!errors.model || !!errors.opusModel || !!errors.sonnetModel || !!errors.haikuModel;
   const isCreating = createMutation.isPending;
-
-  const isOpenRouter = currentPreset?.id === DEFAULT_PRESET_ID;
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -359,7 +318,7 @@ export function ProfileCreateDialog({
 
               <div className="space-y-2">
                 <Label className="text-xs font-medium uppercase tracking-[0.12em] text-foreground/70">
-                  {t('openrouterQuickStart.localRuntimesTitle')}
+                  {t('profileCreateDialog.localRuntimesTitle')}
                 </Label>
                 <div className="flex flex-wrap gap-2">
                   {LOCAL_RUNTIME_PRESETS.map((preset) => (
@@ -561,50 +520,6 @@ export function ProfileCreateDialog({
                   </div>
                 </div>
 
-                {/* OpenRouter Model Picker */}
-                {isOpenRouter && (
-                  <div className="space-y-2">
-                    <Label>{t('openrouterModelPicker.searchModels')}</Label>
-                    <Input
-                      value={modelSearch}
-                      onChange={(e) => setModelSearch(e.target.value)}
-                      placeholder={t('profileCreateDialog.searchModelsPlaceholder')}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' && filteredModels.length > 0) {
-                          e.preventDefault();
-                          handleModelSelect(filteredModels[0]);
-                        }
-                      }}
-                    />
-                    <div className="border rounded-md max-h-48 overflow-y-auto">
-                      {filteredModels.length === 0 ? (
-                        <p className="text-sm text-muted-foreground p-3 text-center">
-                          {modelSearch
-                            ? t('profileCreateDialog.noModelsFound', { query: modelSearch })
-                            : t('profileCreateDialog.loadingModels')}
-                        </p>
-                      ) : (
-                        <div className="p-1">
-                          {!modelSearch && (
-                            <div className="flex items-center gap-1.5 px-2 py-1 text-xs text-muted-foreground">
-                              <Sparkles className="w-3 h-3 text-accent" />
-                              <span>{t('openrouterModelPicker.newestModels')}</span>
-                            </div>
-                          )}
-                          {filteredModels.map((model) => (
-                            <ModelSearchItem
-                              key={model.id}
-                              model={model}
-                              onClick={() => handleModelSelect(model)}
-                              showAge={!modelSearch}
-                            />
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
-
                 {/* Model Inputs */}
                 <div className="space-y-3">
                   <div className="space-y-1.5">
@@ -789,49 +704,6 @@ function CustomPresetCard({ isSelected, onClick }: { isSelected: boolean; onClic
           {t('profileEditor.customEndpoint')}
         </div>
       </div>
-    </button>
-  );
-}
-
-/** Model search result item */
-function ModelSearchItem({
-  model,
-  onClick,
-  showAge,
-}: {
-  model: CategorizedModel;
-  onClick: () => void;
-  showAge?: boolean;
-}) {
-  const { t } = useTranslation();
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className="group flex w-full items-center justify-between rounded-sm px-2 py-1.5 text-left text-sm hover:bg-accent hover:text-accent-foreground"
-    >
-      <span className="flex-1 truncate">{model.name}</span>
-      <span className="text-muted-foreground group-hover:text-accent-foreground/80 ml-2 flex items-center gap-2 text-xs">
-        {showAge && model.created && (
-          <Badge
-            variant="outline"
-            className="text-[10px] text-accent group-hover:text-accent-foreground/80 group-hover:border-accent-foreground/30"
-          >
-            {formatModelAge(model.created)}
-          </Badge>
-        )}
-        {model.isFree ? (
-          <Badge
-            variant="secondary"
-            className="text-xs group-hover:bg-accent-foreground/20 group-hover:text-accent-foreground"
-          >
-            {t('profileCreateDialog.free')}
-          </Badge>
-        ) : (
-          <span>{formatPricingPair(model.pricing)}</span>
-        )}
-        <span>{formatContextLength(model.context_length)}</span>
-      </span>
     </button>
   );
 }

@@ -167,7 +167,7 @@ export async function handleConfigCommand(
   const port =
     options.port ??
     (await deps.getPort({
-      port: [3000, 3001, 3002, 8000, 8080],
+      port: [5179, 3000, 3001, 3002, 8000, 8080],
     }));
 
   try {

@@ -29,6 +29,9 @@ const CliproxyAiProvidersPage = lazy(() =>
 const CliproxyControlPanelPage = lazy(() =>
   import('@/pages/cliproxy-control-panel').then((m) => ({ default: m.CliproxyControlPanelPage }))
 );
+const CliproxyProvidersPage = lazy(() =>
+  import('@/pages/cliproxy-providers').then((m) => ({ default: m.CliproxyProvidersPage }))
+);
 const CopilotPage = lazy(() => import('@/pages/copilot').then((m) => ({ default: m.CopilotPage })));
 const CursorPage = lazy(() => import('@/pages/cursor').then((m) => ({ default: m.CursorPage })));
 const ClaudeExtensionPage = lazy(() =>
@@ -121,6 +124,14 @@ export default function App() {
                       element={
                         <Suspense fallback={<PageLoader />}>
                           <CliproxyControlPanelPage />
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/provider-models"
+                      element={
+                        <Suspense fallback={<PageLoader />}>
+                          <CliproxyProvidersPage />
                         </Suspense>
                       }
                     />

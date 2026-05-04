@@ -131,25 +131,6 @@ describe('profile-writer Anthropic direct', () => {
     expect(config.profile_targets?.['hf-target-claude']).toBeUndefined();
   });
 
-  it('preserves OpenRouter ANTHROPIC_API_KEY blank behavior', () => {
-    const result = createApiProfile(
-      'openrouter-test',
-      'https://openrouter.ai/api',
-      'sk-or-testkey',
-      { default: 'anthropic/claude-opus-4.5', opus: 'anthropic/claude-opus-4.5', sonnet: 'anthropic/claude-opus-4.5', haiku: 'anthropic/claude-opus-4.5' }
-    );
-
-    expect(result.success).toBe(true);
-
-    const settingsPath = path.join(tempHome, '.ccs', 'openrouter-test.settings.json');
-    const settings = JSON.parse(fs.readFileSync(settingsPath, 'utf8'));
-
-    // OpenRouter: proxy mode with ANTHROPIC_API_KEY explicitly blank
-    expect(settings.env.ANTHROPIC_BASE_URL).toBe('https://openrouter.ai/api');
-    expect(settings.env.ANTHROPIC_AUTH_TOKEN).toBe('sk-or-testkey');
-    expect(settings.env.ANTHROPIC_API_KEY).toBe('');
-  });
-
   it('rolls back the created settings file when local WebSearch tool setup fails', () => {
     const copyFileSpy = spyOn(fs, 'copyFileSync').mockImplementation(() => {
       throw new Error('copy failed');

@@ -231,12 +231,14 @@ export async function ensureCliproxyService(
     // Need to start new instance
     log('CLIProxy not running, starting background instance...');
 
-    // 1. Ensure binary exists
+    // 1. Ensure binary exists (auto-install if missing)
+    // Force 'original' backend to always download from the official source
     let binaryPath: string;
     try {
       binaryPath = await ensureBinaryFn(verbose, {
-        allowInstall: false,
+        allowInstall: true,
         skipAutoUpdate: true,
+        backend: 'original',
       });
       log(`Binary ready: ${binaryPath}`);
     } catch (error) {

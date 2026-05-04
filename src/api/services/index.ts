@@ -61,9 +61,6 @@ export {
   importApiProfileBundle,
 } from './profile-lifecycle-service';
 
-// OpenRouter catalog and picker
-export { isOpenRouterUrl, fetchOpenRouterModels, type OpenRouterModel } from './openrouter-catalog';
-export { pickOpenRouterModel, type OpenRouterSelection } from './openrouter-picker';
 export {
   getLocalRuntimeReadiness,
   type LocalRuntimeId,
@@ -75,7 +72,6 @@ export {
 export {
   PROVIDER_PRESETS,
   PRESET_ALIASES,
-  OPENROUTER_BASE_URL,
   getPresetById,
   getPresetAliases,
   getPresetIds,

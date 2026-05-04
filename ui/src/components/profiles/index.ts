@@ -13,12 +13,5 @@ export { ProfilesTable } from './profiles-table';
 export { ProfileEditor } from './editor';
 export type { Settings, SettingsResponse, ProfileEditorProps } from './editor';
 
-// OpenRouter components
-export { OpenRouterBadge } from './openrouter-badge';
-export { OpenRouterBanner } from './openrouter-banner';
-export { OpenRouterModelPicker } from './openrouter-model-picker';
-export { OpenRouterPromoCard } from './openrouter-promo-card';
-export { OpenRouterQuickStart } from './openrouter-quick-start';
-export { AlibabaCodingPlanPromoCard } from './alibaba-coding-plan-promo-card';
 export { ModelTierMapping } from './model-tier-mapping';
 export type { TierMapping } from './model-tier-mapping';

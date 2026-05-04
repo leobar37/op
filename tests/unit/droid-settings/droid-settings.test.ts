@@ -10,9 +10,9 @@ import {
   removeCcsModel,
   listCcsModels,
   pruneOrphanedModels,
-} from '../../../src/targets/droid-config-manager';
+} from '../../../src/droid-settings';
 
-describe('droid-config-manager', () => {
+describe('droid-settings', () => {
   let tmpDir: string;
   let originalCcsHome: string | undefined;
 

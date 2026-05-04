@@ -2,8 +2,6 @@
  * Utility functions for Profile Editor
  */
 
-import type { Settings } from './types';
-
 /** Check if a key is considered sensitive (API keys, tokens, etc.) */
 export function isSensitiveKey(key: string): boolean {
   const sensitivePatterns = [
@@ -16,15 +14,6 @@ export function isSensitiveKey(key: string): boolean {
     /^SECRET$/,
   ];
   return sensitivePatterns.some((pattern) => pattern.test(key));
-}
-
-/**
- * Check if settings indicate an OpenRouter profile
- */
-export function isOpenRouterProfile(settings: Settings | undefined): boolean {
-  if (!settings?.env) return false;
-  const baseUrl = settings.env.ANTHROPIC_BASE_URL || '';
-  return baseUrl.toLowerCase().includes('openrouter.ai');
 }
 
 /**

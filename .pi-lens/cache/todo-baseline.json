@@ -1,0 +1,2090 @@
+{
+  "items": [
+    {
+      "type": "TODO",
+      "message": "Re-enable when Antigravity backend supports 1M context (currently 256k)",
+      "file": "src/cliproxy/model-catalog.ts",
+      "line": 104,
+      "column": 11
+    },
+    {
+      "type": "TODO",
+      "message": "Replace with proper imports after converting these files",
+      "file": "src/utils/config-manager.ts",
+      "line": 11,
+      "column": 3
+    },
+    {
+      "type": "TODO",
+      "message": "Add recovery manager logic",
+      "file": "src/utils/config-manager.ts",
+      "line": 193,
+      "column": 7
+    },
+    {
+      "type": "TODO",
+      "message": "Add recovery manager logic",
+      "file": "src/utils/config-manager.ts",
+      "line": 371,
+      "column": 9
+    },
+    {
+      "type": "TODO",
+      "message": "Add file-based locking (e.g., proper-lockfile) to prevent concurrent modification",
+      "file": "src/web-server/routes/variant-routes.ts",
+      "line": 172,
+      "column": 3
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"High Risk\" badge */}",
+      "file": "ui/src/components/account/account-safety-warning-card.tsx",
+      "line": 118,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for disclaimer text */}",
+      "file": "ui/src/components/account/account-safety-warning-card.tsx",
+      "line": 127,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Applies to CLI and dashboard auth\" */}",
+      "file": "ui/src/components/account/account-safety-warning-card.tsx",
+      "line": 153,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key */}",
+      "file": "ui/src/components/account/account-safety-warning-card.tsx",
+      "line": 161,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for AGY responsibility error",
+      "file": "ui/src/components/account/add-account-dialog.tsx",
+      "line": 306,
+      "column": 11
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for Kiro social browser hint */}",
+      "file": "ui/src/components/account/add-account-dialog.tsx",
+      "line": 458,
+      "column": 22
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key */}IDC Start URL",
+      "file": "ui/src/components/account/add-account-dialog.tsx",
+      "line": 474,
+      "column": 22
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key */}Required for organization IAM Identity Center login.",
+      "file": "ui/src/components/account/add-account-dialog.tsx",
+      "line": 487,
+      "column": 22
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key */}IDC Region</Label>",
+      "file": "ui/src/components/account/add-account-dialog.tsx",
+      "line": 492,
+      "column": 53
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key */}Optional. Leave blank to use the upstream default",
+      "file": "ui/src/components/account/add-account-dialog.tsx",
+      "line": 504,
+      "column": 22
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key */}IDC Flow</Label>",
+      "file": "ui/src/components/account/add-account-dialog.tsx",
+      "line": 510,
+      "column": 51
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key */}Select IDC flow\" />",
+      "file": "ui/src/components/account/add-account-dialog.tsx",
+      "line": 519,
+      "column": 50
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key */}Authorization Code",
+      "file": "ui/src/components/account/add-account-dialog.tsx",
+      "line": 523,
+      "column": 26
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key */}Device Code",
+      "file": "ui/src/components/account/add-account-dialog.tsx",
+      "line": 526,
+      "column": 26
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key */}Auth Code opens a browser and may need the final",
+      "file": "ui/src/components/account/add-account-dialog.tsx",
+      "line": 531,
+      "column": 22
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for Kiro social callback hint",
+      "file": "ui/src/components/account/add-account-dialog.tsx",
+      "line": 639,
+      "column": 27
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key",
+      "file": "ui/src/components/account/add-account-dialog.tsx",
+      "line": 690,
+      "column": 29
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for Kiro social preparing URL",
+      "file": "ui/src/components/account/add-account-dialog.tsx",
+      "line": 727,
+      "column": 25
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for step 1 */}",
+      "file": "ui/src/components/account/antigravity-responsibility-checklist.tsx",
+      "line": 81,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for step 2 */}",
+      "file": "ui/src/components/account/antigravity-responsibility-checklist.tsx",
+      "line": 95,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for step 3 */}",
+      "file": "ui/src/components/account/antigravity-responsibility-checklist.tsx",
+      "line": 111,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for step 4 */}",
+      "file": "ui/src/components/account/antigravity-responsibility-checklist.tsx",
+      "line": 121,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key */}Read issue #509",
+      "file": "ui/src/components/account/antigravity-responsibility-checklist.tsx",
+      "line": 140,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Volume\" */}",
+      "file": "ui/src/components/account/flow-viz/account-card-stats.tsx",
+      "line": 42,
+      "column": 14
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for compact \"Paused\" */}",
+      "file": "ui/src/components/account/flow-viz/account-card.tsx",
+      "line": 366,
+      "column": 14
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Active\" */}Active ·{' '}",
+      "file": "ui/src/components/account/shared/account-quota-panel.tsx",
+      "line": 257,
+      "column": 30
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Last used\" */}Last used{' '}",
+      "file": "ui/src/components/account/shared/account-quota-panel.tsx",
+      "line": 265,
+      "column": 30
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for compact \"Paused\" badge */}",
+      "file": "ui/src/components/account/shared/account-surface-card.tsx",
+      "line": 237,
+      "column": 14
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Default\" badge */}",
+      "file": "ui/src/components/account/shared/account-surface-card.tsx",
+      "line": 320,
+      "column": 22
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Paused\" badge */}",
+      "file": "ui/src/components/account/shared/account-surface-card.tsx",
+      "line": 330,
+      "column": 22
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Cache Efficiency\" */}",
+      "file": "ui/src/components/analytics/cache-efficiency-card.tsx",
+      "line": 78,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Cache Efficiency\" */}",
+      "file": "ui/src/components/analytics/cache-efficiency-card.tsx",
+      "line": 96,
+      "column": 14
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Estimated Savings\" */}",
+      "file": "ui/src/components/analytics/cache-efficiency-card.tsx",
+      "line": 110,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing keys for \"Reads:\" / \"Writes:\" */}",
+      "file": "ui/src/components/analytics/cache-efficiency-card.tsx",
+      "line": 151,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key",
+      "file": "ui/src/components/analytics/cache-efficiency-card.tsx",
+      "line": 160,
+      "column": 84
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key",
+      "file": "ui/src/components/analytics/cache-efficiency-card.tsx",
+      "line": 168,
+      "column": 86
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Read\" */}",
+      "file": "ui/src/components/analytics/cache-efficiency-card.tsx",
+      "line": 174,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Write\" */}",
+      "file": "ui/src/components/analytics/cache-efficiency-card.tsx",
+      "line": 179,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"CLIProxy Stats\" */}",
+      "file": "ui/src/components/analytics/cliproxy-stats-card.tsx",
+      "line": 41,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"CLIProxy Stats\" */}",
+      "file": "ui/src/components/analytics/cliproxy-stats-card.tsx",
+      "line": 68,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"CLIProxy Stats\" */}",
+      "file": "ui/src/components/analytics/cliproxy-stats-card.tsx",
+      "line": 98,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Error\" */}",
+      "file": "ui/src/components/analytics/cliproxy-stats-card.tsx",
+      "line": 102,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"CLIProxy Stats\" */}",
+      "file": "ui/src/components/analytics/cliproxy-stats-card.tsx",
+      "line": 134,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing keys for \"failed\" / \"All success\" */}",
+      "file": "ui/src/components/analytics/cliproxy-stats-card.tsx",
+      "line": 186,
+      "column": 24
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Token Breakdown\" */}",
+      "file": "ui/src/components/analytics/model-details-content.tsx",
+      "line": 62,
+      "column": 14
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing keys for Input/Output/Cache Write/Cache Read labels */}",
+      "file": "ui/src/components/analytics/model-details-content.tsx",
+      "line": 66,
+      "column": 14
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Session Stats\" */}",
+      "file": "ui/src/components/analytics/session-stats-card.tsx",
+      "line": 69,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Session Stats\" */}",
+      "file": "ui/src/components/analytics/session-stats-card.tsx",
+      "line": 89,
+      "column": 14
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Recent Activity\" */}",
+      "file": "ui/src/components/analytics/session-stats-card.tsx",
+      "line": 130,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for singular/plural \"Alert\"/\"Alerts\" */}{' '}",
+      "file": "ui/src/components/analytics/usage-insights-card.tsx",
+      "line": 119,
+      "column": 14
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: import { useTranslation } from 'react-i18next'; when keys are ready",
+      "file": "ui/src/components/analytics/usage-trend-chart.tsx",
+      "line": 25,
+      "column": 3
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Sign Out\" */}Sign Out",
+      "file": "ui/src/components/auth/user-menu.tsx",
+      "line": 39,
+      "column": 14
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key",
+      "file": "ui/src/components/cliproxy/ai-providers/family-rail.tsx",
+      "line": 22,
+      "column": 26
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key",
+      "file": "ui/src/components/cliproxy/ai-providers/family-rail.tsx",
+      "line": 28,
+      "column": 36
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key",
+      "file": "ui/src/components/cliproxy/ai-providers/family-rail.tsx",
+      "line": 34,
+      "column": 35
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing keys for 'Configured' / 'Missing secret' */}",
+      "file": "ui/src/components/cliproxy/ai-providers/provider-entry-card.tsx",
+      "line": 36,
+      "column": 10
+    },
+    {
+      "type": "TODO",
+      "message": "comments below.",
+      "file": "ui/src/components/cliproxy/ai-providers/provider-entry-card.tsx",
+      "line": 51,
+      "column": 52
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: use t('providerEditor.agyDenylist')",
+      "file": "ui/src/components/cliproxy/cliproxy-dialog.tsx",
+      "line": 81,
+      "column": 84
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: use t('providerEditor.agyDenylist')",
+      "file": "ui/src/components/cliproxy/cliproxy-edit-dialog.tsx",
+      "line": 73,
+      "column": 84
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Edit\" */}",
+      "file": "ui/src/components/cliproxy/cliproxy-table.tsx",
+      "line": 111,
+      "column": 20
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Delete\" */}",
+      "file": "ui/src/components/cliproxy/cliproxy-table.tsx",
+      "line": 119,
+      "column": 20
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Cancel\" in diff context */}",
+      "file": "ui/src/components/cliproxy/config/diff-dialog.tsx",
+      "line": 83,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key */ 'Saving...'",
+      "file": "ui/src/components/cliproxy/config/diff-dialog.tsx",
+      "line": 88,
+      "column": 19
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key */ 'Save Changes'}",
+      "file": "ui/src/components/cliproxy/config/diff-dialog.tsx",
+      "line": 89,
+      "column": 19
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Accounts\" */}",
+      "file": "ui/src/components/cliproxy/provider-editor/accounts-section.tsx",
+      "line": 145,
+      "column": 14
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Pause Selected\" */}",
+      "file": "ui/src/components/cliproxy/provider-editor/bulk-action-bar.tsx",
+      "line": 52,
+      "column": 14
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Resume Selected\" */}",
+      "file": "ui/src/components/cliproxy/provider-editor/bulk-action-bar.tsx",
+      "line": 63,
+      "column": 14
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Presets\" */}",
+      "file": "ui/src/components/cliproxy/provider-editor/model-config-section.tsx",
+      "line": 123,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for remote traffic text */}",
+      "file": "ui/src/components/cliproxy/provider-editor/provider-editor-header.tsx",
+      "line": 83,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Provider Information\" */}",
+      "file": "ui/src/components/cliproxy/provider-editor/provider-info-tab.tsx",
+      "line": 54,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for detail toggle */}",
+      "file": "ui/src/components/cliproxy/routing-guidance-card.tsx",
+      "line": 289,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.writesUserLayer */}",
+      "file": "ui/src/components/compatible-cli/codex-control-center-tab.tsx",
+      "line": 80,
+      "column": 24
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.noRepoTrustReflection */}",
+      "file": "ui/src/components/compatible-cli/codex-control-center-tab.tsx",
+      "line": 90,
+      "column": 24
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.formattingNote */}",
+      "file": "ui/src/components/compatible-cli/codex-control-center-tab.tsx",
+      "line": 103,
+      "column": 26
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.formattingNoteDesc */}",
+      "file": "ui/src/components/compatible-cli/codex-control-center-tab.tsx",
+      "line": 107,
+      "column": 26
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing keys codex.savedProjectTrust / codex.removedProjectTrust",
+      "file": "ui/src/components/compatible-cli/codex-control-center-tab.tsx",
+      "line": 138,
+      "column": 17
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.savedProfile",
+      "file": "ui/src/components/compatible-cli/codex-control-center-tab.tsx",
+      "line": 154,
+      "column": 17
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.deletedProfile",
+      "file": "ui/src/components/compatible-cli/codex-control-center-tab.tsx",
+      "line": 161,
+      "column": 17
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.setActiveProfile",
+      "file": "ui/src/components/compatible-cli/codex-control-center-tab.tsx",
+      "line": 168,
+      "column": 17
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.savedModelProvider",
+      "file": "ui/src/components/compatible-cli/codex-control-center-tab.tsx",
+      "line": 182,
+      "column": 17
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.deletedModelProvider",
+      "file": "ui/src/components/compatible-cli/codex-control-center-tab.tsx",
+      "line": 189,
+      "column": 17
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.savedMcpServer",
+      "file": "ui/src/components/compatible-cli/codex-control-center-tab.tsx",
+      "line": 203,
+      "column": 17
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.deletedMcpServer",
+      "file": "ui/src/components/compatible-cli/codex-control-center-tab.tsx",
+      "line": 210,
+      "column": 17
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.savedFeatureToggle",
+      "file": "ui/src/components/compatible-cli/codex-control-center-tab.tsx",
+      "line": 224,
+      "column": 17
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.ccsBridgeRecipe */}",
+      "file": "ui/src/components/compatible-cli/codex-docs-tab.tsx",
+      "line": 109,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.saveCliproxyProvider */}",
+      "file": "ui/src/components/compatible-cli/codex-docs-tab.tsx",
+      "line": 130,
+      "column": 20
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.setTopLevelModelProvider */}",
+      "file": "ui/src/components/compatible-cli/codex-docs-tab.tsx",
+      "line": 134,
+      "column": 20
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.exportCliproxyApiKey */}",
+      "file": "ui/src/components/compatible-cli/codex-docs-tab.tsx",
+      "line": 138,
+      "column": 20
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.upstreamNotes */}",
+      "file": "ui/src/components/compatible-cli/codex-docs-tab.tsx",
+      "line": 154,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.providerBridgeReference */}",
+      "file": "ui/src/components/compatible-cli/codex-docs-tab.tsx",
+      "line": 195,
+      "column": 20
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.providerValues */}",
+      "file": "ui/src/components/compatible-cli/codex-docs-tab.tsx",
+      "line": 225,
+      "column": 22
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.settingsHierarchy */}",
+      "file": "ui/src/components/compatible-cli/codex-docs-tab.tsx",
+      "line": 232,
+      "column": 20
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.startupTimeoutSec",
+      "file": "ui/src/components/compatible-cli/codex-mcp-servers-card.tsx",
+      "line": 150,
+      "column": 13
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.toolTimeoutSec",
+      "file": "ui/src/components/compatible-cli/codex-mcp-servers-card.tsx",
+      "line": 164,
+      "column": 13
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.enabled */}",
+      "file": "ui/src/components/compatible-cli/codex-mcp-servers-card.tsx",
+      "line": 188,
+      "column": 14
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.required */}",
+      "file": "ui/src/components/compatible-cli/codex-mcp-servers-card.tsx",
+      "line": 197,
+      "column": 14
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key common.delete */}",
+      "file": "ui/src/components/compatible-cli/codex-mcp-servers-card.tsx",
+      "line": 210,
+      "column": 14
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.saveMcpServer */}",
+      "file": "ui/src/components/compatible-cli/codex-mcp-servers-card.tsx",
+      "line": 233,
+      "column": 14
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.mcpServers",
+      "file": "ui/src/components/compatible-cli/codex-mcp-servers-card.tsx",
+      "line": 263,
+      "column": 9
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.mcpServersDesc",
+      "file": "ui/src/components/compatible-cli/codex-mcp-servers-card.tsx",
+      "line": 267,
+      "column": 9
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.selectMcpServer */}",
+      "file": "ui/src/components/compatible-cli/codex-mcp-servers-card.tsx",
+      "line": 279,
+      "column": 14
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.cliproxyQuickStart */}",
+      "file": "ui/src/components/compatible-cli/codex-model-providers-card.tsx",
+      "line": 74,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.useCliproxyCodexPreset */}",
+      "file": "ui/src/components/compatible-cli/codex-model-providers-card.tsx",
+      "line": 85,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.providerId",
+      "file": "ui/src/components/compatible-cli/codex-model-providers-card.tsx",
+      "line": 95,
+      "column": 13
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.displayName",
+      "file": "ui/src/components/compatible-cli/codex-model-providers-card.tsx",
+      "line": 104,
+      "column": 13
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.requiresOpenaiAuth */}",
+      "file": "ui/src/components/compatible-cli/codex-model-providers-card.tsx",
+      "line": 140,
+      "column": 14
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.supportsWebsockets */}",
+      "file": "ui/src/components/compatible-cli/codex-model-providers-card.tsx",
+      "line": 151,
+      "column": 14
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key common.delete */}",
+      "file": "ui/src/components/compatible-cli/codex-model-providers-card.tsx",
+      "line": 166,
+      "column": 14
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.saveProvider */}",
+      "file": "ui/src/components/compatible-cli/codex-model-providers-card.tsx",
+      "line": 183,
+      "column": 14
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.nativeCodexCliproxyHint */}",
+      "file": "ui/src/components/compatible-cli/codex-model-providers-card.tsx",
+      "line": 189,
+      "column": 12
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.modelProviders",
+      "file": "ui/src/components/compatible-cli/codex-model-providers-card.tsx",
+      "line": 217,
+      "column": 9
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.modelProvidersDesc",
+      "file": "ui/src/components/compatible-cli/codex-model-providers-card.tsx",
+      "line": 221,
+      "column": 9
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.selectProvider */}",
+      "file": "ui/src/components/compatible-cli/codex-model-providers-card.tsx",
+      "line": 227,
+      "column": 14
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key common.delete */}",
+      "file": "ui/src/components/compatible-cli/codex-profiles-card.tsx",
+      "line": 131,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.setActive */}",
+      "file": "ui/src/components/compatible-cli/codex-profiles-card.tsx",
+      "line": 141,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.saveProfile */}",
+      "file": "ui/src/components/compatible-cli/codex-profiles-card.tsx",
+      "line": 162,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.saveAndActivate */}",
+      "file": "ui/src/components/compatible-cli/codex-profiles-card.tsx",
+      "line": 180,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.profilesDesc",
+      "file": "ui/src/components/compatible-cli/codex-profiles-card.tsx",
+      "line": 214,
+      "column": 9
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.selectProfile */}",
+      "file": "ui/src/components/compatible-cli/codex-profiles-card.tsx",
+      "line": 220,
+      "column": 14
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.activeSuffix */}",
+      "file": "ui/src/components/compatible-cli/codex-profiles-card.tsx",
+      "line": 228,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.saveTrust */}",
+      "file": "ui/src/components/compatible-cli/codex-project-trust-card.tsx",
+      "line": 61,
+      "column": 12
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.projectTrust",
+      "file": "ui/src/components/compatible-cli/codex-project-trust-card.tsx",
+      "line": 80,
+      "column": 9
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.projectTrustDesc",
+      "file": "ui/src/components/compatible-cli/codex-project-trust-card.tsx",
+      "line": 84,
+      "column": 9
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.trustPathsHint */}",
+      "file": "ui/src/components/compatible-cli/codex-project-trust-card.tsx",
+      "line": 89,
+      "column": 12
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.trustCurrentWorkspace */}",
+      "file": "ui/src/components/compatible-cli/codex-project-trust-card.tsx",
+      "line": 107,
+      "column": 12
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.toggle */}",
+      "file": "ui/src/components/compatible-cli/codex-project-trust-card.tsx",
+      "line": 133,
+      "column": 22
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.manualOptInOnly */}",
+      "file": "ui/src/components/compatible-cli/codex-top-level-controls-card.tsx",
+      "line": 307,
+      "column": 20
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing keys codex.gpt54Selected / codex.gpt54Reference */}",
+      "file": "ui/src/components/compatible-cli/codex-top-level-controls-card.tsx",
+      "line": 314,
+      "column": 20
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.draftValuesOnly */}",
+      "file": "ui/src/components/compatible-cli/codex-top-level-controls-card.tsx",
+      "line": 321,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.fillCautiousPair */}",
+      "file": "ui/src/components/compatible-cli/codex-top-level-controls-card.tsx",
+      "line": 340,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.setOfficialMaxWindow */}",
+      "file": "ui/src/components/compatible-cli/codex-top-level-controls-card.tsx",
+      "line": 355,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.clear */}",
+      "file": "ui/src/components/compatible-cli/codex-top-level-controls-card.tsx",
+      "line": 371,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.officialMax */}",
+      "file": "ui/src/components/compatible-cli/codex-top-level-controls-card.tsx",
+      "line": 380,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.standardWindow */}",
+      "file": "ui/src/components/compatible-cli/codex-top-level-controls-card.tsx",
+      "line": 388,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.above272k */}",
+      "file": "ui/src/components/compatible-cli/codex-top-level-controls-card.tsx",
+      "line": 398,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.oneCautiousPair */}",
+      "file": "ui/src/components/compatible-cli/codex-top-level-controls-card.tsx",
+      "line": 412,
+      "column": 20
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.context */}",
+      "file": "ui/src/components/compatible-cli/codex-top-level-controls-card.tsx",
+      "line": 416,
+      "column": 20
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.autoCompact */}",
+      "file": "ui/src/components/compatible-cli/codex-top-level-controls-card.tsx",
+      "line": 420,
+      "column": 20
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.notOfficial */}",
+      "file": "ui/src/components/compatible-cli/codex-top-level-controls-card.tsx",
+      "line": 429,
+      "column": 20
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.draftOnly */}",
+      "file": "ui/src/components/compatible-cli/codex-top-level-controls-card.tsx",
+      "line": 436,
+      "column": 20
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.shouldBeCheckedSeparately */}",
+      "file": "ui/src/components/compatible-cli/codex-top-level-controls-card.tsx",
+      "line": 445,
+      "column": 20
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.unset",
+      "file": "ui/src/components/compatible-cli/codex-top-level-controls-card.tsx",
+      "line": 466,
+      "column": 17
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.writesModelContextWindow */}",
+      "file": "ui/src/components/compatible-cli/codex-top-level-controls-card.tsx",
+      "line": 471,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.unset",
+      "file": "ui/src/components/compatible-cli/codex-top-level-controls-card.tsx",
+      "line": 489,
+      "column": 17
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.writesAutoCompactTokenLimit */}",
+      "file": "ui/src/components/compatible-cli/codex-top-level-controls-card.tsx",
+      "line": 494,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.docs */}",
+      "file": "ui/src/components/compatible-cli/codex-top-level-controls-card.tsx",
+      "line": 502,
+      "column": 14
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.gptModelGuide */}",
+      "file": "ui/src/components/compatible-cli/codex-top-level-controls-card.tsx",
+      "line": 510,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.releaseNotes */}",
+      "file": "ui/src/components/compatible-cli/codex-top-level-controls-card.tsx",
+      "line": 519,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.configReference */}",
+      "file": "ui/src/components/compatible-cli/codex-top-level-controls-card.tsx",
+      "line": 528,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.saveTopLevelSettings */}",
+      "file": "ui/src/components/compatible-cli/codex-top-level-controls-card.tsx",
+      "line": 537,
+      "column": 14
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.topLevelControls",
+      "file": "ui/src/components/compatible-cli/codex-top-level-controls-card.tsx",
+      "line": 555,
+      "column": 9
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key codex.topLevelControlsDesc",
+      "file": "ui/src/components/compatible-cli/codex-top-level-controls-card.tsx",
+      "line": 559,
+      "column": 9
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key droidSettings.noByokModels */}",
+      "file": "ui/src/components/compatible-cli/droid-byok-reasoning-controls-card.tsx",
+      "line": 61,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key droidSettings.useProviderDefault */}",
+      "file": "ui/src/components/compatible-cli/droid-byok-reasoning-controls-card.tsx",
+      "line": 93,
+      "column": 28
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key droidSettings.useProviderDefault */}",
+      "file": "ui/src/components/compatible-cli/droid-byok-reasoning-controls-card.tsx",
+      "line": 97,
+      "column": 28
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing keys for droidSettings enum/boolean/number field labels */}",
+      "file": "ui/src/components/compatible-cli/droid-settings-quick-controls-card.tsx",
+      "line": 146,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing keys for droidSettings number field labels */}",
+      "file": "ui/src/components/compatible-cli/droid-settings-quick-controls-card.tsx",
+      "line": 173,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing keys for droidSettings boolean field labels */}",
+      "file": "ui/src/components/compatible-cli/droid-settings-quick-controls-card.tsx",
+      "line": 198,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key rawJsonSettingsEditor.unsaved */}",
+      "file": "ui/src/components/compatible-cli/raw-json-settings-editor-panel.tsx",
+      "line": 70,
+      "column": 20
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key rawJsonSettingsEditor.save */}",
+      "file": "ui/src/components/compatible-cli/raw-json-settings-editor-panel.tsx",
+      "line": 84,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key rawJsonSettingsEditor.discard */}",
+      "file": "ui/src/components/compatible-cli/raw-json-settings-editor-panel.tsx",
+      "line": 89,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing keys rawJsonSettingsEditor.copied / rawJsonSettingsEditor.copy */}",
+      "file": "ui/src/components/compatible-cli/raw-json-settings-editor-panel.tsx",
+      "line": 95,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key rawJsonSettingsEditor.readOnly */}",
+      "file": "ui/src/components/compatible-cli/raw-json-settings-editor-panel.tsx",
+      "line": 120,
+      "column": 20
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key copilotConfigForm.lastModified */}",
+      "file": "ui/src/components/copilot/config-form/header-section.tsx",
+      "line": 55,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key copilotConfigForm.neverSaved */}",
+      "file": "ui/src/components/copilot/config-form/header-section.tsx",
+      "line": 56,
+      "column": 33
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key copilotConfigForm.saving */}",
+      "file": "ui/src/components/copilot/config-form/header-section.tsx",
+      "line": 74,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key copilotConfigForm.save */}",
+      "file": "ui/src/components/copilot/config-form/header-section.tsx",
+      "line": 80,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key copilotConfigForm.deprecatedModelsDesc */}",
+      "file": "ui/src/components/copilot/config-form/index.tsx",
+      "line": 91,
+      "column": 20
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key copilotConfigForm.modelConfig */}",
+      "file": "ui/src/components/copilot/config-form/index.tsx",
+      "line": 114,
+      "column": 24
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key copilotConfigForm.settings */}",
+      "file": "ui/src/components/copilot/config-form/index.tsx",
+      "line": 118,
+      "column": 24
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key copilotConfigForm.info */}",
+      "file": "ui/src/components/copilot/config-form/index.tsx",
+      "line": 122,
+      "column": 24
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for 'Configuration Info' */}",
+      "file": "ui/src/components/copilot/config-form/info-tab.tsx",
+      "line": 34,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for 'File exists' / 'Using defaults' */}",
+      "file": "ui/src/components/copilot/config-form/info-tab.tsx",
+      "line": 69,
+      "column": 26
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing keys for usage command labels */}",
+      "file": "ui/src/components/copilot/config-form/info-tab.tsx",
+      "line": 81,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for 'Free Tier' */}",
+      "file": "ui/src/components/copilot/config-form/model-config-tab.tsx",
+      "line": 112,
+      "column": 22
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for 'Pro+ Required' */}",
+      "file": "ui/src/components/copilot/config-form/model-config-tab.tsx",
+      "line": 143,
+      "column": 22
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for 'Uses premium request quota' */}",
+      "file": "ui/src/components/copilot/config-form/model-config-tab.tsx",
+      "line": 147,
+      "column": 22
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for model mapping description */}",
+      "file": "ui/src/components/copilot/config-form/model-config-tab.tsx",
+      "line": 175,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for 'CCS can switch Copilot models...' */}",
+      "file": "ui/src/components/copilot/config-form/model-config-tab.tsx",
+      "line": 181,
+      "column": 20
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for 'Start the daemon to inspect...' */}",
+      "file": "ui/src/components/copilot/config-form/model-config-tab.tsx",
+      "line": 195,
+      "column": 22
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing keys for preset descriptions (\"Free tier - no premium usage\", etc.)",
+      "file": "ui/src/components/copilot/config-form/presets.ts",
+      "line": 8,
+      "column": 3
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing keys for paid preset descriptions",
+      "file": "ui/src/components/copilot/config-form/presets.ts",
+      "line": 29,
+      "column": 3
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for 'Invalid JSON syntax' */}",
+      "file": "ui/src/components/copilot/config-form/raw-editor-section.tsx",
+      "line": 49,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for 'Missing required fields:' */}",
+      "file": "ui/src/components/copilot/config-form/raw-editor-section.tsx",
+      "line": 58,
+      "column": 20
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for 'These fields will use default values at runtime.' */}",
+      "file": "ui/src/components/copilot/config-form/raw-editor-section.tsx",
+      "line": 65,
+      "column": 20
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for 'Free' multiplier label",
+      "file": "ui/src/components/copilot/config-form/utils.ts",
+      "line": 28,
+      "column": 5
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for 'Auto-start' */}",
+      "file": "ui/src/components/copilot/copilot-status-card.tsx",
+      "line": 126,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: Consider making formatRelativeLogTime/formatLogTimestamp i18n-aware",
+      "file": "ui/src/components/logs/utils.ts",
+      "line": 6,
+      "column": 3
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for account count */}",
+      "file": "ui/src/components/monitoring/auth-monitor/components/provider-card.tsx",
+      "line": 64,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key */}Missing Project ID - re-add account to fix",
+      "file": "ui/src/components/monitoring/auth-monitor/components/provider-card.tsx",
+      "line": 135,
+      "column": 26
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Request Distribution by Provider\" */}",
+      "file": "ui/src/components/monitoring/auth-monitor/index.tsx",
+      "line": 223,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Configuration\" tab label */}",
+      "file": "ui/src/components/profiles/editor/friendly-ui-section.tsx",
+      "line": 129,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Info & Usage\" tab label */}",
+      "file": "ui/src/components/profiles/editor/friendly-ui-section.tsx",
+      "line": 133,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Model Selection\" label */}",
+      "file": "ui/src/components/profiles/editor/friendly-ui-section.tsx",
+      "line": 152,
+      "column": 26
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Additional Variables\" label */}",
+      "file": "ui/src/components/profiles/editor/friendly-ui-section.tsx",
+      "line": 201,
+      "column": 30
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing keys for Zod validation messages (\"Invalid URL\", \"Name is required\", \"Invalid profile name\", \"API key must be at least 10 characters\")",
+      "file": "ui/src/components/profiles/profile-dialog.tsx",
+      "line": 22,
+      "column": 3
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for 'Binding created'",
+      "file": "ui/src/hooks/use-claude-extension.ts",
+      "line": 153,
+      "column": 9
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for 'Provider entry created'",
+      "file": "ui/src/hooks/use-cliproxy-ai-providers.ts",
+      "line": 20,
+      "column": 5
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for 'Provider entry updated'",
+      "file": "ui/src/hooks/use-cliproxy-ai-providers.ts",
+      "line": 42,
+      "column": 5
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for 'Provider entry removed'",
+      "file": "ui/src/hooks/use-cliproxy-ai-providers.ts",
+      "line": 66,
+      "column": 5
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for 'Synced {{count}} profile(s) to CLIProxy'",
+      "file": "ui/src/hooks/use-cliproxy-sync.ts",
+      "line": 168,
+      "column": 11
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for 'Solo mode: paused {{count}} other account(s)'",
+      "file": "ui/src/hooks/use-cliproxy.ts",
+      "line": 254,
+      "column": 9
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for 'Paused {{count}} account(s)'",
+      "file": "ui/src/hooks/use-cliproxy.ts",
+      "line": 274,
+      "column": 9
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for '{{count}} account(s) failed to pause'",
+      "file": "ui/src/hooks/use-cliproxy.ts",
+      "line": 279,
+      "column": 11
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for 'Resumed {{count}} account(s)'",
+      "file": "ui/src/hooks/use-cliproxy.ts",
+      "line": 300,
+      "column": 9
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for '{{count}} account(s) failed to resume'",
+      "file": "ui/src/hooks/use-cliproxy.ts",
+      "line": 305,
+      "column": 11
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for 'CLIProxy stopped ({{count}} session(s) disconnected)'",
+      "file": "ui/src/hooks/use-cliproxy.ts",
+      "line": 484,
+      "column": 11
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for 'Backend updated'",
+      "file": "ui/src/hooks/use-cliproxy.ts",
+      "line": 532,
+      "column": 9
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for 'Stop the proxy first to change backend'",
+      "file": "ui/src/hooks/use-cliproxy.ts",
+      "line": 536,
+      "column": 9
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for 'Installed v{{version}}'",
+      "file": "ui/src/hooks/use-cliproxy.ts",
+      "line": 573,
+      "column": 11
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for 'Installation failed'",
+      "file": "ui/src/hooks/use-cliproxy.ts",
+      "line": 576,
+      "column": 11
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for 'Proxy restarted on port {{port}}'",
+      "file": "ui/src/hooks/use-cliproxy.ts",
+      "line": 594,
+      "column": 11
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for 'Restart failed'",
+      "file": "ui/src/hooks/use-cliproxy.ts",
+      "line": 597,
+      "column": 11
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for unnamed model",
+      "file": "ui/src/lib/droid-byok-custom-models.ts",
+      "line": 270,
+      "column": 26
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for relative time \"just now\"",
+      "file": "ui/src/lib/error-log-parser.ts",
+      "line": 411,
+      "column": 7
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for relative time minutes",
+      "file": "ui/src/lib/error-log-parser.ts",
+      "line": 419,
+      "column": 7
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for relative time hours",
+      "file": "ui/src/lib/error-log-parser.ts",
+      "line": 427,
+      "column": 7
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for relative time days",
+      "file": "ui/src/lib/error-log-parser.ts",
+      "line": 435,
+      "column": 7
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing keys for error type labels (rate_limit, auth, not_found, server, timeout, unknown)",
+      "file": "ui/src/lib/error-log-parser.ts",
+      "line": 471,
+      "column": 5
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing keys for quota reset timestamp formatting",
+      "file": "ui/src/lib/error-log-parser.ts",
+      "line": 534,
+      "column": 5
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing keys for MODEL_CATALOGS displayNames, model names, and descriptions",
+      "file": "ui/src/lib/model-catalogs.ts",
+      "line": 142,
+      "column": 3
+    },
+    {
+      "type": "TODO",
+      "message": "Re-enable when Antigravity backend supports 1M context (currently 256k)",
+      "file": "ui/src/lib/model-catalogs.ts",
+      "line": 153,
+      "column": 11
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for kiro auth method aws",
+      "file": "ui/src/lib/provider-config.ts",
+      "line": 425,
+      "column": 46
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key",
+      "file": "ui/src/lib/provider-config.ts",
+      "line": 426,
+      "column": 87
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key",
+      "file": "ui/src/lib/provider-config.ts",
+      "line": 432,
+      "column": 44
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key",
+      "file": "ui/src/lib/provider-config.ts",
+      "line": 433,
+      "column": 63
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key",
+      "file": "ui/src/lib/provider-config.ts",
+      "line": 439,
+      "column": 30
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key",
+      "file": "ui/src/lib/provider-config.ts",
+      "line": 440,
+      "column": 68
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key",
+      "file": "ui/src/lib/provider-config.ts",
+      "line": 446,
+      "column": 30
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key",
+      "file": "ui/src/lib/provider-config.ts",
+      "line": 447,
+      "column": 70
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key",
+      "file": "ui/src/lib/provider-config.ts",
+      "line": 453,
+      "column": 43
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key",
+      "file": "ui/src/lib/provider-config.ts",
+      "line": 454,
+      "column": 86
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: import { useTranslation } from 'react-i18next'; when keys are ready",
+      "file": "ui/src/pages/analytics/components/charts-grid.tsx",
+      "line": 16,
+      "column": 3
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: uncomment when keys for \"Last 24 Hours\" / \"Usage Trends\" / \"Model Usage\" are added",
+      "file": "ui/src/pages/analytics/components/charts-grid.tsx",
+      "line": 46,
+      "column": 5
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing keys for \"Last 24 Hours\" / \"Usage Trends\" */}",
+      "file": "ui/src/pages/analytics/components/charts-grid.tsx",
+      "line": 56,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Model Usage\" */}",
+      "file": "ui/src/pages/analytics/components/charts-grid.tsx",
+      "line": 84,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Structured controls unavailable: failed to load the current config.toml.\" */ 'Structured controls unavailable: failed to load the current config.toml.'",
+      "file": "ui/src/pages/codex.tsx",
+      "line": 58,
+      "column": 9
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for controls unavailable with read error */ `Structured controls unavailable: ${rawConfig.readError}`",
+      "file": "ui/src/pages/codex.tsx",
+      "line": 60,
+      "column": 11
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Save or discard raw TOML edits before using structured controls.\" */ 'Save or discard raw TOML edits before using structured controls.'",
+      "file": "ui/src/pages/codex.tsx",
+      "line": 63,
+      "column": 15
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Fix or discard raw TOML edits before using structured controls.\" */ 'Fix or discard raw TOML edits before using structured controls.'",
+      "file": "ui/src/pages/codex.tsx",
+      "line": 64,
+      "column": 15
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for controls disabled with parse error */ `Structured controls disabled: ${rawConfig.parseError}`",
+      "file": "ui/src/pages/codex.tsx",
+      "line": 66,
+      "column": 15
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Loading Codex diagnostics...\" */ 'Loading Codex diagnostics...'",
+      "file": "ui/src/pages/codex.tsx",
+      "line": 162,
+      "column": 15
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Failed to load Codex diagnostics.\" */ 'Failed to load Codex diagnostics.'",
+      "file": "ui/src/pages/codex.tsx",
+      "line": 172,
+      "column": 15
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Codex config.toml\" title",
+      "file": "ui/src/pages/codex.tsx",
+      "line": 230,
+      "column": 15
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Loading config.toml...\"",
+      "file": "ui/src/pages/codex.tsx",
+      "line": 256,
+      "column": 15
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"TOML warning\"",
+      "file": "ui/src/pages/codex.tsx",
+      "line": 258,
+      "column": 15
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing keys for ownership notice paragraphs */}",
+      "file": "ui/src/pages/codex.tsx",
+      "line": 262,
+      "column": 20
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Raw settings must be a JSON object\"",
+      "file": "ui/src/pages/cursor.tsx",
+      "line": 146,
+      "column": 11
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Invalid JSON\"",
+      "file": "ui/src/pages/cursor.tsx",
+      "line": 158,
+      "column": 9
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"OpenAI-only mapping: GPT-5.3 Codex / Codex Max / GPT-5 Mini\"",
+      "file": "ui/src/pages/cursor.tsx",
+      "line": 1112,
+      "column": 35
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Claude-first mapping: Opus 4.6 / Sonnet 4.5 / Haiku 4.5\"",
+      "file": "ui/src/pages/cursor.tsx",
+      "line": 1124,
+      "column": 35
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Gemini-first mapping: Gemini 3 Pro + Gemini 3 Flash\"",
+      "file": "ui/src/pages/cursor.tsx",
+      "line": 1136,
+      "column": 35
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for model mapping env var info paragraph */}",
+      "file": "ui/src/pages/cursor.tsx",
+      "line": 1296,
+      "column": 32
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing keys for DEFAULT_DROID_FACTORY_DOC_LINKS labels and descriptions",
+      "file": "ui/src/pages/droid.tsx",
+      "line": 37,
+      "column": 3
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing keys for DEFAULT_DROID_PROVIDER_DOC_LINKS labels and apiFormat",
+      "file": "ui/src/pages/droid.tsx",
+      "line": 59,
+      "column": 3
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"N/A\" */ 'N/A';",
+      "file": "ui/src/pages/droid.tsx",
+      "line": 117,
+      "column": 51
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"JSON root must be an object.\" */ error:",
+      "file": "ui/src/pages/droid.tsx",
+      "line": 136,
+      "column": 11
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"N/A\" */ 'N/A'",
+      "file": "ui/src/pages/droid.tsx",
+      "line": 365,
+      "column": 27
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Unknown\" */ 'Unknown'",
+      "file": "ui/src/pages/droid.tsx",
+      "line": 373,
+      "column": 27
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Not set\" */ 'Not set'",
+      "file": "ui/src/pages/droid.tsx",
+      "line": 381,
+      "column": 27
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Quick settings disabled: \" */ `Quick settings disabled: ${rawEditorParsed.error}`",
+      "file": "ui/src/pages/droid.tsx",
+      "line": 461,
+      "column": 27
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Not set\" */ 'Not set'",
+      "file": "ui/src/pages/droid.tsx",
+      "line": 532,
+      "column": 27
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"no-key\" */ 'no-key'}",
+      "file": "ui/src/pages/droid.tsx",
+      "line": 604,
+      "column": 39
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Open logs\" */}",
+      "file": "ui/src/pages/home.tsx",
+      "line": 198,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: error/success messages in this hook cannot use useTranslation",
+      "file": "ui/src/pages/settings/hooks/use-official-channels-config.ts",
+      "line": 4,
+      "column": 3
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: error messages in this hook cannot use useTranslation",
+      "file": "ui/src/pages/settings/hooks/use-thinking-config.ts",
+      "line": 6,
+      "column": 3
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"config.yaml\" header */}",
+      "file": "ui/src/pages/settings/index.tsx",
+      "line": 215,
+      "column": 22
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"~/.ccs/config.yaml\" path */}",
+      "file": "ui/src/pages/settings/index.tsx",
+      "line": 217,
+      "column": 22
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing keys for summaryCompactDetail format strings",
+      "file": "ui/src/pages/settings/sections/image-analysis/index.tsx",
+      "line": 289,
+      "column": 3
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for thinking level labels",
+      "file": "ui/src/pages/settings/sections/thinking/index.tsx",
+      "line": 28,
+      "column": 3
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for override level labels",
+      "file": "ui/src/pages/settings/sections/thinking/index.tsx",
+      "line": 39,
+      "column": 3
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for budget range text */}",
+      "file": "ui/src/pages/settings/sections/thinking/index.tsx",
+      "line": 343,
+      "column": 22
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for CLI/env override info text */}",
+      "file": "ui/src/pages/settings/sections/thinking/index.tsx",
+      "line": 456,
+      "column": 16
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing keys for CHAIN_STEPS titles",
+      "file": "ui/src/pages/settings/sections/websearch/index.tsx",
+      "line": 65,
+      "column": 3
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing keys for BACKEND_PROVIDERS titles, descriptions, badges, footerNotes, field labels, helpTexts, placeholders",
+      "file": "ui/src/pages/settings/sections/websearch/index.tsx",
+      "line": 75,
+      "column": 3
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing keys for LEGACY_PROVIDERS titles, descriptions, badges, footerNotes, field labels, helpTexts, placeholders",
+      "file": "ui/src/pages/settings/sections/websearch/index.tsx",
+      "line": 199,
+      "column": 3
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing keys for getStatusLabel return values (\"Ready\", \"Needs setup\", \"Disabled\")",
+      "file": "ui/src/pages/settings/sections/websearch/index.tsx",
+      "line": 298,
+      "column": 3
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing keys for getApiKeySummary return values",
+      "file": "ui/src/pages/settings/sections/websearch/index.tsx",
+      "line": 382,
+      "column": 3
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing keys for legacy summary format strings (\"Off\", \"X enabled\", \"N enabled\")",
+      "file": "ui/src/pages/settings/sections/websearch/index.tsx",
+      "line": 445,
+      "column": 7
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Execution chain\" */}",
+      "file": "ui/src/pages/settings/sections/websearch/index.tsx",
+      "line": 633,
+      "column": 24
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Primary backends\" */}",
+      "file": "ui/src/pages/settings/sections/websearch/index.tsx",
+      "line": 696,
+      "column": 22
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"API Key\" */}",
+      "file": "ui/src/pages/settings/sections/websearch/index.tsx",
+      "line": 750,
+      "column": 38
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Store X here...\" */ `Store ${provider.badge} here so the backend is ready immediately after you enable it.`}",
+      "file": "ui/src/pages/settings/sections/websearch/index.tsx",
+      "line": 759,
+      "column": 41
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Saved\" */ 'Saved'}",
+      "file": "ui/src/pages/settings/sections/websearch/index.tsx",
+      "line": 764,
+      "column": 38
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Enter a new key to rotate the stored secret\" */ 'Enter a new key to rotate the stored secret'",
+      "file": "ui/src/pages/settings/sections/websearch/index.tsx",
+      "line": 780,
+      "column": 39
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Paste X\" */ `Paste ${provider.badge}`",
+      "file": "ui/src/pages/settings/sections/websearch/index.tsx",
+      "line": 781,
+      "column": 39
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Update key\" */ 'Update key'",
+      "file": "ui/src/pages/settings/sections/websearch/index.tsx",
+      "line": 798,
+      "column": 39
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Save key\" */ 'Save key'}",
+      "file": "ui/src/pages/settings/sections/websearch/index.tsx",
+      "line": 799,
+      "column": 39
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Remove stored key\" */ 'Remove stored key'",
+      "file": "ui/src/pages/settings/sections/websearch/index.tsx",
+      "line": 813,
+      "column": 39
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Legacy CLI fallbacks\" */}",
+      "file": "ui/src/pages/settings/sections/websearch/index.tsx",
+      "line": 842,
+      "column": 22
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Shared item totals could not be loaded. Listing still works.\"",
+      "file": "ui/src/pages/shared.tsx",
+      "line": 92,
+      "column": 5
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for \"Run `ccs sync` to configure.\" */}",
+      "file": "ui/src/pages/shared.tsx",
+      "line": 159,
+      "column": 18
+    },
+    {
+      "type": "TODO",
+      "message": "i18n: missing key for connection lost message",
+      "file": "ui/src/pages/shared.tsx",
+      "line": 404,
+      "column": 7
+    }
+  ]
+}

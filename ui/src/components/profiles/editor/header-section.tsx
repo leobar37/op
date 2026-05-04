@@ -14,8 +14,6 @@ import {
 } from '@/components/ui/select';
 import { Save, Loader2, Trash2, RefreshCw } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { OpenRouterBadge } from '@/components/profiles/openrouter-badge';
-import { isOpenRouterProfile } from './utils';
 import type { Settings } from './types';
 import type { CliTarget } from '@/lib/api-client';
 
@@ -39,7 +37,7 @@ export function HeaderSection({
   profileName,
   target,
   data,
-  settings,
+  _settings,
   isLoading,
   isSaving,
   isTargetSaving,
@@ -64,7 +62,6 @@ export function HeaderSection({
               {data.path.replace(/^.*\//, '')}
             </Badge>
           )}
-          {isOpenRouterProfile(settings) && <OpenRouterBadge className="ml-1" />}
         </div>
         {data && (
           <p className="text-xs text-muted-foreground mt-0.5">

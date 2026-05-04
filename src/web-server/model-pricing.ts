@@ -451,7 +451,7 @@ const PRICING_REGISTRY: Record<string, ModelPricing> = {
   },
 
   // ---------------------------------------------------------------------------
-  // GLM Models (Zhipu AI / Z.AI) - Source: OpenRouter verified pricing
+  // GLM Models (Zhipu AI / Z.AI)
   // ---------------------------------------------------------------------------
   'glm-5': {
     inputPerMillion: 1.0,

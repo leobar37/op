@@ -91,9 +91,6 @@ export async function showApiCommandHelp(writeLine: HelpWriter = console.log): P
   writeLine(
     `  ${color('ccs api create --preset anthropic --1m', 'command')} ${dim('# explicit Claude [1m] opt-in')}`
   );
-  writeLine(`  ${color('ccs api create --preset openrouter', 'command')}`);
-  writeLine(`  ${color('ccs api create --preset alibaba-coding-plan', 'command')}`);
-  writeLine(`  ${color('ccs api create --preset alibaba', 'command')} ${dim('# alias')}`);
   writeLine(
     `  ${color('ccs api create hf-router --preset hf', 'command')} ${dim('# defaults to droid for generic chat completions')}`
   );

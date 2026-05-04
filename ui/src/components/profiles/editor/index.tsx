@@ -375,5 +375,5 @@ export { RawEditorSection } from './raw-editor-section';
 export { HeaderSection } from './header-section';
 export { FriendlyUISection } from './friendly-ui-section';
 export { useProfileEditor } from './use-profile-editor';
-export { isSensitiveKey, isOpenRouterProfile, extractTierMapping, applyTierMapping } from './utils';
+export { isSensitiveKey, extractTierMapping, applyTierMapping } from './utils';
 export type { Settings, SettingsResponse, ProfileEditorProps } from './types';

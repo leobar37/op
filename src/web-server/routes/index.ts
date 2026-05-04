@@ -24,6 +24,7 @@ import cliproxyAuthRoutes from './cliproxy-auth-routes';
 import cliproxyStatsRoutes from './cliproxy-stats-routes';
 import cliproxyRoutingRoutes from './cliproxy-routing-routes';
 import cliproxySyncRoutes from './cliproxy-sync-routes';
+import cliproxyProvidersRoutes from './cliproxy-providers-routes';
 import aiProviderRoutes from './ai-provider-routes';
 import copilotRoutes from './copilot-routes';
 import cursorRoutes from './cursor-routes';
@@ -95,6 +96,9 @@ apiRoutes.use('/cliproxy/sync', cliproxySyncRoutes);
 apiRoutes.use('/cliproxy/catalog', catalogRoutes);
 apiRoutes.use('/cliproxy/ai-providers', aiProviderRoutes);
 apiRoutes.use('/cliproxy/openai-compat', providerRoutes);
+
+// ==================== Provider Models (CLIProxy Global View) ====================
+apiRoutes.use('/provider-models', cliproxyProvidersRoutes);
 
 // ==================== WebSearch ====================
 apiRoutes.use('/websearch', websearchRoutes);

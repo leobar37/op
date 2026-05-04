@@ -48,6 +48,7 @@ export interface DroidConfigFileDiagnostics {
 }
 
 export interface DroidCustomModelDiagnostics {
+  index: number;
   displayName: string;
   model: string;
   provider: string;

@@ -39,7 +39,7 @@ describe('droid-provider', () => {
     });
 
     it('detects generic openai-chat-compatible endpoints', () => {
-      expect(inferDroidProviderFromBaseUrl('https://openrouter.ai/api/v1')).toBe(
+      expect(inferDroidProviderFromBaseUrl('https://api.groq.com/v1')).toBe(
         'generic-chat-completion-api'
       );
       expect(inferDroidProviderFromBaseUrl('https://api.deepinfra.com/v1/openai')).toBe(

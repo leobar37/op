@@ -16,12 +16,6 @@ vi.mock('@/hooks/use-profiles', () => ({
   }),
 }));
 
-vi.mock('@/hooks/use-openrouter-models', () => ({
-  useOpenRouterCatalog: () => ({
-    models: [],
-  }),
-}));
-
 vi.mock('@/hooks/use-cliproxy', () => ({
   useCliproxyAuth: () => ({
     data: { authStatus: [] },
@@ -35,18 +29,12 @@ describe('ProfileCreateDialog', () => {
 
   it('keeps More Presets visible by default and deselects custom after choosing a template', async () => {
     render(
-      <ProfileCreateDialog
-        open
-        onOpenChange={vi.fn()}
-        onSuccess={vi.fn()}
-        initialMode="openrouter"
-      />
+      <ProfileCreateDialog open onOpenChange={vi.fn()} onSuccess={vi.fn()} initialMode="normal" />
     );
 
     expect(screen.getByText('Featured Providers')).toBeInTheDocument();
     expect(screen.getByText('More Presets')).toBeInTheDocument();
     expect(screen.getByText('Local runtimes')).toBeInTheDocument();
-    expect(screen.getByText('Alibaba Coding Plan')).toBeVisible();
     expect(screen.getByText('Hugging Face')).toBeVisible();
     expect(document.body.querySelectorAll('.overflow-x-auto')).toHaveLength(2);
 
@@ -78,12 +66,7 @@ describe('ProfileCreateDialog', () => {
 
   it('steers the Hugging Face preset to the droid target by default', async () => {
     render(
-      <ProfileCreateDialog
-        open
-        onOpenChange={vi.fn()}
-        onSuccess={vi.fn()}
-        initialMode="openrouter"
-      />
+      <ProfileCreateDialog open onOpenChange={vi.fn()} onSuccess={vi.fn()} initialMode="normal" />
     );
 
     const huggingFaceButton = screen.getByText('Hugging Face').closest('button');

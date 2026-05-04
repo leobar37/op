@@ -144,7 +144,6 @@ export {
   addOpenAICompatProvider,
   updateOpenAICompatProvider,
   removeOpenAICompatProvider,
-  OPENROUTER_TEMPLATE,
   TOGETHER_TEMPLATE,
 } from './ai-providers/openai-compat-manager';
 

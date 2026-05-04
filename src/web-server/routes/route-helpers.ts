@@ -83,10 +83,6 @@ function canonicalizeModelForProvider(
   return canonicalizeModelIdForProvider(value, provider);
 }
 
-function isOpenRouterUrl(baseUrl: string): boolean {
-  return baseUrl.toLowerCase().includes('openrouter.ai');
-}
-
 export function isAnthropicDirectProfile(
   baseUrl: string | undefined | null,
   apiKey: string | undefined | null
@@ -194,7 +190,6 @@ export function createSettingsFile(
         : {
             ANTHROPIC_BASE_URL: normalizedBaseUrl,
             ANTHROPIC_AUTH_TOKEN: normalizedApiKey,
-            ...(isOpenRouterUrl(normalizedBaseUrl) && { ANTHROPIC_API_KEY: '' }),
           }),
       ...(canonicalModel && { ANTHROPIC_MODEL: canonicalModel }),
       ...(canonicalOpusModel && { ANTHROPIC_DEFAULT_OPUS_MODEL: canonicalOpusModel }),
@@ -293,11 +288,7 @@ export function updateSettingsFile(
   } else {
     settings.env.ANTHROPIC_BASE_URL = nextBaseUrl;
     settings.env.ANTHROPIC_AUTH_TOKEN = nextApiKey;
-    if (isOpenRouterUrl(nextBaseUrl)) {
-      settings.env.ANTHROPIC_API_KEY = '';
-    } else {
-      delete settings.env.ANTHROPIC_API_KEY;
-    }
+    delete settings.env.ANTHROPIC_API_KEY;
   }
 
   if (updates.model !== undefined) {

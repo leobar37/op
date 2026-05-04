@@ -1,0 +1,2928 @@
+{
+  "success": true,
+  "clones": [
+    {
+      "fileA": "ui/src/pages/settings/sections/websearch/index.tsx",
+      "startA": 882,
+      "fileB": "ui/src/pages/settings/sections/websearch/index.tsx",
+      "startB": 723,
+      "lines": 19,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/settings/sections/websearch/index.tsx",
+      "startA": 537,
+      "fileB": "ui/src/pages/settings/sections/websearch/index.tsx",
+      "startB": 520,
+      "lines": 15,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/settings/sections/websearch/index.tsx",
+      "startA": 865,
+      "fileB": "ui/src/pages/settings/sections/websearch/index.tsx",
+      "startB": 705,
+      "lines": 7,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/settings/sections/thinking/index.tsx",
+      "startA": 473,
+      "fileB": "ui/src/pages/settings/sections/websearch/index.tsx",
+      "startB": 917,
+      "lines": 15,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/settings/sections/proxy/index.tsx",
+      "startA": 269,
+      "fileB": "ui/src/pages/settings/sections/thinking/index.tsx",
+      "startB": 131,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/settings/sections/proxy/index.tsx",
+      "startA": 375,
+      "fileB": "ui/src/pages/settings/sections/websearch/index.tsx",
+      "startB": 594,
+      "lines": 15,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/settings/sections/proxy/index.tsx",
+      "startA": 385,
+      "fileB": "ui/src/pages/settings/sections/thinking/index.tsx",
+      "startB": 169,
+      "lines": 15,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/settings/sections/proxy/index.tsx",
+      "startA": 758,
+      "fileB": "ui/src/pages/settings/sections/thinking/index.tsx",
+      "startB": 469,
+      "lines": 25,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/settings/sections/browser/index.tsx",
+      "startA": 703,
+      "fileB": "ui/src/pages/settings/sections/browser/index.tsx",
+      "startB": 472,
+      "lines": 39,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/settings/sections/browser/index.tsx",
+      "startA": 767,
+      "fileB": "ui/src/pages/settings/sections/browser/index.tsx",
+      "startB": 598,
+      "lines": 14,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/settings/sections/browser/index.tsx",
+      "startA": 828,
+      "fileB": "ui/src/pages/settings/sections/browser/index.tsx",
+      "startB": 685,
+      "lines": 9,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/setup/wizard/steps/account-step.tsx",
+      "startA": 96,
+      "fileB": "ui/src/components/setup/wizard/steps/auth-step.tsx",
+      "startB": 55,
+      "lines": 11,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/settings/sections/globalenv-section.tsx",
+      "startA": 43,
+      "fileB": "ui/src/pages/settings/sections/thinking/index.tsx",
+      "startB": 128,
+      "lines": 27,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/settings/sections/globalenv-section.tsx",
+      "startA": 57,
+      "fileB": "ui/src/pages/settings/sections/proxy/index.tsx",
+      "startB": 372,
+      "lines": 28,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/settings/sections/globalenv-section.tsx",
+      "startA": 197,
+      "fileB": "ui/src/pages/settings/sections/thinking/index.tsx",
+      "startB": 466,
+      "lines": 25,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/settings/sections/channels.tsx",
+      "startA": 146,
+      "fileB": "ui/src/pages/settings/sections/websearch/index.tsx",
+      "startB": 579,
+      "lines": 32,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/settings/sections/backups-section.tsx",
+      "startA": 176,
+      "fileB": "ui/src/pages/settings/sections/globalenv-section.tsx",
+      "startB": 54,
+      "lines": 23,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/settings/sections/backups-section.tsx",
+      "startA": 263,
+      "fileB": "ui/src/pages/settings/sections/proxy/index.tsx",
+      "startB": 757,
+      "lines": 22,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/settings/sections/auth-section.tsx",
+      "startA": 175,
+      "fileB": "ui/src/pages/settings/sections/auth-section.tsx",
+      "startB": 125,
+      "lines": 13,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/settings/sections/auth-section.tsx",
+      "startA": 209,
+      "fileB": "ui/src/pages/settings/sections/thinking/index.tsx",
+      "startB": 131,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/settings/sections/auth-section.tsx",
+      "startA": 227,
+      "fileB": "ui/src/pages/settings/sections/proxy/index.tsx",
+      "startB": 370,
+      "lines": 29,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/settings/sections/auth-section.tsx",
+      "startA": 319,
+      "fileB": "ui/src/pages/settings/sections/auth-section.tsx",
+      "startB": 269,
+      "lines": 20,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/settings/sections/auth-section.tsx",
+      "startA": 338,
+      "fileB": "ui/src/pages/settings/sections/auth-section.tsx",
+      "startB": 287,
+      "lines": 10,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/settings/hooks/use-thinking-config.ts",
+      "startA": 127,
+      "fileB": "ui/src/pages/settings/hooks/use-thinking-config.ts",
+      "startB": 50,
+      "lines": 11,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/settings/hooks/context-hooks.ts",
+      "startA": 203,
+      "fileB": "ui/src/pages/settings/hooks/context-hooks.ts",
+      "startB": 173,
+      "lines": 29,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/profiles/editor/env-editor-section.tsx",
+      "startA": 57,
+      "fileB": "ui/src/components/profiles/editor/friendly-ui-section.tsx",
+      "startB": 210,
+      "lines": 48,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/copilot/config-form/raw-editor-section.tsx",
+      "startA": 9,
+      "fileB": "ui/src/components/profiles/editor/raw-editor-section.tsx",
+      "startB": 12,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/copilot/config-form/raw-editor-section.tsx",
+      "startA": 29,
+      "fileB": "ui/src/components/profiles/editor/raw-editor-section.tsx",
+      "startB": 44,
+      "lines": 21,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/copilot/config-form/raw-editor-section.tsx",
+      "startA": 67,
+      "fileB": "ui/src/components/profiles/editor/raw-editor-section.tsx",
+      "startB": 81,
+      "lines": 16,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/copilot/config-form/info-tab.tsx",
+      "startA": 52,
+      "fileB": "ui/src/components/profiles/editor/info-section.tsx",
+      "startB": 48,
+      "lines": 8,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/provider-editor/use-provider-editor.ts",
+      "startA": 136,
+      "fileB": "ui/src/components/cliproxy/provider-editor/use-provider-editor.ts",
+      "startB": 107,
+      "lines": 11,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/provider-editor/usage-command.tsx",
+      "startA": 6,
+      "fileB": "ui/src/components/copilot/config-form/usage-command.tsx",
+      "startB": 6,
+      "lines": 20,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/provider-editor/raw-editor-section.tsx",
+      "startA": 30,
+      "fileB": "ui/src/components/copilot/config-form/raw-editor-section.tsx",
+      "startB": 38,
+      "lines": 36,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/provider-editor/raw-editor-section.tsx",
+      "startA": 22,
+      "fileB": "ui/src/components/profiles/editor/raw-editor-section.tsx",
+      "startB": 45,
+      "lines": 20,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/provider-editor/raw-editor-section.tsx",
+      "startA": 56,
+      "fileB": "ui/src/components/copilot/config-form/raw-editor-section.tsx",
+      "startB": 66,
+      "lines": 26,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/provider-editor/provider-info-tab.tsx",
+      "startA": 68,
+      "fileB": "ui/src/components/profiles/editor/info-section.tsx",
+      "startB": 44,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/provider-editor/index.tsx",
+      "startA": 282,
+      "fileB": "ui/src/components/cliproxy/provider-editor/model-config-tab.tsx",
+      "startB": 173,
+      "lines": 16,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/provider-editor/index.tsx",
+      "startA": 247,
+      "fileB": "ui/src/components/copilot/config-form/index.tsx",
+      "startB": 109,
+      "lines": 6,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/provider-editor/custom-preset-dialog.tsx",
+      "startA": 105,
+      "fileB": "ui/src/components/cliproxy/provider-editor/custom-preset-dialog.tsx",
+      "startB": 96,
+      "lines": 28,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/provider-editor/accounts-section.tsx",
+      "startA": 18,
+      "fileB": "ui/src/components/cliproxy/provider-editor/model-config-tab.tsx",
+      "startB": 41,
+      "lines": 8,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/account/flow-viz/account-card.tsx",
+      "startA": 114,
+      "fileB": "ui/src/components/account/shared/account-surface-card.tsx",
+      "startB": 119,
+      "lines": 31,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/account/flow-viz/account-card.tsx",
+      "startA": 162,
+      "fileB": "ui/src/components/account/flow-viz/account-card.tsx",
+      "startB": 144,
+      "lines": 16,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/settings/index.tsx",
+      "startA": 186,
+      "fileB": "ui/src/pages/settings/index.tsx",
+      "startB": 160,
+      "lines": 15,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/shared/docs-link.tsx",
+      "startA": 13,
+      "fileB": "ui/src/components/shared/github-link.tsx",
+      "startB": 13,
+      "lines": 7,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/page-shell/empty-state.tsx",
+      "startA": 30,
+      "fileB": "ui/src/components/page-shell/error-state.tsx",
+      "startB": 27,
+      "lines": 7,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/monitoring/proxy-status-widget.tsx",
+      "startA": 499,
+      "fileB": "ui/src/components/monitoring/proxy-status-widget.tsx",
+      "startB": 341,
+      "lines": 14,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/logs/logs-row.tsx",
+      "startA": 20,
+      "fileB": "ui/src/components/logs/logs-trace-row.tsx",
+      "startB": 28,
+      "lines": 15,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/compatible-cli/droid-settings-quick-controls-card.tsx",
+      "startA": 198,
+      "fileB": "ui/src/components/compatible-cli/droid-settings-quick-controls-card.tsx",
+      "startB": 146,
+      "lines": 13,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/compatible-cli/droid-byok-reasoning-controls-card.tsx",
+      "startA": 1,
+      "fileB": "ui/src/components/compatible-cli/droid-settings-quick-controls-card.tsx",
+      "startB": 1,
+      "lines": 13,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/compatible-cli/codex-top-level-controls-card.tsx",
+      "startA": 201,
+      "fileB": "ui/src/components/compatible-cli/codex-top-level-controls-card.tsx",
+      "startB": 155,
+      "lines": 11,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/compatible-cli/codex-top-level-controls-card.tsx",
+      "startA": 224,
+      "fileB": "ui/src/components/compatible-cli/codex-top-level-controls-card.tsx",
+      "startB": 155,
+      "lines": 11,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/compatible-cli/codex-top-level-controls-card.tsx",
+      "startA": 247,
+      "fileB": "ui/src/components/compatible-cli/codex-top-level-controls-card.tsx",
+      "startB": 155,
+      "lines": 11,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/compatible-cli/codex-overview-tab.tsx",
+      "startA": 235,
+      "fileB": "ui/src/components/compatible-cli/codex-overview-tab.tsx",
+      "startB": 230,
+      "lines": 26,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/compatible-cli/codex-mcp-servers-card.tsx",
+      "startA": 297,
+      "fileB": "ui/src/components/compatible-cli/codex-model-providers-card.tsx",
+      "startB": 245,
+      "lines": 10,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/compatible-cli/codex-mcp-servers-card.tsx",
+      "startA": 2,
+      "fileB": "ui/src/components/compatible-cli/codex-model-providers-card.tsx",
+      "startB": 2,
+      "lines": 13,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/compatible-cli/codex-mcp-servers-card.tsx",
+      "startA": 199,
+      "fileB": "ui/src/components/compatible-cli/codex-model-providers-card.tsx",
+      "startB": 153,
+      "lines": 35,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/compatible-cli/codex-mcp-servers-card.tsx",
+      "startA": 248,
+      "fileB": "ui/src/components/compatible-cli/codex-profiles-card.tsx",
+      "startB": 199,
+      "lines": 9,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/routing-guidance-card.tsx",
+      "startA": 252,
+      "fileB": "ui/src/components/cliproxy/routing-guidance-card.tsx",
+      "startB": 148,
+      "lines": 19,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/provider-model-selector.tsx",
+      "startA": 435,
+      "fileB": "ui/src/components/cliproxy/provider-model-selector.tsx",
+      "startB": 383,
+      "lines": 16,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/provider-model-selector.tsx",
+      "startA": 450,
+      "fileB": "ui/src/components/cliproxy/provider-model-selector.tsx",
+      "startB": 399,
+      "lines": 16,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/provider-model-selector.tsx",
+      "startA": 482,
+      "fileB": "ui/src/components/cliproxy/provider-model-selector.tsx",
+      "startB": 474,
+      "lines": 9,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/provider-model-selector.tsx",
+      "startA": 492,
+      "fileB": "ui/src/components/copilot/config-form/model-selector.tsx",
+      "startB": 20,
+      "lines": 13,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/cliproxy-table.tsx",
+      "startA": 165,
+      "fileB": "ui/src/components/profiles/profiles-table.tsx",
+      "startB": 131,
+      "lines": 18,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/cliproxy-stats-overview.tsx",
+      "startA": 144,
+      "fileB": "ui/src/components/cliproxy/cliproxy-stats-overview.tsx",
+      "startB": 72,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/cliproxy-edit-dialog.tsx",
+      "startA": 44,
+      "fileB": "ui/src/components/cliproxy/cliproxy-edit-dialog.tsx",
+      "startB": 39,
+      "lines": 6,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/cliproxy-edit-dialog.tsx",
+      "startA": 49,
+      "fileB": "ui/src/components/cliproxy/cliproxy-edit-dialog.tsx",
+      "startB": 39,
+      "lines": 6,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/cliproxy-edit-dialog.tsx",
+      "startA": 185,
+      "fileB": "ui/src/components/cliproxy/cliproxy-edit-dialog.tsx",
+      "startB": 84,
+      "lines": 8,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/cliproxy-edit-dialog.tsx",
+      "startA": 274,
+      "fileB": "ui/src/components/cliproxy/cliproxy-edit-dialog.tsx",
+      "startB": 212,
+      "lines": 14,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/cliproxy-edit-dialog.tsx",
+      "startA": 421,
+      "fileB": "ui/src/components/cliproxy/cliproxy-edit-dialog.tsx",
+      "startB": 326,
+      "lines": 16,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/cliproxy-edit-dialog.tsx",
+      "startA": 468,
+      "fileB": "ui/src/components/cliproxy/cliproxy-edit-dialog.tsx",
+      "startB": 395,
+      "lines": 21,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/cliproxy-dialog.tsx",
+      "startA": 11,
+      "fileB": "ui/src/components/cliproxy/cliproxy-edit-dialog.tsx",
+      "startB": 9,
+      "lines": 9,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/cliproxy-dialog.tsx",
+      "startA": 36,
+      "fileB": "ui/src/components/cliproxy/cliproxy-edit-dialog.tsx",
+      "startB": 29,
+      "lines": 8,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/cliproxy-dialog.tsx",
+      "startA": 47,
+      "fileB": "ui/src/components/cliproxy/cliproxy-edit-dialog.tsx",
+      "startB": 36,
+      "lines": 25,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/cliproxy-dialog.tsx",
+      "startA": 208,
+      "fileB": "ui/src/components/cliproxy/cliproxy-edit-dialog.tsx",
+      "startB": 329,
+      "lines": 13,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/cliproxy-dialog.tsx",
+      "startA": 269,
+      "fileB": "ui/src/components/cliproxy/cliproxy-edit-dialog.tsx",
+      "startB": 468,
+      "lines": 15,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/cliproxy-dialog.tsx",
+      "startA": 303,
+      "fileB": "ui/src/components/cliproxy/cliproxy-edit-dialog.tsx",
+      "startB": 309,
+      "lines": 16,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/cliproxy-dialog.tsx",
+      "startA": 318,
+      "fileB": "ui/src/components/cliproxy/cliproxy-edit-dialog.tsx",
+      "startB": 325,
+      "lines": 29,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/cliproxy-dialog.tsx",
+      "startA": 346,
+      "fileB": "ui/src/components/cliproxy/cliproxy-edit-dialog.tsx",
+      "startB": 353,
+      "lines": 16,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/cliproxy-dialog.tsx",
+      "startA": 361,
+      "fileB": "ui/src/components/cliproxy/cliproxy-edit-dialog.tsx",
+      "startB": 368,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/cliproxy-dialog.tsx",
+      "startA": 375,
+      "fileB": "ui/src/components/cliproxy/cliproxy-edit-dialog.tsx",
+      "startB": 382,
+      "lines": 11,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/cliproxy-dialog.tsx",
+      "startA": 388,
+      "fileB": "ui/src/components/cliproxy/cliproxy-edit-dialog.tsx",
+      "startB": 395,
+      "lines": 21,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/cliproxy/categorized-model-selector.tsx",
+      "startA": 64,
+      "fileB": "ui/src/components/cliproxy/overview/model-preferences-grid.tsx",
+      "startB": 87,
+      "lines": 13,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/analytics/usage-trend-chart.tsx",
+      "startA": 220,
+      "fileB": "ui/src/components/cliproxy/cliproxy-stats-overview.tsx",
+      "startB": 327,
+      "lines": 9,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/analytics/usage-summary-cards.tsx",
+      "startA": 163,
+      "fileB": "ui/src/components/cliproxy/cliproxy-stats-overview.tsx",
+      "startB": 327,
+      "lines": 9,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/analytics/token-breakdown-chart.tsx",
+      "startA": 183,
+      "fileB": "ui/src/components/cliproxy/cliproxy-stats-overview.tsx",
+      "startB": 328,
+      "lines": 8,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/analytics/model-breakdown-chart.tsx",
+      "startA": 104,
+      "fileB": "ui/src/components/cliproxy/cliproxy-stats-overview.tsx",
+      "startB": 327,
+      "lines": 9,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/analytics/cliproxy-stats-card.tsx",
+      "startA": 115,
+      "fileB": "ui/src/components/cliproxy/cliproxy-stats-overview.tsx",
+      "startB": 121,
+      "lines": 10,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/analytics/cliproxy-stats-card.tsx",
+      "startA": 239,
+      "fileB": "ui/src/components/cliproxy/cliproxy-stats-overview.tsx",
+      "startB": 322,
+      "lines": 16,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/analytics/cache-efficiency-card.tsx",
+      "startA": 55,
+      "fileB": "ui/src/components/analytics/session-stats-card.tsx",
+      "startB": 46,
+      "lines": 18,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/analytics/cache-efficiency-card.tsx",
+      "startA": 91,
+      "fileB": "ui/src/components/analytics/cache-efficiency-card.tsx",
+      "startB": 73,
+      "lines": 10,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/analytics/cache-efficiency-card.tsx",
+      "startA": 182,
+      "fileB": "ui/src/components/analytics/session-stats-card.tsx",
+      "startB": 163,
+      "lines": 13,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/account/continuity-overview.tsx",
+      "startA": 85,
+      "fileB": "ui/src/components/account/edit-account-context-dialog.tsx",
+      "startB": 99,
+      "lines": 20,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/account/continuity-overview.tsx",
+      "startA": 228,
+      "fileB": "ui/src/components/account/edit-account-context-dialog.tsx",
+      "startB": 309,
+      "lines": 11,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/account/accounts-table.tsx",
+      "startA": 6,
+      "fileB": "ui/src/components/cliproxy/cliproxy-table.tsx",
+      "startB": 8,
+      "lines": 14,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/components/account/accounts-table.tsx",
+      "startA": 287,
+      "fileB": "ui/src/components/profiles/profiles-table.tsx",
+      "startB": 125,
+      "lines": 25,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/droid.tsx",
+      "startA": 77,
+      "fileB": "ui/src/components/compatible-cli/codex-docs-tab.tsx",
+      "startB": 45,
+      "lines": 40,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/droid.tsx",
+      "startA": 117,
+      "fileB": "ui/src/components/compatible-cli/codex-overview-tab.tsx",
+      "startB": 30,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/droid.tsx",
+      "startA": 155,
+      "fileB": "ui/src/components/compatible-cli/codex-overview-tab.tsx",
+      "startB": 38,
+      "lines": 21,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/droid.tsx",
+      "startA": 400,
+      "fileB": "ui/src/components/compatible-cli/codex-overview-tab.tsx",
+      "startB": 195,
+      "lines": 10,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/droid.tsx",
+      "startA": 436,
+      "fileB": "ui/src/components/compatible-cli/codex-overview-tab.tsx",
+      "startB": 408,
+      "lines": 15,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/droid.tsx",
+      "startA": 655,
+      "fileB": "ui/src/components/compatible-cli/codex-docs-tab.tsx",
+      "startB": 179,
+      "lines": 18,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/droid.tsx",
+      "startA": 685,
+      "fileB": "ui/src/components/compatible-cli/codex-docs-tab.tsx",
+      "startB": 208,
+      "lines": 14,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/codex.tsx",
+      "startA": 213,
+      "fileB": "ui/src/pages/droid.tsx",
+      "startB": 709,
+      "lines": 11,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/cliproxy.tsx",
+      "startA": 364,
+      "fileB": "ui/src/pages/copilot.tsx",
+      "startB": 127,
+      "lines": 13,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/accounts.tsx",
+      "startA": 252,
+      "fileB": "ui/src/pages/accounts.tsx",
+      "startB": 97,
+      "lines": 54,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/_styleguide.tsx",
+      "startA": 737,
+      "fileB": "ui/src/pages/_styleguide.tsx",
+      "startB": 644,
+      "lines": 7,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/pages/_styleguide.tsx",
+      "startA": 744,
+      "fileB": "ui/src/pages/_styleguide.tsx",
+      "startB": 652,
+      "lines": 11,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/lib/error-log-parser.ts",
+      "startA": 224,
+      "fileB": "ui/src/lib/error-log-parser.ts",
+      "startB": 189,
+      "lines": 6,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/hooks/use-usage.ts",
+      "startA": 217,
+      "fileB": "ui/src/lib/auth-api.ts",
+      "startB": 35,
+      "lines": 9,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/hooks/use-unified-config.ts",
+      "startA": 90,
+      "fileB": "ui/src/hooks/use-unified-config.ts",
+      "startB": 64,
+      "lines": 6,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/hooks/use-device-code.ts",
+      "startA": 41,
+      "fileB": "ui/src/hooks/use-project-selection.ts",
+      "startB": 32,
+      "lines": 9,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/hooks/use-copilot.ts",
+      "startA": 253,
+      "fileB": "ui/src/hooks/use-copilot.ts",
+      "startB": 244,
+      "lines": 9,
+      "tokens": 0
+    },
+    {
+      "fileA": "ui/src/hooks/use-cliproxy-auth-flow.ts",
+      "startA": 482,
+      "fileB": "ui/src/hooks/use-cliproxy-auth-flow.ts",
+      "startB": 176,
+      "lines": 6,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/usage/handlers.ts",
+      "startA": 462,
+      "fileB": "src/web-server/usage/handlers.ts",
+      "startB": 403,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/usage/handlers.ts",
+      "startA": 494,
+      "fileB": "src/web-server/usage/handlers.ts",
+      "startB": 403,
+      "lines": 9,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/usage/handlers.ts",
+      "startA": 534,
+      "fileB": "src/web-server/usage/handlers.ts",
+      "startB": 403,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/usage/handlers.ts",
+      "startA": 640,
+      "fileB": "src/web-server/usage/handlers.ts",
+      "startB": 403,
+      "lines": 9,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/usage/handlers.ts",
+      "startA": 690,
+      "fileB": "src/web-server/usage/handlers.ts",
+      "startB": 403,
+      "lines": 9,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/usage/handlers.ts",
+      "startA": 832,
+      "fileB": "src/web-server/usage/handlers.ts",
+      "startB": 403,
+      "lines": 11,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/usage/droid-native-usage-collector.ts",
+      "startA": 27,
+      "fileB": "ui/src/lib/codex-config.ts",
+      "startB": 136,
+      "lines": 9,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/usage/data-aggregator.ts",
+      "startA": 217,
+      "fileB": "src/web-server/usage/data-aggregator.ts",
+      "startB": 128,
+      "lines": 37,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/usage/data-aggregator.ts",
+      "startA": 307,
+      "fileB": "src/web-server/usage/data-aggregator.ts",
+      "startB": 128,
+      "lines": 37,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/usage/data-aggregator.ts",
+      "startA": 403,
+      "fileB": "src/web-server/usage/data-aggregator.ts",
+      "startB": 128,
+      "lines": 16,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/usage/data-aggregator.ts",
+      "startA": 436,
+      "fileB": "src/web-server/usage/data-aggregator.ts",
+      "startB": 142,
+      "lines": 23,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/usage/codex-native-usage-collector.ts",
+      "startA": 23,
+      "fileB": "src/web-server/usage/droid-native-usage-collector.ts",
+      "startB": 26,
+      "lines": 6,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/usage/cliproxy-usage-transformer.ts",
+      "startA": 306,
+      "fileB": "src/web-server/usage/cliproxy-usage-transformer.ts",
+      "startB": 277,
+      "lines": 11,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/usage/cliproxy-usage-transformer.ts",
+      "startA": 354,
+      "fileB": "src/web-server/usage/cliproxy-usage-transformer.ts",
+      "startB": 273,
+      "lines": 18,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/usage/cliproxy-usage-transformer.ts",
+      "startA": 376,
+      "fileB": "src/web-server/usage/cliproxy-usage-transformer.ts",
+      "startB": 300,
+      "lines": 21,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/usage/cliproxy-usage-transformer.ts",
+      "startA": 399,
+      "fileB": "src/web-server/usage/cliproxy-usage-transformer.ts",
+      "startB": 330,
+      "lines": 14,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/usage/aggregator.ts",
+      "startA": 215,
+      "fileB": "src/web-server/usage/aggregator.ts",
+      "startB": 168,
+      "lines": 14,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/usage/aggregator.ts",
+      "startA": 261,
+      "fileB": "src/web-server/usage/aggregator.ts",
+      "startB": 165,
+      "lines": 17,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/usage/aggregator.ts",
+      "startA": 672,
+      "fileB": "src/web-server/usage/aggregator.ts",
+      "startB": 540,
+      "lines": 7,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/usage/aggregator.ts",
+      "startA": 686,
+      "fileB": "src/web-server/usage/aggregator.ts",
+      "startB": 670,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/services/droid-dashboard-service.ts",
+      "startA": 46,
+      "fileB": "ui/src/lib/codex-config.ts",
+      "startB": 136,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/services/compatible-cli-types.ts",
+      "startA": 32,
+      "fileB": "ui/src/hooks/use-droid.ts",
+      "startB": 13,
+      "lines": 31,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/services/compatible-cli-toml-file-service.ts",
+      "startA": 6,
+      "fileB": "ui/src/hooks/use-droid.ts",
+      "startB": 18,
+      "lines": 14,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/services/compatible-cli-json-file-service.ts",
+      "startA": 4,
+      "fileB": "ui/src/hooks/use-droid.ts",
+      "startB": 18,
+      "lines": 14,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/services/compatible-cli-json-file-service.ts",
+      "startA": 49,
+      "fileB": "src/web-server/services/compatible-cli-toml-file-service.ts",
+      "startB": 51,
+      "lines": 21,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/services/compatible-cli-json-file-service.ts",
+      "startA": 73,
+      "fileB": "src/web-server/services/compatible-cli-toml-file-service.ts",
+      "startB": 208,
+      "lines": 17,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/services/compatible-cli-json-file-service.ts",
+      "startA": 94,
+      "fileB": "src/web-server/services/compatible-cli-toml-file-service.ts",
+      "startB": 229,
+      "lines": 16,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/services/compatible-cli-json-file-service.ts",
+      "startA": 198,
+      "fileB": "src/web-server/services/compatible-cli-toml-file-service.ts",
+      "startB": 287,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/services/compatible-cli-json-file-service.ts",
+      "startA": 209,
+      "fileB": "src/web-server/services/compatible-cli-toml-file-service.ts",
+      "startB": 299,
+      "lines": 22,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/services/codex-dashboard-service.ts",
+      "startA": 75,
+      "fileB": "src/web-server/services/droid-dashboard-service.ts",
+      "startB": 39,
+      "lines": 19,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/services/codex-dashboard-service.ts",
+      "startA": 790,
+      "fileB": "ui/src/lib/codex-config.ts",
+      "startB": 158,
+      "lines": 7,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/services/claude-extension-settings-service.ts",
+      "startA": 21,
+      "fileB": "ui/src/hooks/use-claude-extension.ts",
+      "startB": 69,
+      "lines": 14,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/services/claude-extension-settings-service.ts",
+      "startA": 144,
+      "fileB": "src/web-server/services/claude-extension-settings-service.ts",
+      "startB": 100,
+      "lines": 19,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/services/claude-extension-settings-service.ts",
+      "startA": 563,
+      "fileB": "src/web-server/services/claude-extension-settings-service.ts",
+      "startB": 499,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/services/claude-extension-settings-service.ts",
+      "startA": 583,
+      "fileB": "src/web-server/services/claude-extension-settings-service.ts",
+      "startB": 521,
+      "lines": 9,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/services/claude-extension-binding-service.ts",
+      "startA": 168,
+      "fileB": "src/web-server/services/claude-extension-settings-service.ts",
+      "startB": 234,
+      "lines": 11,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/routes/variant-routes.ts",
+      "startA": 178,
+      "fileB": "src/web-server/routes/variant-routes.ts",
+      "startB": 55,
+      "lines": 9,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/routes/variant-routes.ts",
+      "startA": 252,
+      "fileB": "src/web-server/routes/variant-routes.ts",
+      "startB": 222,
+      "lines": 7,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/routes/settings-routes.ts",
+      "startA": 430,
+      "fileB": "src/web-server/routes/settings-routes.ts",
+      "startB": 394,
+      "lines": 13,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/routes/settings-routes.ts",
+      "startA": 444,
+      "fileB": "src/web-server/routes/settings-routes.ts",
+      "startB": 409,
+      "lines": 18,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/routes/settings-routes.ts",
+      "startA": 910,
+      "fileB": "src/web-server/routes/settings-routes.ts",
+      "startB": 854,
+      "lines": 15,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/routes/route-helpers.ts",
+      "startA": 29,
+      "fileB": "src/web-server/routes/settings-routes.ts",
+      "startB": 151,
+      "lines": 19,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/routes/profile-routes.ts",
+      "startA": 375,
+      "fileB": "src/web-server/routes/profile-routes.ts",
+      "startB": 107,
+      "lines": 11,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/routes/profile-routes.ts",
+      "startA": 420,
+      "fileB": "src/web-server/routes/profile-routes.ts",
+      "startB": 144,
+      "lines": 17,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/routes/profile-routes.ts",
+      "startA": 442,
+      "fileB": "src/web-server/routes/profile-routes.ts",
+      "startB": 166,
+      "lines": 15,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/routes/image-analysis-routes.ts",
+      "startA": 61,
+      "fileB": "src/web-server/routes/settings-routes.ts",
+      "startB": 152,
+      "lines": 18,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/routes/copilot-routes.ts",
+      "startA": 34,
+      "fileB": "src/web-server/routes/cursor-settings-routes.ts",
+      "startB": 35,
+      "lines": 13,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/routes/codex-routes.ts",
+      "startA": 30,
+      "fileB": "src/web-server/routes/droid-routes.ts",
+      "startB": 41,
+      "lines": 17,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/routes/codex-routes.ts",
+      "startA": 52,
+      "fileB": "src/web-server/routes/droid-routes.ts",
+      "startB": 63,
+      "lines": 9,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/routes/codex-routes.ts",
+      "startA": 75,
+      "fileB": "src/web-server/routes/codex-routes.ts",
+      "startB": 46,
+      "lines": 15,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/routes/channels-routes.ts",
+      "startA": 93,
+      "fileB": "src/web-server/routes/channels-routes.ts",
+      "startB": 78,
+      "lines": 16,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/routes/browser-routes.ts",
+      "startA": 64,
+      "fileB": "src/web-server/routes/image-analysis-routes.ts",
+      "startB": 332,
+      "lines": 8,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/routes/ai-provider-routes.ts",
+      "startA": 119,
+      "fileB": "src/web-server/routes/ai-provider-routes.ts",
+      "startB": 104,
+      "lines": 8,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/routes/ai-provider-routes.ts",
+      "startA": 126,
+      "fileB": "src/web-server/routes/ai-provider-routes.ts",
+      "startB": 111,
+      "lines": 8,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/routes/ai-provider-routes.ts",
+      "startA": 133,
+      "fileB": "src/web-server/routes/ai-provider-routes.ts",
+      "startB": 118,
+      "lines": 9,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/routes/account-routes.ts",
+      "startA": 364,
+      "fileB": "src/web-server/routes/account-routes.ts",
+      "startB": 210,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/routes/account-routes.ts",
+      "startA": 400,
+      "fileB": "src/web-server/routes/account-routes.ts",
+      "startB": 226,
+      "lines": 13,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/routes/account-routes.ts",
+      "startA": 468,
+      "fileB": "src/web-server/routes/account-routes.ts",
+      "startB": 431,
+      "lines": 28,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/websearch/hook-installer.ts",
+      "startA": 22,
+      "fileB": "src/utils/websearch/mcp-installer.ts",
+      "startB": 42,
+      "lines": 13,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/websearch/claude-tool-args.ts",
+      "startA": 39,
+      "fileB": "src/utils/websearch/trace.ts",
+      "startB": 34,
+      "lines": 16,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/image-analysis/mcp-installer.ts",
+      "startA": 44,
+      "fileB": "src/utils/websearch/mcp-installer.ts",
+      "startB": 39,
+      "lines": 16,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/image-analysis/mcp-installer.ts",
+      "startA": 59,
+      "fileB": "src/utils/websearch/mcp-installer.ts",
+      "startB": 54,
+      "lines": 13,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/image-analysis/mcp-installer.ts",
+      "startA": 78,
+      "fileB": "src/utils/websearch/mcp-installer.ts",
+      "startB": 70,
+      "lines": 46,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/image-analysis/mcp-installer.ts",
+      "startA": 198,
+      "fileB": "src/utils/websearch/mcp-installer.ts",
+      "startB": 120,
+      "lines": 16,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/image-analysis/mcp-installer.ts",
+      "startA": 217,
+      "fileB": "src/utils/websearch/mcp-installer.ts",
+      "startB": 137,
+      "lines": 13,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/image-analysis/mcp-installer.ts",
+      "startA": 366,
+      "fileB": "src/utils/image-analysis/mcp-installer.ts",
+      "startB": 165,
+      "lines": 11,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/image-analysis/mcp-installer.ts",
+      "startA": 400,
+      "fileB": "src/utils/image-analysis/mcp-installer.ts",
+      "startB": 236,
+      "lines": 11,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/image-analysis/mcp-installer.ts",
+      "startA": 465,
+      "fileB": "src/utils/websearch/mcp-installer.ts",
+      "startB": 350,
+      "lines": 14,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/hooks/image-analyzer-profile-hook-injector.ts",
+      "startA": 44,
+      "fileB": "src/utils/websearch/profile-hook-injector.ts",
+      "startB": 42,
+      "lines": 6,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/hooks/image-analyzer-profile-hook-injector.ts",
+      "startA": 86,
+      "fileB": "src/utils/hooks/image-analyzer-profile-hook-injector.ts",
+      "startB": 64,
+      "lines": 17,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/hooks/image-analyzer-profile-hook-injector.ts",
+      "startA": 131,
+      "fileB": "src/utils/websearch/profile-hook-injector.ts",
+      "startB": 66,
+      "lines": 19,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/hooks/image-analyzer-profile-hook-injector.ts",
+      "startA": 184,
+      "fileB": "src/utils/websearch/profile-hook-injector.ts",
+      "startB": 105,
+      "lines": 20,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/hooks/image-analyzer-profile-hook-injector.ts",
+      "startA": 214,
+      "fileB": "src/utils/websearch/profile-hook-injector.ts",
+      "startB": 166,
+      "lines": 21,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/hooks/image-analyzer-profile-hook-injector.ts",
+      "startA": 234,
+      "fileB": "src/utils/websearch/profile-hook-injector.ts",
+      "startB": 186,
+      "lines": 15,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/hooks/image-analyzer-profile-hook-injector.ts",
+      "startA": 256,
+      "fileB": "src/utils/websearch/profile-hook-injector.ts",
+      "startB": 221,
+      "lines": 11,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/hooks/image-analyzer-profile-hook-injector.ts",
+      "startA": 266,
+      "fileB": "src/utils/websearch/profile-hook-injector.ts",
+      "startB": 231,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/hooks/image-analyzer-profile-hook-injector.ts",
+      "startA": 277,
+      "fileB": "src/utils/websearch/profile-hook-injector.ts",
+      "startB": 242,
+      "lines": 18,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/hooks/image-analyzer-profile-hook-injector.ts",
+      "startA": 310,
+      "fileB": "src/utils/websearch/hook-installer.ts",
+      "startB": 50,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/hooks/image-analyzer-hook-utils.ts",
+      "startA": 26,
+      "fileB": "src/utils/websearch/hook-utils.ts",
+      "startB": 14,
+      "lines": 9,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/hooks/image-analyzer-hook-utils.ts",
+      "startA": 40,
+      "fileB": "src/utils/websearch/hook-utils.ts",
+      "startB": 33,
+      "lines": 8,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/hooks/image-analysis-backend-resolver.ts",
+      "startA": 105,
+      "fileB": "src/web-server/routes/settings-routes.ts",
+      "startB": 154,
+      "lines": 16,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/browser/mcp-installer.ts",
+      "startA": 65,
+      "fileB": "src/utils/websearch/mcp-installer.ts",
+      "startB": 39,
+      "lines": 13,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/browser/mcp-installer.ts",
+      "startA": 78,
+      "fileB": "src/utils/websearch/mcp-installer.ts",
+      "startB": 57,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/browser/mcp-installer.ts",
+      "startA": 91,
+      "fileB": "src/utils/websearch/mcp-installer.ts",
+      "startB": 70,
+      "lines": 78,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/browser/mcp-installer.ts",
+      "startA": 165,
+      "fileB": "src/utils/image-analysis/mcp-installer.ts",
+      "startB": 188,
+      "lines": 13,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/browser/mcp-installer.ts",
+      "startA": 177,
+      "fileB": "src/utils/websearch/mcp-installer.ts",
+      "startB": 125,
+      "lines": 11,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/browser/mcp-installer.ts",
+      "startA": 238,
+      "fileB": "src/utils/websearch/mcp-installer.ts",
+      "startB": 205,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/browser/mcp-installer.ts",
+      "startA": 278,
+      "fileB": "src/utils/image-analysis/mcp-installer.ts",
+      "startB": 163,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/browser/mcp-installer.ts",
+      "startA": 349,
+      "fileB": "src/utils/websearch/mcp-installer.ts",
+      "startB": 350,
+      "lines": 14,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/browser/browser-status.ts",
+      "startA": 200,
+      "fileB": "src/utils/browser/browser-status.ts",
+      "startB": 162,
+      "lines": 14,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/proxy/transformers/request-transformer.ts",
+      "startA": 591,
+      "fileB": "src/proxy/transformers/request-transformer.ts",
+      "startB": 491,
+      "lines": 15,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/management/checks/profile-check.ts",
+      "startA": 144,
+      "fileB": "src/web-server/health/profile-checks.ts",
+      "startB": 107,
+      "lines": 9,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/management/checks/profile-check.ts",
+      "startA": 179,
+      "fileB": "src/web-server/health/profile-checks.ts",
+      "startB": 135,
+      "lines": 6,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/management/checks/config-check.ts",
+      "startA": 41,
+      "fileB": "src/management/checks/profile-check.ts",
+      "startB": 26,
+      "lines": 9,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/glmt/pipeline/stream-parser.ts",
+      "startA": 273,
+      "fileB": "src/glmt/pipeline/stream-parser.ts",
+      "startB": 250,
+      "lines": 15,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/commands/docker/up-subcommand.ts",
+      "startA": 13,
+      "fileB": "src/commands/docker/update-subcommand.ts",
+      "startB": 9,
+      "lines": 16,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/commands/docker/status-subcommand.ts",
+      "startA": 7,
+      "fileB": "src/commands/docker/update-subcommand.ts",
+      "startB": 7,
+      "lines": 18,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/commands/docker/status-subcommand.ts",
+      "startA": 45,
+      "fileB": "src/commands/docker/up-subcommand.ts",
+      "startB": 44,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/commands/docker/logs-subcommand.ts",
+      "startA": 13,
+      "fileB": "src/commands/docker/update-subcommand.ts",
+      "startB": 13,
+      "lines": 13,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/commands/docker/logs-subcommand.ts",
+      "startA": 41,
+      "fileB": "src/commands/docker/update-subcommand.ts",
+      "startB": 27,
+      "lines": 11,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/commands/docker/down-subcommand.ts",
+      "startA": 7,
+      "fileB": "src/commands/docker/update-subcommand.ts",
+      "startB": 7,
+      "lines": 18,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/commands/docker/down-subcommand.ts",
+      "startA": 27,
+      "fileB": "src/commands/docker/update-subcommand.ts",
+      "startB": 27,
+      "lines": 11,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/commands/docker/config-subcommand.ts",
+      "startA": 7,
+      "fileB": "src/commands/docker/update-subcommand.ts",
+      "startB": 7,
+      "lines": 19,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/commands/docker/config-subcommand.ts",
+      "startA": 48,
+      "fileB": "src/commands/docker/update-subcommand.ts",
+      "startB": 27,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/commands/cliproxy/variant-subcommand.ts",
+      "startA": 429,
+      "fileB": "src/commands/cliproxy/variant-subcommand.ts",
+      "startB": 399,
+      "lines": 13,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/commands/cliproxy/variant-subcommand.ts",
+      "startA": 466,
+      "fileB": "src/commands/cliproxy/variant-subcommand.ts",
+      "startB": 205,
+      "lines": 10,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/commands/cliproxy/variant-subcommand.ts",
+      "startA": 513,
+      "fileB": "src/commands/cliproxy/variant-subcommand.ts",
+      "startB": 332,
+      "lines": 28,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/commands/cliproxy/variant-subcommand.ts",
+      "startA": 545,
+      "fileB": "src/commands/cliproxy/variant-subcommand.ts",
+      "startB": 232,
+      "lines": 9,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/commands/cliproxy/variant-subcommand.ts",
+      "startA": 626,
+      "fileB": "src/commands/cliproxy/variant-subcommand.ts",
+      "startB": 229,
+      "lines": 16,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/commands/cliproxy/variant-subcommand.ts",
+      "startA": 647,
+      "fileB": "src/commands/cliproxy/variant-subcommand.ts",
+      "startB": 563,
+      "lines": 10,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/commands/cliproxy/variant-subcommand.ts",
+      "startA": 656,
+      "fileB": "src/commands/cliproxy/variant-subcommand.ts",
+      "startB": 572,
+      "lines": 20,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/commands/cliproxy/variant-subcommand.ts",
+      "startA": 720,
+      "fileB": "src/commands/cliproxy/variant-subcommand.ts",
+      "startB": 207,
+      "lines": 8,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/commands/cliproxy/variant-subcommand.ts",
+      "startA": 771,
+      "fileB": "src/commands/cliproxy/variant-subcommand.ts",
+      "startB": 332,
+      "lines": 32,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/commands/cliproxy/variant-subcommand.ts",
+      "startA": 866,
+      "fileB": "src/commands/cliproxy/variant-subcommand.ts",
+      "startB": 738,
+      "lines": 11,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/commands/cliproxy/routing-subcommand.ts",
+      "startA": 242,
+      "fileB": "src/commands/cliproxy/routing-subcommand.ts",
+      "startB": 140,
+      "lines": 7,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/commands/api-command/discover-command.ts",
+      "startA": 12,
+      "fileB": "src/commands/api-command/import-command.ts",
+      "startB": 32,
+      "lines": 8,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/commands/api-command/create-command.ts",
+      "startA": 458,
+      "fileB": "src/commands/api-command/create-command.ts",
+      "startB": 372,
+      "lines": 7,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/commands/api-command/create-command.ts",
+      "startA": 506,
+      "fileB": "src/commands/api-command/create-command.ts",
+      "startB": 395,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/commands/api-command/create-command.ts",
+      "startA": 563,
+      "fileB": "src/commands/cliproxy/variant-subcommand.ts",
+      "startB": 336,
+      "lines": 24,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/services/variant-settings.ts",
+      "startA": 190,
+      "fileB": "src/cliproxy/services/variant-settings.ts",
+      "startB": 146,
+      "lines": 38,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/services/variant-settings.ts",
+      "startA": 434,
+      "fileB": "src/cliproxy/services/variant-settings.ts",
+      "startB": 272,
+      "lines": 27,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/services/variant-service.ts",
+      "startA": 471,
+      "fileB": "src/cliproxy/services/variant-service.ts",
+      "startB": 379,
+      "lines": 11,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/services/variant-config-adapter.ts",
+      "startA": 303,
+      "fileB": "src/cliproxy/services/variant-config-adapter.ts",
+      "startB": 227,
+      "lines": 8,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/services/stats-fetcher.ts",
+      "startA": 176,
+      "fileB": "src/cliproxy/services/stats-fetcher.ts",
+      "startB": 144,
+      "lines": 10,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/services/stats-fetcher.ts",
+      "startA": 185,
+      "fileB": "src/cliproxy/services/stats-fetcher.ts",
+      "startB": 153,
+      "lines": 18,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/services/stats-fetcher.ts",
+      "startA": 251,
+      "fileB": "src/cliproxy/services/stats-fetcher.ts",
+      "startB": 189,
+      "lines": 14,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/services/stats-fetcher.ts",
+      "startA": 317,
+      "fileB": "src/cliproxy/services/stats-fetcher.ts",
+      "startB": 235,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/services/stats-fetcher.ts",
+      "startA": 331,
+      "fileB": "src/cliproxy/services/stats-fetcher.ts",
+      "startB": 155,
+      "lines": 16,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/services/remote-auth-fetcher.ts",
+      "startA": 87,
+      "fileB": "src/cliproxy/services/remote-proxy-client.ts",
+      "startB": 286,
+      "lines": 14,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/routing/routing-strategy-http.ts",
+      "startA": 36,
+      "fileB": "src/cliproxy/services/remote-auth-fetcher.ts",
+      "startB": 31,
+      "lines": 20,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/routing/routing-strategy-http.ts",
+      "startA": 77,
+      "fileB": "src/cliproxy/services/remote-auth-fetcher.ts",
+      "startB": 72,
+      "lines": 20,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/quota/quota-manager.ts",
+      "startA": 351,
+      "fileB": "src/cliproxy/quota/quota-manager.ts",
+      "startB": 333,
+      "lines": 11,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/quota/quota-fetcher-claude-normalizer.ts",
+      "startA": 163,
+      "fileB": "src/cliproxy/quota/quota-fetcher-claude.ts",
+      "startB": 31,
+      "lines": 9,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/proxy/tool-sanitization-proxy.ts",
+      "startA": 599,
+      "fileB": "src/cliproxy/proxy/tool-sanitization-proxy.ts",
+      "startB": 525,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/proxy/tool-sanitization-proxy.ts",
+      "startA": 619,
+      "fileB": "src/cliproxy/proxy/tool-sanitization-proxy.ts",
+      "startB": 543,
+      "lines": 20,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/proxy/tool-sanitization-proxy.ts",
+      "startA": 730,
+      "fileB": "src/cliproxy/proxy/tool-sanitization-proxy.ts",
+      "startB": 676,
+      "lines": 23,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/proxy/tool-sanitization-proxy.ts",
+      "startA": 749,
+      "fileB": "src/cliproxy/proxy/tool-sanitization-proxy.ts",
+      "startB": 599,
+      "lines": 20,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/proxy/https-tunnel-proxy.ts",
+      "startA": 147,
+      "fileB": "src/cliproxy/proxy/tool-sanitization-proxy.ts",
+      "startB": 445,
+      "lines": 19,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/executor/session-bridge.ts",
+      "startA": 224,
+      "fileB": "src/cliproxy/executor/session-bridge.ts",
+      "startB": 193,
+      "lines": 23,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/executor/session-bridge.ts",
+      "startA": 261,
+      "fileB": "src/cliproxy/executor/session-bridge.ts",
+      "startB": 193,
+      "lines": 27,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/config/model-config.ts",
+      "startA": 75,
+      "fileB": "src/cliproxy/config/model-config.ts",
+      "startB": 58,
+      "lines": 9,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/config/generator.ts",
+      "startA": 145,
+      "fileB": "src/cliproxy/routing/routing-strategy.ts",
+      "startB": 319,
+      "lines": 15,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/config/env-builder.ts",
+      "startA": 154,
+      "fileB": "src/cliproxy/config/env-builder.ts",
+      "startB": 99,
+      "lines": 9,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/config/env-builder.ts",
+      "startA": 164,
+      "fileB": "src/cliproxy/config/env-builder.ts",
+      "startB": 110,
+      "lines": 19,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/config/env-builder.ts",
+      "startA": 590,
+      "fileB": "src/cliproxy/config/env-builder.ts",
+      "startB": 100,
+      "lines": 7,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/config/env-builder.ts",
+      "startA": 635,
+      "fileB": "src/cliproxy/config/env-builder.ts",
+      "startB": 402,
+      "lines": 8,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/config/env-builder.ts",
+      "startA": 650,
+      "fileB": "src/cliproxy/config/env-builder.ts",
+      "startB": 443,
+      "lines": 11,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/config/env-builder.ts",
+      "startA": 674,
+      "fileB": "src/cliproxy/config/env-builder.ts",
+      "startB": 481,
+      "lines": 6,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/config/env-builder.ts",
+      "startA": 750,
+      "fileB": "src/cliproxy/config/env-builder.ts",
+      "startB": 446,
+      "lines": 8,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/binary/tar-extractor.ts",
+      "startA": 19,
+      "fileB": "src/cliproxy/binary/zip-extractor.ts",
+      "startB": 19,
+      "lines": 10,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/binary/downloader.ts",
+      "startA": 354,
+      "fileB": "src/cliproxy/binary/downloader.ts",
+      "startB": 214,
+      "lines": 11,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/binary/downloader.ts",
+      "startA": 427,
+      "fileB": "src/cliproxy/binary/downloader.ts",
+      "startB": 316,
+      "lines": 11,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/binary/downloader.ts",
+      "startA": 467,
+      "fileB": "src/cliproxy/binary/downloader.ts",
+      "startB": 361,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/binary/downloader.ts",
+      "startA": 496,
+      "fileB": "src/cliproxy/binary/downloader.ts",
+      "startB": 386,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/auth/oauth-process.ts",
+      "startA": 910,
+      "fileB": "src/cliproxy/auth/oauth-process.ts",
+      "startB": 840,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/auth/kiro-import.ts",
+      "startA": 141,
+      "fileB": "src/cliproxy/auth/oauth-process.ts",
+      "startB": 596,
+      "lines": 8,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/ai-providers/openai-compat-manager.ts",
+      "startA": 32,
+      "fileB": "src/cliproxy/types/config-types.ts",
+      "startB": 43,
+      "lines": 15,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/ai-providers/codex-reasoning-proxy.ts",
+      "startA": 307,
+      "fileB": "src/cliproxy/proxy/tool-sanitization-proxy.ts",
+      "startB": 238,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/ai-providers/codex-reasoning-proxy.ts",
+      "startA": 329,
+      "fileB": "src/cliproxy/proxy/tool-sanitization-proxy.ts",
+      "startB": 271,
+      "lines": 13,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/ai-providers/codex-reasoning-proxy.ts",
+      "startA": 342,
+      "fileB": "src/cliproxy/proxy/tool-sanitization-proxy.ts",
+      "startB": 284,
+      "lines": 14,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/ai-providers/codex-reasoning-proxy.ts",
+      "startA": 395,
+      "fileB": "src/cliproxy/proxy/tool-sanitization-proxy.ts",
+      "startB": 305,
+      "lines": 21,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/ai-providers/codex-reasoning-proxy.ts",
+      "startA": 464,
+      "fileB": "src/cliproxy/proxy/tool-sanitization-proxy.ts",
+      "startB": 428,
+      "lines": 47,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/ai-providers/codex-reasoning-proxy.ts",
+      "startA": 511,
+      "fileB": "src/cliproxy/proxy/tool-sanitization-proxy.ts",
+      "startB": 471,
+      "lines": 70,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/ai-providers/codex-reasoning-proxy.ts",
+      "startA": 586,
+      "fileB": "src/cliproxy/proxy/tool-sanitization-proxy.ts",
+      "startB": 549,
+      "lines": 14,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/ai-providers/codex-reasoning-proxy.ts",
+      "startA": 663,
+      "fileB": "src/cliproxy/proxy/tool-sanitization-proxy.ts",
+      "startB": 597,
+      "lines": 18,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/accounts/registry.ts",
+      "startA": 336,
+      "fileB": "src/web-server/routes/settings-routes.ts",
+      "startB": 336,
+      "lines": 15,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/accounts/registry.ts",
+      "startA": 572,
+      "fileB": "src/cliproxy/accounts/registry.ts",
+      "startB": 519,
+      "lines": 25,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/accounts/registry.ts",
+      "startA": 680,
+      "fileB": "src/cliproxy/accounts/registry.ts",
+      "startB": 653,
+      "lines": 10,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/accounts/account-safety.ts",
+      "startA": 117,
+      "fileB": "src/cliproxy/accounts/account-safety.ts",
+      "startB": 75,
+      "lines": 18,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/accounts/account-safety.ts",
+      "startA": 666,
+      "fileB": "src/cliproxy/accounts/account-safety.ts",
+      "startB": 637,
+      "lines": 19,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/auth/commands/remove-command.ts",
+      "startA": 42,
+      "fileB": "src/auth/commands/show-command.ts",
+      "startB": 42,
+      "lines": 13,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/auth/commands/list-command.ts",
+      "startA": 53,
+      "fileB": "src/auth/commands/show-command.ts",
+      "startB": 56,
+      "lines": 10,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/auth/commands/backup-command.ts",
+      "startA": 37,
+      "fileB": "src/auth/commands/show-command.ts",
+      "startB": 18,
+      "lines": 8,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/api/services/profile-writer.ts",
+      "startA": 46,
+      "fileB": "src/web-server/routes/settings-routes.ts",
+      "startB": 155,
+      "lines": 15,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/api/services/profile-writer.ts",
+      "startA": 70,
+      "fileB": "src/cliproxy/services/variant-settings.ts",
+      "startB": 96,
+      "lines": 19,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/api/services/profile-writer.ts",
+      "startA": 201,
+      "fileB": "src/api/services/profile-writer.ts",
+      "startB": 110,
+      "lines": 19,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/api/services/profile-writer.ts",
+      "startA": 224,
+      "fileB": "src/api/services/profile-writer.ts",
+      "startB": 130,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/api/services/profile-writer.ts",
+      "startA": 360,
+      "fileB": "src/api/services/profile-writer.ts",
+      "startB": 147,
+      "lines": 13,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/api/services/profile-lifecycle-validation.ts",
+      "startA": 32,
+      "fileB": "src/web-server/routes/settings-routes.ts",
+      "startB": 159,
+      "lines": 11,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/api/services/profile-lifecycle-service.ts",
+      "startA": 123,
+      "fileB": "src/cliproxy/services/variant-settings.ts",
+      "startB": 96,
+      "lines": 19,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/api/services/openrouter-catalog.ts",
+      "startA": 70,
+      "fileB": "ui/src/hooks/use-openrouter-models.ts",
+      "startB": 20,
+      "lines": 7,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/api/services/cliproxy-profile-bridge.ts",
+      "startA": 34,
+      "fileB": "src/web-server/routes/image-analysis-routes.ts",
+      "startB": 59,
+      "lines": 20,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/web-server/shared-routes.ts",
+      "startA": 485,
+      "fileB": "src/web-server/shared-routes.ts",
+      "startB": 464,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/update-checker.ts",
+      "startA": 163,
+      "fileB": "src/utils/update-checker.ts",
+      "startB": 118,
+      "lines": 17,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/update-checker.ts",
+      "startA": 180,
+      "fileB": "src/utils/update-checker.ts",
+      "startB": 139,
+      "lines": 18,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/shell-completion.ts",
+      "startA": 155,
+      "fileB": "src/utils/shell-completion.ts",
+      "startB": 106,
+      "lines": 10,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/shell-completion.ts",
+      "startA": 237,
+      "fileB": "src/utils/shell-completion.ts",
+      "startB": 110,
+      "lines": 10,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/platform-commands.ts",
+      "startA": 148,
+      "fileB": "src/cliproxy/auth/environment-detector.ts",
+      "startB": 82,
+      "lines": 7,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/claude-tool-args.ts",
+      "startA": 16,
+      "fileB": "src/utils/websearch/trace.ts",
+      "startB": 29,
+      "lines": 9,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/claude-tool-args.ts",
+      "startA": 24,
+      "fileB": "src/utils/websearch/trace.ts",
+      "startB": 37,
+      "lines": 7,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/claude-symlink-manager.ts",
+      "startA": 40,
+      "fileB": "src/management/checks/types.ts",
+      "startB": 104,
+      "lines": 14,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/claude-dir-installer.ts",
+      "startA": 8,
+      "fileB": "src/utils/claude-symlink-manager.ts",
+      "startB": 17,
+      "lines": 37,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/claude-dir-installer.ts",
+      "startA": 149,
+      "fileB": "src/utils/claude-symlink-manager.ts",
+      "startB": 236,
+      "lines": 8,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/api-key-validator.ts",
+      "startA": 172,
+      "fileB": "src/utils/api-key-validator.ts",
+      "startB": 41,
+      "lines": 11,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/api-key-validator.ts",
+      "startA": 207,
+      "fileB": "src/utils/api-key-validator.ts",
+      "startB": 89,
+      "lines": 9,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/utils/api-key-validator.ts",
+      "startA": 223,
+      "fileB": "src/utils/api-key-validator.ts",
+      "startB": 110,
+      "lines": 19,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/targets/droid-adapter.ts",
+      "startA": 174,
+      "fileB": "src/utils/shell-executor.ts",
+      "startB": 303,
+      "lines": 8,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/targets/codex-adapter.ts",
+      "startA": 268,
+      "fileB": "src/targets/droid-adapter.ts",
+      "startB": 88,
+      "lines": 13,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/targets/codex-adapter.ts",
+      "startA": 347,
+      "fileB": "src/targets/droid-adapter.ts",
+      "startB": 167,
+      "lines": 8,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/targets/claude-adapter.ts",
+      "startA": 86,
+      "fileB": "src/targets/droid-adapter.ts",
+      "startB": 94,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/targets/claude-adapter.ts",
+      "startA": 112,
+      "fileB": "src/utils/shell-executor.ts",
+      "startB": 259,
+      "lines": 15,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/targets/claude-adapter.ts",
+      "startA": 149,
+      "fileB": "src/utils/shell-executor.ts",
+      "startB": 299,
+      "lines": 20,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/shared/compatible-cli-contracts.ts",
+      "startA": 1,
+      "fileB": "src/web-server/services/compatible-cli-docs-registry.ts",
+      "startB": 1,
+      "lines": 25,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/shared/compatible-cli-contracts.ts",
+      "startA": 37,
+      "fileB": "ui/src/hooks/use-droid.ts",
+      "startB": 18,
+      "lines": 14,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/proxy/proxy-daemon.ts",
+      "startA": 400,
+      "fileB": "src/proxy/proxy-daemon.ts",
+      "startB": 338,
+      "lines": 31,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/management/profile-context-sync-lock.ts",
+      "startA": 180,
+      "fileB": "src/management/profile-context-sync-lock.ts",
+      "startB": 109,
+      "lines": 38,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/management/profile-context-sync-lock.ts",
+      "startA": 217,
+      "fileB": "src/management/profile-context-sync-lock.ts",
+      "startB": 147,
+      "lines": 19,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/management/oauth-port-diagnostics.ts",
+      "startA": 193,
+      "fileB": "src/management/checks/oauth-check.ts",
+      "startB": 44,
+      "lines": 8,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/glmt/locale-enforcer.ts",
+      "startA": 44,
+      "fileB": "src/glmt/reasoning-enforcer.ts",
+      "startB": 63,
+      "lines": 9,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/glmt/locale-enforcer.ts",
+      "startA": 56,
+      "fileB": "src/glmt/reasoning-enforcer.ts",
+      "startB": 75,
+      "lines": 14,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/glmt/glmt-proxy.ts",
+      "startA": 526,
+      "fileB": "src/glmt/glmt-proxy.ts",
+      "startB": 464,
+      "lines": 18,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/glmt/glmt-proxy.ts",
+      "startA": 634,
+      "fileB": "src/glmt/glmt-proxy.ts",
+      "startB": 547,
+      "lines": 21,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cursor/cursor-daemon-entry.ts",
+      "startA": 63,
+      "fileB": "src/proxy/server/http-helpers.ts",
+      "startB": 11,
+      "lines": 8,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cursor/cursor-daemon-entry.ts",
+      "startA": 85,
+      "fileB": "src/proxy/server/http-helpers.ts",
+      "startB": 34,
+      "lines": 27,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cursor/cursor-daemon-entry.ts",
+      "startA": 148,
+      "fileB": "src/proxy/server/http-helpers.ts",
+      "startB": 61,
+      "lines": 19,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cursor/cursor-anthropic-translator.ts",
+      "startA": 17,
+      "fileB": "src/proxy/transformers/request-transformer.ts",
+      "startB": 137,
+      "lines": 10,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cursor/cursor-anthropic-translator.ts",
+      "startA": 37,
+      "fileB": "src/proxy/transformers/request-transformer.ts",
+      "startB": 175,
+      "lines": 22,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cursor/cursor-anthropic-translator.ts",
+      "startA": 153,
+      "fileB": "src/proxy/transformers/request-transformer.ts",
+      "startB": 610,
+      "lines": 15,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/copilot/copilot-package-manager.ts",
+      "startA": 157,
+      "fileB": "src/cliproxy/binary/version-cache.ts",
+      "startB": 81,
+      "lines": 17,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/copilot/copilot-package-manager.ts",
+      "startA": 195,
+      "fileB": "src/cliproxy/binary/version-checker.ts",
+      "startB": 46,
+      "lines": 17,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/copilot/copilot-models.ts",
+      "startA": 169,
+      "fileB": "src/cursor/cursor-models.ts",
+      "startB": 185,
+      "lines": 17,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/copilot/copilot-executor.ts",
+      "startA": 129,
+      "fileB": "src/cursor/cursor-profile-executor.ts",
+      "startB": 60,
+      "lines": 16,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/copilot/copilot-executor.ts",
+      "startA": 321,
+      "fileB": "src/cursor/cursor-profile-executor.ts",
+      "startB": 172,
+      "lines": 11,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/copilot/copilot-daemon.ts",
+      "startA": 57,
+      "fileB": "src/cursor/cursor-daemon.ts",
+      "startB": 65,
+      "lines": 19,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/copilot/copilot-daemon.ts",
+      "startA": 76,
+      "fileB": "src/cursor/cursor-daemon.ts",
+      "startB": 89,
+      "lines": 21,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/copilot/copilot-daemon.ts",
+      "startA": 110,
+      "fileB": "src/cursor/cursor-daemon-pid.ts",
+      "startB": 13,
+      "lines": 17,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/copilot/copilot-daemon.ts",
+      "startA": 127,
+      "fileB": "src/cursor/cursor-daemon-pid.ts",
+      "startB": 27,
+      "lines": 16,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/copilot/copilot-daemon.ts",
+      "startA": 269,
+      "fileB": "src/cursor/cursor-daemon.ts",
+      "startB": 232,
+      "lines": 26,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/copilot/copilot-daemon.ts",
+      "startA": 365,
+      "fileB": "src/cursor/cursor-daemon.ts",
+      "startB": 311,
+      "lines": 20,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/copilot/copilot-daemon.ts",
+      "startA": 381,
+      "fileB": "src/cursor/cursor-daemon.ts",
+      "startB": 336,
+      "lines": 18,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/config/migration-manager.ts",
+      "startA": 569,
+      "fileB": "src/config/migration-manager.ts",
+      "startB": 260,
+      "lines": 19,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/commands/persist-command.ts",
+      "startA": 183,
+      "fileB": "src/targets/droid-config-manager.ts",
+      "startB": 310,
+      "lines": 13,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/commands/persist-command.ts",
+      "startA": 415,
+      "fileB": "src/web-server/routes/persist-routes.ts",
+      "startB": 66,
+      "lines": 46,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/commands/cursor-command.ts",
+      "startA": 82,
+      "fileB": "src/commands/proxy-command.ts",
+      "startB": 14,
+      "lines": 9,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/commands/cursor-command.ts",
+      "startA": 182,
+      "fileB": "src/commands/cursor-command.ts",
+      "startB": 159,
+      "lines": 7,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/commands/copilot-command.ts",
+      "startA": 332,
+      "fileB": "src/commands/cursor-command.ts",
+      "startB": 255,
+      "lines": 16,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/commands/copilot-command.ts",
+      "startA": 347,
+      "fileB": "src/commands/cursor-command.ts",
+      "startB": 271,
+      "lines": 18,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/commands/config-channels-command.ts",
+      "startA": 228,
+      "fileB": "src/commands/config-channels-command.ts",
+      "startB": 213,
+      "lines": 17,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/commands/cleanup-command.ts",
+      "startA": 64,
+      "fileB": "src/commands/cleanup-command.ts",
+      "startB": 43,
+      "lines": 9,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/commands/cleanup-command.ts",
+      "startA": 377,
+      "fileB": "src/commands/cleanup-command.ts",
+      "startB": 304,
+      "lines": 9,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/commands/arg-extractor.ts",
+      "startA": 154,
+      "fileB": "src/commands/api-command/shared.ts",
+      "startB": 87,
+      "lines": 11,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/session-tracker.ts",
+      "startA": 312,
+      "fileB": "src/cliproxy/session-tracker.ts",
+      "startB": 281,
+      "lines": 13,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/service-manager.ts",
+      "startA": 47,
+      "fileB": "src/cliproxy/executor/lifecycle-manager.ts",
+      "startB": 26,
+      "lines": 17,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/cliproxy/provider-capabilities.ts",
+      "startA": 211,
+      "fileB": "src/management/oauth-port-diagnostics.ts",
+      "startB": 40,
+      "lines": 13,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/bin/ccsxp-runtime.ts",
+      "startA": 22,
+      "fileB": "src/targets/codex-adapter.ts",
+      "startB": 67,
+      "lines": 16,
+      "tokens": 0
+    },
+    {
+      "fileA": "src/auth/profile-registry.ts",
+      "startA": 95,
+      "fileB": "src/auth/profile-registry.ts",
+      "startB": 75,
+      "lines": 22,
+      "tokens": 0
+    },
+    {
+      "fileA": "lib/mcp/ccs-image-analysis-server.cjs",
+      "startA": 75,
+      "fileB": "lib/mcp/ccs-websearch-server.cjs",
+      "startB": 56,
+      "lines": 31,
+      "tokens": 0
+    },
+    {
+      "fileA": "lib/mcp/ccs-image-analysis-server.cjs",
+      "startA": 338,
+      "fileB": "lib/mcp/ccs-websearch-server.cjs",
+      "startB": 198,
+      "lines": 18,
+      "tokens": 0
+    },
+    {
+      "fileA": "lib/mcp/ccs-image-analysis-server.cjs",
+      "startA": 369,
+      "fileB": "lib/mcp/ccs-websearch-server.cjs",
+      "startB": 261,
+      "lines": 44,
+      "tokens": 0
+    },
+    {
+      "fileA": "lib/hooks/image-analysis-runtime.cjs",
+      "startA": 61,
+      "fileB": "lib/hooks/image-analyzer-transformer.cjs",
+      "startB": 61,
+      "lines": 6,
+      "tokens": 0
+    },
+    {
+      "fileA": "scripts/postinstall.js",
+      "startA": 233,
+      "fileB": "scripts/postinstall.js",
+      "startB": 194,
+      "lines": 7,
+      "tokens": 0
+    },
+    {
+      "fileA": "lib/progress-indicator.sh",
+      "startA": 73,
+      "fileB": "lib/progress-indicator.sh",
+      "startB": 28,
+      "lines": 12,
+      "tokens": 0
+    }
+  ],
+  "duplicatedLines": 5412,
+  "totalLines": 203155,
+  "percentage": 2.66
+}

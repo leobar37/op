@@ -6,7 +6,6 @@
  */
 
 import {
-  OPENROUTER_BASE_URL,
   PROVIDER_PRESET_ALIASES,
   createProviderPresetDefinitions,
   normalizeProviderPresetId,
@@ -14,7 +13,6 @@ import {
   type ProviderPresetDefinition,
 } from '../../shared/provider-preset-catalog';
 
-export { OPENROUTER_BASE_URL };
 export type { PresetCategory };
 export type ProviderPreset = ProviderPresetDefinition;
 

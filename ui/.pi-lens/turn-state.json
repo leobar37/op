@@ -1,0 +1,25 @@
+{
+  "files": {
+    "src/components/layout/layout.tsx": {
+      "modifiedRanges": [
+        {
+          "start": 12,
+          "end": 13
+        },
+        {
+          "start": 42,
+          "end": 43
+        },
+        {
+          "start": 45,
+          "end": 48
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-03T18:14:11.649Z"
+    }
+  },
+  "turnCycles": 0,
+  "maxCycles": 3,
+  "lastUpdated": "2026-05-03T18:14:11.649Z"
+}

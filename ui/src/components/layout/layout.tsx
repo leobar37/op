@@ -7,14 +7,12 @@ import { PrivacyToggle } from '@/components/shared/privacy-toggle';
 import { GitHubLink } from '@/components/shared/github-link';
 import { DocsLink } from '@/components/shared/docs-link';
 import { ConnectionIndicator } from '@/components/shared/connection-indicator';
-import { LocalhostDisclaimer } from '@/components/shared/localhost-disclaimer';
 import { Skeleton } from '@/components/ui/skeleton';
-import { ClaudeKitBadge } from '@/components/shared/claudekit-badge';
-import { SponsorButton } from '@/components/shared/sponsor-button';
 import { ProjectSelectionDialog } from '@/components/shared/project-selection-dialog';
 import { DeviceCodeDialog } from '@/components/shared/device-code-dialog';
 import { UserMenu } from '@/components/auth/user-menu';
 import { LanguageSwitcher } from './language-switcher';
+import { CliproxyHeaderStatus } from './cliproxy-header-status';
 import { useProjectSelection } from '@/hooks/use-project-selection';
 import { useDeviceCode } from '@/hooks/use-device-code';
 import { storeLastRoute } from '@/lib/last-route';
@@ -42,9 +40,8 @@ export function Layout() {
       <AppSidebar />
       <main className="flex-1 flex flex-col min-h-0 overflow-hidden bg-background">
         <header className="flex h-14 items-center justify-between px-6 border-b shrink-0 bg-background shadow-sm z-20">
-          <div className="flex items-center gap-3">
-            <ClaudeKitBadge />
-            <SponsorButton />
+          <div className="flex items-center gap-4">
+            <CliproxyHeaderStatus />
           </div>
           <div className="flex items-center gap-2">
             <ConnectionIndicator />
@@ -61,7 +58,6 @@ export function Layout() {
             <Outlet />
           </Suspense>
         </div>
-        <LocalhostDisclaimer />
       </main>
 
       {/* Global project selection dialog for OAuth flows */}

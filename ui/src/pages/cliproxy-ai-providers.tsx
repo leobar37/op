@@ -291,7 +291,7 @@ function getFamilyGuide(family: AiProviderFamilyState): FamilyGuide {
     case 'openai-compatibility':
       return {
         requiredNow: [
-          'Name the connector, for example openrouter or together.',
+          'Name the connector, for example together or custom-provider.',
           'Set the connector Base URL.',
           'Add at least one API key before saving.',
         ],
@@ -942,7 +942,7 @@ function EntryInspector({
                           onChange={(event) =>
                             updateDraft((current) => ({ ...current, name: event.target.value }))
                           }
-                          placeholder="openrouter"
+                          placeholder="together"
                         />
                       </EntryEditorField>
                     ) : (
@@ -1008,7 +1008,7 @@ function EntryInspector({
                             : family.id === 'claude-api-key'
                               ? 'https://api.anthropic.com'
                               : family.id === 'openai-compatibility'
-                                ? 'https://openrouter.ai/api/v1'
+                                ? 'https://api.together.xyz/v1'
                                 : 'https://provider.example.com'
                         }
                       />

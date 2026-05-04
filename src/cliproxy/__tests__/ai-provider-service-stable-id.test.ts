@@ -123,9 +123,9 @@ describe('ai-provider service stable ids', () => {
     writeCliproxyConfig(tempHome, {
       'openai-compatibility': [
         {
-          name: 'openrouter',
-          'base-url': 'https://openrouter.ai/api/v1',
-          'api-key-entries': [{ 'api-key': 'sk-openrouter' }],
+          name: 'together',
+          'base-url': 'https://api.together.xyz/v1',
+          'api-key-entries': [{ 'api-key': 'sk-together' }],
         },
       ],
     });
@@ -137,7 +137,7 @@ describe('ai-provider service stable ids', () => {
     expect(connectorId).toBeTruthy();
 
     await updateAiProviderEntry('openai-compatibility', connectorId!, {
-      name: 'openrouter',
+      name: 'together',
       baseUrl: 'https://router.example/v1',
       preserveSecrets: true,
     });
@@ -149,7 +149,7 @@ describe('ai-provider service stable ids', () => {
     expect(persisted[0]?.['base-url']).toBe('https://router.example/v1');
     expect(
       (persisted[0]?.['api-key-entries'] as Array<Record<string, unknown>>)[0]?.['api-key']
-    ).toBe('sk-openrouter');
+    ).toBe('sk-together');
   });
 
   it('normalizes plain openai-compatible model rules without aliases', async () => {
@@ -158,9 +158,9 @@ describe('ai-provider service stable ids', () => {
     writeCliproxyConfig(tempHome, {
       'openai-compatibility': [
         {
-          name: 'openrouter',
-          'base-url': 'https://openrouter.ai/api/v1',
-          'api-key-entries': [{ 'api-key': 'sk-openrouter' }],
+          name: 'together',
+          'base-url': 'https://api.together.xyz/v1',
+          'api-key-entries': [{ 'api-key': 'sk-together' }],
           models: [{ name: 'gpt-4o-mini' }, null, { name: 42 }],
         },
       ],

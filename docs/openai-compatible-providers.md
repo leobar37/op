@@ -6,7 +6,6 @@ your API profile points at an OpenAI-compatible chat completions endpoint.
 This is useful for providers such as:
 
 - Hugging Face Inference Providers
-- OpenRouter
 - Ollama
 - llama.cpp servers
 - OpenAI-compatible self-hosted gateways
@@ -163,9 +162,9 @@ proxy:
     default: "deepseek:deepseek-chat"
     background: "ollama:qwen2.5-coder:0.5b"
     think: "deepseek:deepseek-reasoner"
-    longContext: "openrouter:google/gemini-2.5-pro"
+    longContext: "together:meta-llama/Llama-3-70b-chat-hf"
     longContextThreshold: 60000
-    webSearch: "openrouter:perplexity/sonar-pro"
+    webSearch: "together:meta-llama/Llama-3-70b-chat-hf"
 ```
 
 Current scenario detection:
@@ -223,24 +222,6 @@ Use a settings profile whose env looks like:
 Typical override target:
 
 - `deepseek:deepseek-reasoner`
-
-### OpenRouter
-
-```json
-{
-  "env": {
-    "ANTHROPIC_BASE_URL": "https://openrouter.ai/api/v1",
-    "ANTHROPIC_AUTH_TOKEN": "sk-or-...",
-    "ANTHROPIC_MODEL": "openai/gpt-4.1-mini",
-    "CCS_DROID_PROVIDER": "generic-chat-completion-api"
-  }
-}
-```
-
-Useful when you want:
-
-- model fan-out behind one provider profile
-- long-context or web-search scenario targets
 
 ### Ollama / Local Gateways
 

@@ -33,7 +33,7 @@ CCS provides:
 1. **Multi-Account Claude**: Isolated instances via `CLAUDE_CONFIG_DIR`
 2. **OAuth Providers**: Zero-config Gemini, Codex, Antigravity, Copilot, Kiro (ghcp) integration
 3. **AI Providers**: Dedicated CLIProxy dashboard for Gemini, Codex, Claude, Vertex, and OpenAI-compatible API-key families
-4. **API Profiles**: GLM, Kimi, OpenRouter, any Anthropic-compatible API
+4. **API Profiles**: GLM, Kimi, any Anthropic-compatible API
 5. **Visual Dashboard**: React SPA for configuration management
 6. **Automatic WebSearch**: First-class local WebSearch tool with deterministic provider chain for third-party providers
 7. **Automatic Image Analysis**: First-class local ImageAnalysis tool with direct provider routing for third-party profiles
@@ -51,7 +51,7 @@ CCS provides:
 | Agency/Contractor | Client account isolation | Profile switching |
 | Cost-conscious Dev | GLM for bulk operations | API profiles, analytics |
 | Enterprise | Custom LLM integration | OpenAI-compatible endpoints |
-| Power User | Multiple providers | OpenRouter 300+ models |
+| Power User | Multiple providers | Multiple API providers |
 
 ---
 
@@ -76,7 +76,6 @@ CCS provides:
 - Configure custom API endpoints
 - Support Anthropic-compatible APIs
 - Model mapping and configuration
-- OpenRouter integration with 300+ models
 
 ### FR-004A: CLIProxy AI Provider Management
 - Configure CLIProxy-managed Gemini, Codex, Claude, Vertex, and OpenAI-compatible API-key entries
@@ -253,7 +252,6 @@ CCS provides:
 - [x] Cross-platform support
 
 ### v7.0 Release (Complete)
-- [x] OpenRouter integration with 300+ models
 - [x] Interactive model picker
 - [x] Dynamic model discovery
 - [x] Tier mapping (opus/sonnet/haiku)
@@ -338,7 +336,6 @@ CCS provides:
 - GitHub Copilot (ghcp - Device Code OAuth)
 - AWS Kiro (Authorization Code OAuth)
 - Z.AI GLM API
-- OpenRouter API
 - Moonshot Kimi API
 - DeepSeek API
 - Alibaba Qwen API

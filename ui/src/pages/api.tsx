@@ -18,10 +18,6 @@ import {
 } from 'lucide-react';
 import { ProfileEditor } from '@/components/profile-editor';
 import { ProfileCreateDialog } from '@/components/profiles/profile-create-dialog';
-import { OpenRouterBanner } from '@/components/profiles/openrouter-banner';
-import { OpenRouterQuickStart } from '@/components/profiles/openrouter-quick-start';
-import { OpenRouterPromoCard } from '@/components/profiles/openrouter-promo-card';
-import { AlibabaCodingPlanPromoCard } from '@/components/profiles/alibaba-coding-plan-promo-card';
 import {
   useProfiles,
   useDeleteProfile,
@@ -31,7 +27,6 @@ import {
   useExportProfile,
   useImportProfile,
 } from '@/hooks/use-profiles';
-import { useOpenRouterModels } from '@/hooks/use-openrouter-models';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import type { ApiProfileExportBundle, Profile } from '@/lib/api-client';
 import type { ProviderPreset } from '@/lib/provider-presets';
@@ -43,7 +38,7 @@ import { useNavigate } from 'react-router-dom';
 
 export function ApiPage() {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const _navigate = useNavigate();
   const { data, isLoading, isError, refetch } = useProfiles();
   const deleteMutation = useDeleteProfile();
   const discoverOrphansMutation = useDiscoverProfileOrphans();
@@ -54,13 +49,12 @@ export function ApiPage() {
   const [selectedProfile, setSelectedProfile] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [isCreateDialogOpen, setCreateDialogOpen] = useState(false);
-  const [createMode, setCreateMode] = useState<ProviderPreset['id'] | 'normal'>('normal');
+  const [createMode] = useState<ProviderPreset['id'] | 'normal'>('normal');
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
   const [editorHasChanges, setEditorHasChanges] = useState(false);
   const [pendingSwitch, setPendingSwitch] = useState<string | null>(null);
   const importFileInputRef = useRef<HTMLInputElement>(null);
 
-  useOpenRouterModels();
   const profiles = useMemo(() => data?.profiles || [], [data?.profiles]);
   const filteredProfiles = useMemo(
     () => profiles.filter((p) => p.name.toLowerCase().includes(searchQuery.toLowerCase())),
@@ -212,7 +206,6 @@ export function ApiPage() {
 
   return (
     <div className="flex h-full min-h-0 flex-col overflow-hidden">
-      <OpenRouterBanner onCreateClick={() => setCreateDialogOpen(true)} />
       <div className="flex-1 flex min-h-0 overflow-hidden">
         <div className="w-80 border-r flex flex-col bg-muted/30">
           <div className="p-4 border-b bg-background">
@@ -350,19 +343,6 @@ export function ApiPage() {
               </div>
             </div>
           )}
-
-          <OpenRouterPromoCard
-            onCreateClick={() => {
-              setCreateMode('openrouter');
-              setCreateDialogOpen(true);
-            }}
-          />
-          <AlibabaCodingPlanPromoCard
-            onCreateClick={() => {
-              setCreateMode('alibaba-coding-plan');
-              setCreateDialogOpen(true);
-            }}
-          />
         </div>
 
         <div className="flex min-h-0 flex-1 flex-col min-w-0 overflow-hidden">
@@ -397,33 +377,27 @@ export function ApiPage() {
               />
             </>
           ) : (
-            <OpenRouterQuickStart
-              hasProfiles={profiles.length > 0}
-              profileCount={profiles.length}
-              onCliproxyClick={() => {
-                navigate('/cliproxy/ai-providers');
-              }}
-              onOpenRouterClick={() => {
-                setCreateMode('openrouter');
-                setCreateDialogOpen(true);
-              }}
-              onAlibabaCodingPlanClick={() => {
-                setCreateMode('alibaba-coding-plan');
-                setCreateDialogOpen(true);
-              }}
-              onOllamaClick={() => {
-                setCreateMode('ollama');
-                setCreateDialogOpen(true);
-              }}
-              onLlamacppClick={() => {
-                setCreateMode('llamacpp');
-                setCreateDialogOpen(true);
-              }}
-              onCustomClick={() => {
-                setCreateMode('normal');
-                setCreateDialogOpen(true);
-              }}
-            />
+            <div className="flex-1 flex items-center justify-center">
+              <div className="text-center space-y-4 p-8">
+                <FileJson className="w-12 h-12 mx-auto text-muted-foreground/50" />
+                <div>
+                  <p className="text-sm font-medium">{t('apiProfiles.noProfilesYet')}</p>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {t('apiProfiles.noProfilesDesc')}
+                  </p>
+                </div>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => {
+                    setCreateDialogOpen(true);
+                  }}
+                >
+                  <Plus className="w-4 h-4 mr-1" />
+                  {t('apiProfiles.createProfile')}
+                </Button>
+              </div>
+            </div>
           )}
         </div>
       </div>

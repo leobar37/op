@@ -617,6 +617,53 @@ export interface CliproxyCatalogResponse {
   };
 }
 
+/** CLIProxy global provider entry for /cliproxy/providers */
+export interface CliproxyGlobalProvider {
+  provider: string;
+  displayName: string;
+  authenticated: boolean;
+  accountCount: number;
+  modelCount: number;
+}
+
+/** CLIProxy global providers response */
+export interface CliproxyGlobalProvidersResponse {
+  providers: CliproxyGlobalProvider[];
+}
+
+/** CLIProxy provider model entry */
+export interface CliproxyProviderModel {
+  id: string;
+  name: string;
+  owned_by: string;
+  source?: 'live' | 'catalog';
+}
+
+/** CLIProxy provider models response */
+export interface CliproxyProviderModelsResponse {
+  provider: string;
+  models: CliproxyProviderModel[];
+}
+
+/** CLIProxy providers config response */
+export interface CliproxyProvidersConfigResponse {
+  baseUrl: string;
+  isRemote: boolean;
+  source: 'local' | 'remote';
+}
+
+/** Droid custom model entry shape */
+export interface DroidCustomModelEntry {
+  model: string;
+  id: string;
+  index: number;
+  baseUrl: string;
+  apiKey: string;
+  displayName: string;
+  noImageSupport: boolean;
+  provider: string;
+}
+
 /** Individual model quota info from Google Cloud Code API */
 export interface ModelQuota {
   /** Model name, e.g., "gemini-3-pro-high" */
@@ -1434,6 +1481,18 @@ export const api = {
         if (!res.ok) throw new Error('Failed to load error log');
         return res.text();
       },
+    },
+    // Global providers view
+    providers: {
+      /** List all providers with auth status */
+      list: () => request<CliproxyGlobalProvidersResponse>('/provider-models'),
+      /** Get proxy base URL config */
+      config: () => request<CliproxyProvidersConfigResponse>('/provider-models/config'),
+      /** Get models for a specific provider */
+      models: (provider: string) =>
+        request<CliproxyProviderModelsResponse>(
+          `/provider-models/${encodeURIComponent(provider)}/models`
+        ),
     },
   },
   accounts: {

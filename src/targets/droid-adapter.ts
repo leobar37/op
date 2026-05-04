@@ -10,7 +10,7 @@ import * as fs from 'fs';
 import { TargetAdapter, TargetBinaryInfo, TargetCredentials, TargetType } from './target-adapter';
 import { getDroidBinaryInfo, detectDroidCli, checkDroidVersion } from './droid-detector';
 import type { ProfileType } from '../types/profile';
-import { upsertCcsModel } from './droid-config-manager';
+import { upsertCcsModel } from '../droid-settings';
 import { resolveDroidProvider } from './droid-provider';
 import {
   escapeShellArg,

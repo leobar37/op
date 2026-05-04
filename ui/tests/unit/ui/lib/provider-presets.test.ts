@@ -22,7 +22,7 @@ describe('resolvePresetApiKeyValue', () => {
   });
 
   it('returns an empty string for API-key providers when input is empty', () => {
-    const preset = getPresetById('openrouter');
+    const preset = getPresetById('anthropic');
     expect(resolvePresetApiKeyValue(preset, '')).toBe('');
   });
 });

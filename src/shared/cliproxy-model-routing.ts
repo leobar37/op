@@ -47,7 +47,7 @@ export interface CliproxyProviderRoutingHints {
   models: CliproxyModelRoutingHint[];
 }
 
-const PROVIDER_OWNER_HINTS: Record<string, string[]> = {
+export const PROVIDER_OWNER_HINTS: Record<string, string[]> = {
   gemini: ['google'],
   agy: ['antigravity'],
   claude: ['anthropic'],

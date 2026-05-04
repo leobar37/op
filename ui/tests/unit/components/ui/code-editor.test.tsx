@@ -11,7 +11,7 @@ describe('CodeEditor', () => {
   it('creates an internal scroll viewport in fill-parent mode and keeps status outside it', () => {
     const { container } = render(
       <CodeEditor
-        value={'{\n  "provider": "openrouter"\n}'}
+        value={'{\n  "provider": "together"\n}'}
         onChange={vi.fn()}
         language="json"
         minHeight="100%"
@@ -30,7 +30,7 @@ describe('CodeEditor', () => {
   it('keeps readonly status outside the scroll viewport for bounded editors', () => {
     const { container } = render(
       <CodeEditor
-        value={'{\n  "provider": "openrouter"\n}'}
+        value={'{\n  "provider": "together"\n}'}
         onChange={vi.fn()}
         language="json"
         readonly

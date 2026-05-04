@@ -32,11 +32,6 @@ import {
   resolveCliproxyBridgeProfile,
 } from './cliproxy-profile-bridge';
 
-/** Check if URL is an OpenRouter endpoint */
-function isOpenRouterUrl(baseUrl: string): boolean {
-  return baseUrl.toLowerCase().includes('openrouter.ai');
-}
-
 /** Detect Anthropic direct API profile (native auth, no proxy) */
 function isAnthropicDirect(baseUrl: string, apiKey: string): boolean {
   return apiKey.startsWith('sk-ant-') || baseUrl.includes('api.anthropic.com');
@@ -112,7 +107,6 @@ function createSettingsFile(
         : {
             ANTHROPIC_BASE_URL: baseUrl,
             ANTHROPIC_AUTH_TOKEN: apiKey,
-            ...(isOpenRouterUrl(baseUrl) && { ANTHROPIC_API_KEY: '' }),
           }),
       ANTHROPIC_MODEL: models.default,
       ANTHROPIC_DEFAULT_OPUS_MODEL: models.opus,
@@ -203,7 +197,6 @@ function createApiProfileUnified(
         : {
             ANTHROPIC_BASE_URL: baseUrl,
             ANTHROPIC_AUTH_TOKEN: apiKey,
-            ...(isOpenRouterUrl(baseUrl) && { ANTHROPIC_API_KEY: '' }),
           }),
       ANTHROPIC_MODEL: models.default,
       ANTHROPIC_DEFAULT_OPUS_MODEL: models.opus,

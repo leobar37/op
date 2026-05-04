@@ -8,22 +8,6 @@ import {
 } from '../../../src/api/services/provider-presets';
 
 describe('provider-presets', () => {
-  it('resolves Alibaba Coding Plan preset id', () => {
-    const preset = getPresetById('alibaba-coding-plan');
-    expect(preset?.id).toBe('alibaba-coding-plan');
-    expect(preset?.baseUrl).toBe('https://coding-intl.dashscope.aliyuncs.com/apps/anthropic');
-    expect(preset?.defaultProfileName).toBe('albb');
-  });
-
-  it('resolves alibaba alias to Alibaba Coding Plan preset', () => {
-    const preset = getPresetById('alibaba');
-    expect(preset?.id).toBe('alibaba-coding-plan');
-  });
-
-  it('treats alibaba alias as a valid preset id', () => {
-    expect(isValidPresetId('alibaba')).toBe(true);
-  });
-
   it('resolves canonical km preset id', () => {
     const preset = getPresetById('km');
     expect(preset?.id).toBe('km');

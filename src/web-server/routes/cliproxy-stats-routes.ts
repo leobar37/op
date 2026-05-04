@@ -1075,8 +1075,8 @@ router.post('/install', async (req: Request, res: Response): Promise<void> => {
       ...installResult,
     });
   } catch (error) {
-    console.error(`[cliproxy-stats] ${(error as Error).message}`);
-    res.status(500).json({ error: 'Internal server error' });
+    console.error(`[cliproxy-stats] Install failed:`, error);
+    res.status(500).json({ error: 'Internal server error', message: (error as Error).message });
   }
 });
 

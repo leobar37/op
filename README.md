@@ -27,8 +27,8 @@ CCS gives you one stable command surface while letting you switch between:
 - multiple runtimes such as Claude Code, Factory Droid, and Codex CLI
 - multiple Claude subscriptions and isolated account contexts
 - OAuth providers like Codex, Copilot, Kiro, Claude, Qwen, Kimi, and more
-- API and local-model profiles like GLM, Kimi, OpenRouter, Ollama, llama.cpp,
-  Novita, and Alibaba Coding Plan
+- API and local-model profiles like GLM, Kimi, Ollama, llama.cpp,
+  and Novita
 
 The goal is simple: stop rewriting config files, stop breaking active sessions,
 and move between providers in seconds.

@@ -9,8 +9,6 @@ export type PresetCategory = 'recommended' | 'alternative';
 export type ProviderPresetTarget = 'claude' | 'droid';
 
 export const PROVIDER_PRESET_IDS = [
-  'openrouter',
-  'alibaba-coding-plan',
   'huggingface',
   'ollama',
   'llamacpp',
@@ -49,8 +47,6 @@ export interface ProviderPresetDefinition {
   icon?: string;
 }
 
-export const OPENROUTER_BASE_URL = 'https://openrouter.ai/api';
-
 /**
  * Legacy aliases mapped to canonical preset IDs.
  * Keep this minimal and explicit to avoid hidden implicit behavior.
@@ -58,42 +54,10 @@ export const OPENROUTER_BASE_URL = 'https://openrouter.ai/api';
 export const PROVIDER_PRESET_ALIASES: Readonly<Record<string, ProviderPresetId>> = Object.freeze({
   glmt: 'glm',
   kimi: 'km',
-  alibaba: 'alibaba-coding-plan',
-  acp: 'alibaba-coding-plan',
   hf: 'huggingface',
 });
 
 const RAW_PROVIDER_PRESET_DEFINITIONS: readonly ProviderPresetDefinition[] = [
-  {
-    id: 'openrouter',
-    name: 'OpenRouter',
-    description: '349+ models from OpenAI, Anthropic, Google, Meta',
-    baseUrl: OPENROUTER_BASE_URL,
-    defaultProfileName: 'openrouter',
-    defaultModel: 'anthropic/claude-opus-4.5',
-    apiKeyPlaceholder: 'sk-or-...',
-    apiKeyHint: 'Get your API key at openrouter.ai/keys',
-    category: 'recommended',
-    requiresApiKey: true,
-    badge: '349+ models',
-    featured: true,
-    icon: '/icons/openrouter.svg',
-  },
-  {
-    id: 'alibaba-coding-plan',
-    name: 'Alibaba Coding Plan',
-    description: 'Alibaba Cloud Coding Plan via Anthropic-compatible endpoint',
-    baseUrl: 'https://coding-intl.dashscope.aliyuncs.com/apps/anthropic',
-    defaultProfileName: 'albb',
-    defaultModel: 'qwen3-coder-plus',
-    apiKeyPlaceholder: 'sk-sp-...',
-    apiKeyHint: 'Get your Coding Plan key from Alibaba Cloud Model Studio',
-    category: 'recommended',
-    requiresApiKey: true,
-    badge: 'Coding Plan',
-    featured: true,
-    icon: '/assets/providers/alibabacloud-color.svg',
-  },
   {
     id: 'ollama',
     name: 'Ollama (Local)',

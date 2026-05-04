@@ -6,9 +6,7 @@ import {
   getPresetById,
   getPresetIds,
   getUrlWarning,
-  isOpenRouterUrl,
   isUsingUnifiedConfig,
-  pickOpenRouterModel,
   sanitizeBaseUrl,
   suggestCliproxyBridgeName,
   validateApiName,
@@ -185,33 +183,13 @@ async function resolveApiKey(
 }
 
 async function resolveModelConfiguration(
-  baseUrl: string,
+  _baseUrl: string,
   preset: ProviderPreset | null,
   providedModel: string | undefined,
   yes: boolean | undefined
 ): Promise<{ model: string; models: ModelMapping }> {
-  let openRouterModel: string | undefined;
-  let openRouterTierMapping: { opus?: string; sonnet?: string; haiku?: string } | undefined;
-
-  if (isOpenRouterUrl(baseUrl) && !providedModel) {
-    console.log('');
-    console.log(info('OpenRouter detected!'));
-    const useInteractive = await InteractivePrompt.confirm('Browse models interactively?', {
-      default: true,
-    });
-    if (useInteractive) {
-      const selection = await pickOpenRouterModel();
-      if (selection) {
-        openRouterModel = selection.model;
-        openRouterTierMapping = selection.tierMapping;
-      }
-    }
-    console.log('');
-    console.log(dim('Note: For OpenRouter, ANTHROPIC_API_KEY should be empty.'));
-  }
-
   const defaultModel = preset?.defaultModel || 'claude-sonnet-4-6';
-  let model = providedModel || openRouterModel || preset?.defaultModel;
+  let model = providedModel || preset?.defaultModel;
   if (!model && !yes && !preset) {
     model = await InteractivePrompt.input('Default model (ANTHROPIC_MODEL)', {
       default: defaultModel,
@@ -219,10 +197,10 @@ async function resolveModelConfiguration(
   }
   model = model || defaultModel;
 
-  let opusModel = openRouterTierMapping?.opus || model;
-  let sonnetModel = openRouterTierMapping?.sonnet || model;
-  let haikuModel = openRouterTierMapping?.haiku || model;
-  const shouldPromptForMapping = !yes && !openRouterTierMapping && !preset;
+  let opusModel = model;
+  let sonnetModel = model;
+  let haikuModel = model;
+  const shouldPromptForMapping = !yes && !preset;
 
   if (shouldPromptForMapping) {
     let wantCustomMapping = model !== defaultModel;

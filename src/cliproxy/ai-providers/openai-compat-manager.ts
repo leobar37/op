@@ -221,17 +221,6 @@ export function removeOpenAICompatProvider(name: string): boolean {
   return true;
 }
 
-/** Pre-configured OpenRouter template */
-export const OPENROUTER_TEMPLATE: Omit<OpenAICompatProvider, 'apiKey'> = {
-  name: 'openrouter',
-  baseUrl: 'https://openrouter.ai/api/v1',
-  models: [
-    { name: 'anthropic/claude-3.5-sonnet', alias: 'claude-sonnet' },
-    { name: 'anthropic/claude-3-opus', alias: 'claude-opus' },
-    { name: 'google/gemini-pro-1.5', alias: 'gemini-pro' },
-  ],
-};
-
 /** Pre-configured Together template */
 export const TOGETHER_TEMPLATE: Omit<OpenAICompatProvider, 'apiKey'> = {
   name: 'together',

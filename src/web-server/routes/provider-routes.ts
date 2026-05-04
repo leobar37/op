@@ -9,7 +9,6 @@ import {
   addOpenAICompatProvider,
   updateOpenAICompatProvider,
   removeOpenAICompatProvider,
-  OPENROUTER_TEMPLATE,
   TOGETHER_TEMPLATE,
 } from '../../cliproxy/ai-providers/openai-compat-manager';
 import { isReservedName, RESERVED_PROFILE_NAMES } from '../../config/reserved-names';
@@ -38,10 +37,7 @@ router.get('/', (_req: Request, res: Response): void => {
  */
 router.get('/templates', (_req: Request, res: Response): void => {
   res.json({
-    templates: [
-      { ...OPENROUTER_TEMPLATE, description: 'OpenRouter - Access multiple AI models' },
-      { ...TOGETHER_TEMPLATE, description: 'Together AI - Open source models' },
-    ],
+    templates: [{ ...TOGETHER_TEMPLATE, description: 'Together AI - Open source models' }],
   });
 });
 

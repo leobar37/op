@@ -20,9 +20,9 @@ describe('ProviderEntryCard', () => {
         entry={{
           id: 'openai-compatibility:0',
           index: 0,
-          name: 'openrouter',
-          label: 'openrouter',
-          baseUrl: 'https://openrouter.ai/api/v1',
+          name: 'together',
+          label: 'together',
+          baseUrl: 'https://api.together.xyz/v1',
           headers: [],
           excludedModels: [],
           models: [{ name: 'gpt-5', alias: 'claude-sonnet-4-5' }],

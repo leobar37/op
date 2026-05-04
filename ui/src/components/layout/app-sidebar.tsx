@@ -84,12 +84,13 @@ function buildNavGroups(t: (key: string) => string): SidebarGroupDef[] {
           icon: Key,
           label: t('nav.apiProfiles'),
           badge: {
-            icons: [
-              '/icons/openrouter.svg',
-              '/assets/providers/alibabacloud-color.svg',
-              '/icons/ollama.svg',
-            ],
+            icons: ['/icons/ollama.svg'],
           },
+        },
+        {
+          path: '/provider-models',
+          icon: Zap,
+          label: 'Providers',
         },
         {
           path: '/cliproxy',
@@ -289,7 +290,7 @@ export function AppSidebar() {
                                 </span>
                               </TooltipTrigger>
                               <TooltipContent side="right">
-                                <p>{t('nav.openrouterTooltip')}</p>
+                                <p>{t('nav.apiProfilesTooltip')}</p>
                               </TooltipContent>
                             </Tooltip>
                           )}

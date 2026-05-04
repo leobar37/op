@@ -93,7 +93,15 @@ export async function startServer(options: ServerOptions): Promise<ServerInstanc
 
   // Dev mode: use Vite middleware for HMR
   if (options.dev) {
-    const { createServer: createViteServer } = await import('vite');
+    let createViteServer: typeof import('vite').createServer;
+    try {
+      ({ createServer: createViteServer } = await import('vite'));
+    } catch {
+      throw new Error(
+        'Vite is required for dev mode but not installed.\n' +
+          "Run from the CCS repo with 'bun run dev', or install vite globally."
+      );
+    }
     const vite = await createViteServer({
       root: path.join(__dirname, '../../ui'),
       server: {
