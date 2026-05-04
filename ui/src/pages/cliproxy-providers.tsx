@@ -17,6 +17,8 @@ import {
   Zap,
   Rocket,
   AlertTriangle,
+  Eye,
+  EyeOff,
 } from 'lucide-react';
 import { ProviderLogo } from '@/components/cliproxy/provider-logo';
 import { CodeEditor } from '@/components/shared/code-editor';
@@ -32,6 +34,9 @@ import {
   useCliproxyGlobalProviders,
   useCliproxyProvidersConfig,
   useCliproxyProviderModels,
+  useProviderApiKey,
+  useSaveProviderApiKey,
+  useClearProviderApiKey,
 } from '@/hooks/use-cliproxy-providers';
 import { useDroid } from '@/hooks/use-droid';
 import type { DroidCustomModelEntry } from '@/lib/api-client';
@@ -51,6 +56,7 @@ function ProviderCard({
     authenticated: boolean;
     accountCount: number;
     modelCount: number;
+    secretConfigured?: boolean;
   };
   isSelected: boolean;
   onSelect: () => void;
@@ -82,6 +88,24 @@ function ProviderCard({
             ) : (
               <Badge variant="secondary" className="text-[10px] h-4 px-1.5">
                 Not connected
+              </Badge>
+            )}
+            {provider.secretConfigured === true && (
+              <Badge
+                variant="default"
+                className="text-[10px] h-4 px-1.5 bg-blue-600 hover:bg-blue-600"
+              >
+                <Check className="w-2.5 h-2.5 mr-0.5" />
+                Configured
+              </Badge>
+            )}
+            {provider.secretConfigured === false && (
+              <Badge
+                variant="outline"
+                className="text-[10px] h-4 px-1.5 border-amber-500 text-amber-600"
+              >
+                <AlertTriangle className="w-2.5 h-2.5 mr-0.5" />
+                Missing secret
               </Badge>
             )}
           </div>
@@ -178,6 +202,11 @@ function setAppliedHash(provider: string, modelId: string, hash: string): void {
   }
 }
 
+/** Check if a provider is a Chinese provider that supports API key configuration */
+function isChineseProvider(provider: string): boolean {
+  return ['deepseek', 'glm', 'kimi', 'mm'].includes(provider.toLowerCase());
+}
+
 export function CliproxyProvidersPage() {
   const { t } = useTranslation();
   const {
@@ -197,12 +226,19 @@ export function CliproxyProvidersPage() {
   const [modelIndex, setModelIndex] = useState(0);
   const [hasCopied, setHasCopied] = useState(false);
   const [appliedHashVersion, setAppliedHashVersion] = useState(0);
+  const [apiKeyInput, setApiKeyInput] = useState('');
+  const [showApiKey, setShowApiKey] = useState(false);
 
   const {
     data: modelsData,
     isLoading: modelsLoading,
     isError: modelsError,
   } = useCliproxyProviderModels(selectedProvider || '');
+
+  const { data: apiKeyData, isLoading: apiKeyLoading } = useProviderApiKey(selectedProvider || '');
+
+  const saveApiKeyMutation = useSaveProviderApiKey();
+  const clearApiKeyMutation = useClearProviderApiKey();
 
   const providers = providersData?.providers || [];
 
@@ -277,6 +313,8 @@ export function CliproxyProvidersPage() {
     setSelectedProvider(provider);
     setSelectedModel(null);
     setDisplayName('');
+    setApiKeyInput('');
+    setShowApiKey(false);
   };
 
   const handleModelSelect = (modelId: string) => {
@@ -309,6 +347,35 @@ export function CliproxyProvidersPage() {
 
   const handleRefresh = () => {
     void refetchProviders();
+  };
+
+  const handleSaveApiKey = async () => {
+    if (!selectedProvider || !apiKeyInput.trim()) {
+      toast.error(t('cliproxyProviders.apiKeyRequired'));
+      return;
+    }
+    try {
+      await saveApiKeyMutation.mutateAsync({
+        provider: selectedProvider,
+        apiKey: apiKeyInput.trim(),
+      });
+      toast.success(t('cliproxyProviders.apiKeySaved'));
+      setApiKeyInput('');
+      setShowApiKey(false);
+    } catch (error) {
+      toast.error((error as Error).message || t('cliproxyProviders.apiKeySaveFailed'));
+    }
+  };
+
+  const handleClearApiKey = async () => {
+    if (!selectedProvider) return;
+    try {
+      await clearApiKeyMutation.mutateAsync(selectedProvider);
+      toast.success(t('cliproxyProviders.apiKeyCleared'));
+      setApiKeyInput('');
+    } catch (error) {
+      toast.error((error as Error).message || t('cliproxyProviders.apiKeyClearFailed'));
+    }
   };
 
   return (
@@ -458,6 +525,90 @@ export function CliproxyProvidersPage() {
                       </div>
                     </CardContent>
                   </Card>
+
+                  {/* Provider API Key Configuration - Only for Chinese providers */}
+                  {selectedProvider && isChineseProvider(selectedProvider) && (
+                    <Card>
+                      <CardHeader className="pb-2">
+                        <CardTitle className="text-sm flex items-center gap-2">
+                          <KeyRound className="h-4 w-4 text-primary" />
+                          {t('cliproxyProviders.providerApiKey')}
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        {apiKeyLoading ? (
+                          <Skeleton className="h-10 w-full" />
+                        ) : (
+                          <>
+                            <div className="flex items-center gap-2">
+                              <div className="relative flex-1">
+                                <Input
+                                  type={showApiKey ? 'text' : 'password'}
+                                  value={apiKeyInput}
+                                  onChange={(e) => setApiKeyInput(e.target.value)}
+                                  placeholder={
+                                    apiKeyData?.secretConfigured
+                                      ? t('cliproxyProviders.apiKeyPlaceholderConfigured')
+                                      : t('cliproxyProviders.apiKeyPlaceholder')
+                                  }
+                                  className="pr-10"
+                                />
+                                <button
+                                  type="button"
+                                  onClick={() => setShowApiKey((v) => !v)}
+                                  className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                                  tabIndex={-1}
+                                >
+                                  {showApiKey ? (
+                                    <EyeOff className="w-4 h-4" />
+                                  ) : (
+                                    <Eye className="w-4 h-4" />
+                                  )}
+                                </button>
+                              </div>
+                              <Button
+                                size="sm"
+                                onClick={handleSaveApiKey}
+                                disabled={!apiKeyInput.trim() || saveApiKeyMutation.isPending}
+                              >
+                                {saveApiKeyMutation.isPending ? (
+                                  <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                                ) : (
+                                  t('cliproxyProviders.saveApiKey')
+                                )}
+                              </Button>
+                              {apiKeyData?.secretConfigured && (
+                                <Button
+                                  size="sm"
+                                  variant="outline"
+                                  onClick={handleClearApiKey}
+                                  disabled={clearApiKeyMutation.isPending}
+                                >
+                                  {clearApiKeyMutation.isPending ? (
+                                    <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                                  ) : (
+                                    t('cliproxyProviders.clearApiKey')
+                                  )}
+                                </Button>
+                              )}
+                            </div>
+                            {apiKeyData?.secretConfigured && (
+                              <p className="text-xs text-green-600 flex items-center gap-1">
+                                <Check className="w-3 h-3" />
+                                {t('cliproxyProviders.apiKeyConfigured')}
+                              </p>
+                            )}
+                            {apiKeyData?.secretConfigured === false && (
+                              <p className="text-xs text-amber-600 flex items-center gap-1">
+                                <AlertTriangle className="w-3 h-3" />
+                                {t('cliproxyProviders.apiKeyMissing')}
+                              </p>
+                            )}
+                          </>
+                        )}
+                      </CardContent>
+                    </Card>
+                  )}
 
                   {/* Configuration Form */}
                   {selectedModel && (

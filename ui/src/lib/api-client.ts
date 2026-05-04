@@ -624,11 +624,19 @@ export interface CliproxyGlobalProvider {
   authenticated: boolean;
   accountCount: number;
   modelCount: number;
+  secretConfigured?: boolean;
 }
 
 /** CLIProxy global providers response */
 export interface CliproxyGlobalProvidersResponse {
   providers: CliproxyGlobalProvider[];
+}
+
+/** Provider API key status response */
+export interface ProviderApiKeyResponse {
+  provider: string;
+  secretConfigured: boolean;
+  maskedKey: string | null;
 }
 
 /** CLIProxy provider model entry */
@@ -1493,6 +1501,20 @@ export const api = {
         request<CliproxyProviderModelsResponse>(
           `/provider-models/${encodeURIComponent(provider)}/models`
         ),
+      /** Get API key status for a provider */
+      getApiKey: (provider: string) =>
+        request<ProviderApiKeyResponse>(`/provider-models/${encodeURIComponent(provider)}/apikey`),
+      /** Save API key for a provider */
+      saveApiKey: (provider: string, apiKey: string) =>
+        request<ProviderApiKeyResponse>(`/provider-models/${encodeURIComponent(provider)}/apikey`, {
+          method: 'PUT',
+          body: JSON.stringify({ apiKey }),
+        }),
+      /** Clear API key for a provider */
+      clearApiKey: (provider: string) =>
+        request<ProviderApiKeyResponse>(`/provider-models/${encodeURIComponent(provider)}/apikey`, {
+          method: 'DELETE',
+        }),
     },
   },
   accounts: {
