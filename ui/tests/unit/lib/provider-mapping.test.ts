@@ -39,11 +39,40 @@ describe('resolveDroidProviderForModel', () => {
       );
     });
 
-    it('falls back to model-based inference for unmapped Chinese providers', () => {
-      // deepseek model prefix is not in the model inference list, so falls back to anthropic
-      expect(resolveDroidProviderForModel('deepseek', 'deepseek-chat')).toBe('anthropic');
-      // glm model prefix is not in the model inference list, so falls back to anthropic
-      expect(resolveDroidProviderForModel('glm', 'glm-5')).toBe('anthropic');
+    it('maps deepseek provider to generic-chat-completion-api', () => {
+      expect(resolveDroidProviderForModel('deepseek', 'deepseek-chat')).toBe(
+        'generic-chat-completion-api'
+      );
+      expect(resolveDroidProviderForModel('deepseek', 'deepseek-v4-pro')).toBe(
+        'generic-chat-completion-api'
+      );
+    });
+
+    it('maps glm provider to generic-chat-completion-api', () => {
+      expect(resolveDroidProviderForModel('glm', 'glm-5')).toBe('generic-chat-completion-api');
+      expect(resolveDroidProviderForModel('glm', 'glm-4.7')).toBe('generic-chat-completion-api');
+    });
+
+    it('maps mm (MiniMax) provider to generic-chat-completion-api', () => {
+      expect(resolveDroidProviderForModel('mm', 'MiniMax-M2.7')).toBe(
+        'generic-chat-completion-api'
+      );
+      expect(resolveDroidProviderForModel('mm', 'MiniMax-M2.5')).toBe(
+        'generic-chat-completion-api'
+      );
+    });
+
+    it('infers generic-chat-completion-api from model prefixes for unmapped providers', () => {
+      // deepseek model prefix inference when provider is unknown
+      expect(resolveDroidProviderForModel('unknown', 'deepseek-chat')).toBe(
+        'generic-chat-completion-api'
+      );
+      // glm model prefix inference when provider is unknown
+      expect(resolveDroidProviderForModel('unknown', 'glm-5')).toBe('generic-chat-completion-api');
+      // minimax model prefix inference when provider is unknown
+      expect(resolveDroidProviderForModel('unknown', 'minimax-m2.7')).toBe(
+        'generic-chat-completion-api'
+      );
     });
   });
 

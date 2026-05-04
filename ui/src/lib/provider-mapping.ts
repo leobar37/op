@@ -29,6 +29,12 @@ const PROVIDER_TO_DROID_API_TYPE: Readonly<Record<string, DroidProviderValue>> =
   // Chinese / alternative providers — mapped by their upstream API format
   // kimi (Moonshot) uses OpenAI-compatible API
   kimi: 'generic-chat-completion-api',
+  // deepseek uses OpenAI-compatible API
+  deepseek: 'generic-chat-completion-api',
+  // glm (Zhipu AI) uses OpenAI-compatible API
+  glm: 'generic-chat-completion-api',
+  // mm (MiniMax) uses OpenAI-compatible API
+  mm: 'generic-chat-completion-api',
   // qwen uses Anthropic-compatible endpoint
   qwen: 'anthropic',
 
@@ -57,6 +63,14 @@ function inferProviderFromModel(modelId: string): DroidProviderValue | null {
     normalized.startsWith('o4')
   ) {
     return 'openai';
+  }
+
+  if (
+    normalized.startsWith('deepseek') ||
+    normalized.startsWith('glm') ||
+    normalized.startsWith('minimax')
+  ) {
+    return 'generic-chat-completion-api';
   }
 
   return null;
