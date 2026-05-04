@@ -46,3 +46,24 @@ const localStorageMock = {
   clear: vi.fn(),
 };
 Object.defineProperty(window, 'localStorage', { value: localStorageMock });
+
+// Mock crypto.subtle for SHA-256 hashing in tests
+// Uses a simple deterministic hash for test predictability
+Object.defineProperty(window, 'crypto', {
+  value: {
+    subtle: {
+      digest: vi.fn(async (algorithm: string, data: ArrayBuffer) => {
+        if (algorithm !== 'SHA-256') {
+          throw new Error(`Unsupported algorithm: ${algorithm}`);
+        }
+        const bytes = new Uint8Array(data);
+        // Simple deterministic hash for tests: XOR fold into 32 bytes
+        const hash = new Uint8Array(32);
+        for (let i = 0; i < bytes.length; i++) {
+          hash[i % 32] ^= bytes[i];
+        }
+        return hash.buffer;
+      }),
+    },
+  },
+});

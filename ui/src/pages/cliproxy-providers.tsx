@@ -4,7 +4,7 @@
  * and Droid JSON export integration
  */
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { toast } from 'sonner';
 import {
   Check,
@@ -36,6 +36,7 @@ import {
 import { useDroid } from '@/hooks/use-droid';
 import type { DroidCustomModelEntry } from '@/lib/api-client';
 import { resolveDroidProviderForModel } from '@/lib/provider-mapping';
+import { computeModelHash } from '@/lib/hash';
 import { cn } from '@/lib/utils';
 import { useTranslation } from 'react-i18next';
 
@@ -177,26 +178,6 @@ function setAppliedHash(provider: string, modelId: string, hash: string): void {
   }
 }
 
-function computeClientHash(entry: Record<string, unknown>): string {
-  const normalized = Object.keys(entry)
-    .sort()
-    .reduce(
-      (acc, key) => {
-        acc[key] = entry[key];
-        return acc;
-      },
-      {} as Record<string, unknown>
-    );
-  let hash = 0;
-  const str = JSON.stringify(normalized);
-  for (let i = 0; i < str.length; i++) {
-    const char = str.charCodeAt(i);
-    hash = (hash << 5) - hash + char;
-    hash = hash & hash;
-  }
-  return Math.abs(hash).toString(16).padStart(8, '0');
-}
-
 export function CliproxyProvidersPage() {
   const { t } = useTranslation();
   const {
@@ -215,6 +196,7 @@ export function CliproxyProvidersPage() {
   const [noImageSupport, setNoImageSupport] = useState(false);
   const [modelIndex, setModelIndex] = useState(0);
   const [hasCopied, setHasCopied] = useState(false);
+  const [appliedHashVersion, setAppliedHashVersion] = useState(0);
 
   const {
     data: modelsData,
@@ -253,21 +235,43 @@ export function CliproxyProvidersPage() {
     return JSON.stringify(generatedEntry, null, 2);
   }, [generatedEntry]);
 
-  const currentHash = useMemo(() => {
-    if (!generatedEntry) return '';
-    return computeClientHash(generatedEntry as unknown as Record<string, unknown>);
+  // Async hash computation to match server-side SHA-256
+  const [currentHash, setCurrentHash] = useState('');
+  const [hashReady, setHashReady] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    const updateHash = async () => {
+      if (!generatedEntry) {
+        setCurrentHash('');
+        setHashReady(true);
+        return;
+      }
+      setHashReady(false);
+      const hash = await computeModelHash(generatedEntry as unknown as Record<string, unknown>);
+      if (!cancelled) {
+        setCurrentHash(hash);
+        setHashReady(true);
+      }
+    };
+    void updateHash();
+    return () => {
+      cancelled = true;
+    };
   }, [generatedEntry]);
 
   const appliedHash = useMemo(() => {
     if (!selectedProvider || !selectedModel) return null;
     return getAppliedHash(selectedProvider, selectedModel);
-  }, [selectedProvider, selectedModel]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedProvider, selectedModel, appliedHashVersion]);
 
   const applyState = useMemo(() => {
+    if (!hashReady || !currentHash) return 'not-applied';
     if (!appliedHash) return 'not-applied';
     if (appliedHash === currentHash) return 'applied';
     return 'modified';
-  }, [appliedHash, currentHash]);
+  }, [appliedHash, currentHash, hashReady]);
 
   const handleProviderSelect = (provider: string) => {
     setSelectedProvider(provider);
@@ -296,6 +300,7 @@ export function CliproxyProvidersPage() {
         hash: currentHash,
       });
       setAppliedHash(selectedProvider, selectedModel, result.meta.appliedHash);
+      setAppliedHashVersion((v) => v + 1);
       toast.success(t('cliproxyProviders.appliedToDroid'));
     } catch (error) {
       toast.error((error as Error).message || t('cliproxyProviders.applyFailed'));
