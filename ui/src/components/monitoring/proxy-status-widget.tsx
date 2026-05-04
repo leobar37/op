@@ -248,15 +248,16 @@ export function ProxyStatusWidget() {
   };
 
   // Build remote display info
-  const remoteDisplayHost = isRemoteMode
-    ? (() => {
-        const protocol = remoteConfig.protocol || 'http';
-        const port = remoteConfig.port || (protocol === 'https' ? 443 : 80);
-        const isDefaultPort =
-          (protocol === 'https' && port === 443) || (protocol === 'http' && port === 80);
-        return isDefaultPort ? remoteConfig.host : `${remoteConfig.host}:${port}`;
-      })()
-    : null;
+  const remoteDisplayHost =
+    isRemoteMode && remoteConfig
+      ? (() => {
+          const protocol = remoteConfig.protocol || 'http';
+          const port = remoteConfig.port || (protocol === 'https' ? 443 : 80);
+          const isDefaultPort =
+            (protocol === 'https' && port === 443) || (protocol === 'http' && port === 80);
+          return isDefaultPort ? remoteConfig.host : `${remoteConfig.host}:${port}`;
+        })()
+      : null;
 
   // Remote mode: show remote server info
   if (isRemoteMode) {

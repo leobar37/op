@@ -254,7 +254,7 @@ export function CliproxyProvidersPage() {
 
   const currentHash = useMemo(() => {
     if (!generatedEntry) return '';
-    return computeClientHash(generatedEntry as Record<string, unknown>);
+    return computeClientHash(generatedEntry as unknown as Record<string, unknown>);
   }, [generatedEntry]);
 
   const appliedHash = useMemo(() => {
@@ -291,7 +291,7 @@ export function CliproxyProvidersPage() {
     if (!generatedEntry || !selectedProvider || !selectedModel) return;
     try {
       const result = await applyModelAsync({
-        entry: generatedEntry as Record<string, unknown>,
+        entry: generatedEntry as unknown as Record<string, unknown>,
         hash: currentHash,
       });
       setAppliedHash(selectedProvider, selectedModel, result.meta.appliedHash);

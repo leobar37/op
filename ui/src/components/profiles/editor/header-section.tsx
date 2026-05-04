@@ -14,14 +14,12 @@ import {
 } from '@/components/ui/select';
 import { Save, Loader2, Trash2, RefreshCw } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import type { Settings } from './types';
 import type { CliTarget } from '@/lib/api-client';
 
 interface HeaderSectionProps {
   profileName: string;
   target: CliTarget;
   data: { path?: string; mtime: number } | undefined;
-  settings?: Settings;
   isLoading: boolean;
   isSaving: boolean;
   isTargetSaving: boolean;
@@ -37,7 +35,6 @@ export function HeaderSection({
   profileName,
   target,
   data,
-  _settings,
   isLoading,
   isSaving,
   isTargetSaving,

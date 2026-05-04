@@ -11,18 +11,7 @@ if (!rootElement) {
 // Initialize react-grab in development mode for AI-assisted debugging
 if (import.meta.env.DEV) {
   void import('react-grab').then(({ init }) => {
-    const grab = init({
-      theme: {
-        enabled: true,
-        hue: 180,
-        crosshair: { enabled: false },
-      },
-      onCopySuccess: (_elements, content) => {
-        console.log('[react-grab] Copied element context to clipboard');
-
-        console.log(content);
-      },
-    });
+    const grab = init();
     grab.activate();
   });
 }

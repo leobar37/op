@@ -101,13 +101,6 @@ export function ProfileEditor({
     setRawJsonEdits(JSON.stringify({ ...currentSettings, env: newEnv }, null, 2));
   };
 
-  // Bulk update multiple env vars at once (avoids race conditions)
-  const updateEnvBulk = (env: Record<string, string>) => {
-    const newEnv = { ...(currentSettings?.env || {}), ...env };
-    setLocalEdits((prev) => ({ ...prev, ...env }));
-    setRawJsonEdits(JSON.stringify({ ...currentSettings, env: newEnv }, null, 2));
-  };
-
   const addNewEnvVar = () => {
     if (!newEnvKey.trim()) return;
     const key = newEnvKey.trim();
@@ -276,7 +269,6 @@ export function ProfileEditor({
         profileName={profileName}
         target={resolvedTarget}
         data={data}
-        settings={currentSettings}
         isLoading={isLoading}
         isSaving={saveMutation.isPending}
         isTargetSaving={targetMutation.isPending}
@@ -326,7 +318,6 @@ export function ProfileEditor({
               onNewEnvKeyChange={setNewEnvKey}
               onNewEnvValueChange={setNewEnvValue}
               onEnvValueChange={updateEnvValue}
-              onEnvBulkChange={updateEnvBulk}
               onAddEnvVar={addNewEnvVar}
             />
           </div>

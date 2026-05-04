@@ -274,9 +274,6 @@ const resources = {
         noModelsAvailable: 'No models available',
         modelPlaceholder: 'Model...',
       },
-      profileCreateDialog: {
-        localRuntimesTitle: 'Local runtimes',
-      },
       credentialHealth: {
         title: 'Credential Health',
         ready: 'Ready',
@@ -2302,6 +2299,7 @@ const resources = {
       },
       profileCreateDialog: {
         createProfile: 'Create Profile',
+        localRuntimesTitle: 'Local runtimes',
         appliedModelToTiers: 'Applied "{{model}}" to all model tiers',
         profileCreated: 'Profile "{{name}}" created',
         failedCreate: 'Failed to create profile',
@@ -2515,36 +2513,6 @@ const resources = {
         title: 'AI Providers',
         subtitle: 'Manage AI provider configurations.',
         unableToLoad: 'Unable to load AI Providers',
-      },
-      cliproxyProviders: {
-        title: 'Providers',
-        subtitle: 'Browse CLIProxy providers and export model configurations.',
-        selectProviderPrompt: 'Select a provider from the sidebar to view available models.',
-        selectModelPrompt: 'Select a model to generate the integration JSON.',
-        noProviders: 'No providers available.',
-        noModels: 'No models available for this provider.',
-        modelsError: 'Failed to load models.',
-        integrationConfig: 'Integration Configuration',
-        proxyApiUrl: 'Proxy API URL',
-        selectProviderFirst: 'Select a provider first',
-        modelSettings: 'Model Settings',
-        displayName: 'Display Name',
-        apiKey: 'API Key',
-        index: 'Index',
-        noImageSupport: 'No Image Support',
-        droidJsonPreview: 'Droid JSON Preview',
-        droidJsonHint: 'Add this entry to ~/.factory/settings.json under the customModels array.',
-        copyJson: 'Copy JSON',
-        copied: 'Copied!',
-        applyToDroid: 'Apply to Droid',
-        reapply: 'Re-apply',
-        applying: 'Applying...',
-        applied: 'Applied',
-        modified: 'Modified',
-        appliedToDroid: 'Model applied to Droid successfully',
-        applyFailed: 'Failed to apply model to Droid',
-        appliedHint: 'This model has been applied to Droid',
-        modifiedHint: 'Model modified since last apply. Re-apply to update.',
       },
     },
   },
@@ -2807,9 +2775,6 @@ const resources = {
         selectModel: '选择模型',
         noModelsAvailable: '暂无可用模型',
         modelPlaceholder: '模型...',
-      },
-      profileCreateDialog: {
-        localRuntimesTitle: '本地运行时',
       },
       credentialHealth: {
         title: '凭据健康状态',
@@ -4704,6 +4669,7 @@ const resources = {
       },
       profileCreateDialog: {
         createProfile: '创建配置',
+        localRuntimesTitle: '本地运行时',
         appliedModelToTiers: '已将「{{model}}」应用到所有模型档位',
         profileCreated: '配置「{{name}}」已创建',
         failedCreate: '创建配置失败',
@@ -5214,9 +5180,6 @@ const resources = {
         selectModel: 'Chọn mô hình',
         noModelsAvailable: 'Không có mô hình khả dụng',
         modelPlaceholder: 'Mô hình...',
-      },
-      profileCreateDialog: {
-        localRuntimesTitle: 'Runtime local',
       },
       credentialHealth: {
         title: 'Tình trạng thông tin xác thực',
@@ -7198,6 +7161,7 @@ const resources = {
       },
       profileCreateDialog: {
         createProfile: 'Tạo hồ sơ',
+        localRuntimesTitle: 'Runtime local',
         appliedModelToTiers: 'Đã áp dụng "{{model}}" cho tất cả tier mô hình',
         profileCreated: 'Đã tạo hồ sơ "{{name}}"',
         failedCreate: 'Không tạo được hồ sơ',
@@ -7714,9 +7678,6 @@ const resources = {
         selectModel: 'モデルを選択',
         noModelsAvailable: '利用可能なモデルはありません',
         modelPlaceholder: 'モデル...',
-      },
-      profileCreateDialog: {
-        localRuntimesTitle: 'ローカルランタイム',
       },
       credentialHealth: {
         title: '認証情報の状態',
@@ -9434,6 +9395,7 @@ const resources = {
       },
       profileCreateDialog: {
         createProfile: 'プロファイルを作成',
+        localRuntimesTitle: 'ローカルランタイム',
         appliedModelToTiers: 'すべてのモデルティアに「{{model}}」を適用しました',
         profileCreated: 'プロファイル「{{name}}」を作成しました',
         failedCreate: 'プロファイルの作成に失敗しました',

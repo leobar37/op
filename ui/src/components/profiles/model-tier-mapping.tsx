@@ -9,8 +9,6 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Wand2, ChevronRight } from 'lucide-react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { useOpenRouterCatalog } from '@/hooks/use-openrouter-models';
-import { suggestTierMappings } from '@/lib/openrouter-utils';
 import { cn } from '@/lib/utils';
 import { useTranslation } from 'react-i18next';
 
@@ -34,12 +32,11 @@ export function ModelTierMapping({
   className,
 }: ModelTierMappingProps) {
   const { t } = useTranslation();
-  const { models } = useOpenRouterCatalog();
 
   const suggestions = useMemo(() => {
     if (!selectedModel) return {};
-    return suggestTierMappings(selectedModel, models);
-  }, [selectedModel, models]);
+    return { opus: selectedModel, sonnet: selectedModel, haiku: selectedModel };
+  }, [selectedModel]);
 
   const handleAutoSuggest = () => {
     onChange(suggestions);

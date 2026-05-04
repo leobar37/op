@@ -34,11 +34,9 @@ import { cn } from '@/lib/utils';
 import { CopyButton } from '@/components/ui/copy-button';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
-import { useNavigate } from 'react-router-dom';
 
 export function ApiPage() {
   const { t } = useTranslation();
-  const _navigate = useNavigate();
   const { data, isLoading, isError, refetch } = useProfiles();
   const deleteMutation = useDeleteProfile();
   const discoverOrphansMutation = useDiscoverProfileOrphans();
