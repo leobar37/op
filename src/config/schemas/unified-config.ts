@@ -16,14 +16,12 @@ import type {
   GlobalEnvConfig,
   ContinuityConfig,
   CopilotConfig,
-  CursorConfig,
   CliproxyServerConfig,
   OpenAICompatProxyConfig,
   ImageAnalysisConfig,
 } from './providers';
 import {
   DEFAULT_COPILOT_CONFIG,
-  DEFAULT_CURSOR_CONFIG,
   DEFAULT_CLIPROXY_SERVER_CONFIG,
   DEFAULT_OPENAI_COMPAT_PROXY_CONFIG,
   DEFAULT_IMAGE_ANALYSIS_CONFIG,
@@ -70,8 +68,6 @@ export interface UnifiedConfig {
   continuity?: ContinuityConfig;
   /** Copilot API configuration (GitHub Copilot proxy) */
   copilot?: CopilotConfig;
-  /** Cursor IDE configuration (Cursor proxy daemon) */
-  cursor?: CursorConfig;
   /** CLIProxy server configuration for remote/local mode */
   cliproxy_server?: CliproxyServerConfig;
   /** Quota management configuration (v7+) */
@@ -172,7 +168,6 @@ export function createEmptyUnifiedConfig(): UnifiedConfig {
       env: { ...DEFAULT_GLOBAL_ENV },
     },
     copilot: { ...DEFAULT_COPILOT_CONFIG },
-    cursor: { ...DEFAULT_CURSOR_CONFIG },
     cliproxy_server: { ...DEFAULT_CLIPROXY_SERVER_CONFIG },
     quota_management: { ...DEFAULT_QUOTA_MANAGEMENT_CONFIG },
     thinking: { ...DEFAULT_THINKING_CONFIG },

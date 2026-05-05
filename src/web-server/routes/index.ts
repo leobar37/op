@@ -27,7 +27,6 @@ import cliproxySyncRoutes from './cliproxy-sync-routes';
 import cliproxyProvidersRoutes from './cliproxy-providers-routes';
 import aiProviderRoutes from './ai-provider-routes';
 import copilotRoutes from './copilot-routes';
-import cursorRoutes from './cursor-routes';
 import droidRoutes from './droid-routes';
 import codexRoutes from './codex-routes';
 import miscRoutes from './misc-routes';
@@ -107,10 +106,6 @@ apiRoutes.use('/image-analysis', imageAnalysisRoutes);
 
 // ==================== Copilot ====================
 apiRoutes.use('/copilot', copilotRoutes);
-
-// ==================== Cursor ====================
-apiRoutes.use('/cursor', cursorRoutes);
-apiRoutes.use('/legacy/cursor', cursorRoutes);
 
 // ==================== Droid ====================
 apiRoutes.use('/droid', droidRoutes);

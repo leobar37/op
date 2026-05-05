@@ -87,7 +87,6 @@ export type { LoggingLevel, LoggingConfig, PreferencesConfig } from './logging';
 export {
   DEFAULT_GLOBAL_ENV,
   DEFAULT_COPILOT_CONFIG,
-  DEFAULT_CURSOR_CONFIG,
   DEFAULT_CLIPROXY_SERVER_CONFIG,
   DEFAULT_OPENAI_COMPAT_PROXY_CONFIG,
   DEFAULT_IMAGE_ANALYSIS_CONFIG,
@@ -95,7 +94,6 @@ export {
 export type {
   CopilotAccountType,
   CopilotConfig,
-  CursorConfig,
   ProxyRemoteConfig,
   ProxyFallbackConfig,
   ProxyLocalConfig,

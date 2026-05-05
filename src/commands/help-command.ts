@@ -289,7 +289,6 @@ export async function handleHelpCommand(writeLine: HelpWriter = console.log): Pr
       },
       { name: 'ccs proxy --help', summary: 'Deep help for the OpenAI-compatible local proxy' },
       { name: 'ccs docker --help', summary: 'Deep help for Docker deployment commands' },
-      { name: 'ccs cursor --help', summary: 'Deep help for Cursor runtime/admin commands' },
       { name: 'ccs copilot --help', summary: 'Deep help for GitHub Copilot commands' },
     ],
     writeLine
@@ -351,7 +350,6 @@ export async function handleHelpRoute(
     cliproxy: async () => (await import('./cliproxy/help-subcommand')).showHelp(),
     copilot: async () =>
       process.exit(await (await import('./copilot-command')).handleCopilotCommand(['--help'])),
-    cursor: async () => await showProviderShortcutHelp('cursor', writeLine),
     proxy: async () =>
       process.exit(await (await import('./proxy-command')).handleProxyCommand(['--help'])),
     docker: async () => (await import('./docker/help-subcommand')).showHelp(),

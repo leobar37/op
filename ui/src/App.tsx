@@ -134,18 +134,7 @@ export default function App() {
                         </Suspense>
                       }
                     />
-                    <Route
-                      path="/cursor"
-                      element={<Navigate to="/cliproxy?provider=cursor" replace />}
-                    />
-                    <Route
-                      path="/legacy/cursor"
-                      element={
-                        <Suspense fallback={<PageLoader />}>
-                          <DeprecatedRedirectPage target="/providers" title="Cursor IDE" />
-                        </Suspense>
-                      }
-                    />
+
                     <Route
                       path="/claude-extension"
                       element={

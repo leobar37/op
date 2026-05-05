@@ -110,12 +110,6 @@ export const ROOT_COMMAND_CATALOG: readonly RootCommandEntry[] = [
     visibility: 'public',
   },
   {
-    name: 'cursor',
-    summary: 'Run Cursor via CLIProxy or manage Cursor provider auth',
-    group: 'runtime',
-    visibility: 'public',
-  },
-  {
     name: 'proxy',
     summary: 'Start or inspect the OpenAI-compatible local proxy',
     group: 'runtime',
@@ -327,7 +321,6 @@ export const COMMAND_FLAG_SUGGESTIONS: Readonly<Record<string, readonly string[]
   api: ['--help', '-h'],
   cleanup: CLEANUP_FLAGS,
   config: ['--help', '-h', '--port', '-p', '--host', '-H', '--dev'],
-  cursor: ['--help', '-h'],
   doctor: ['--fix', '-f', '--help', '-h'],
   browser: ['setup', 'status', 'doctor', 'policy', 'enable', 'disable', '--help', '-h'],
   docker: ['--help', '-h', '--host'],
@@ -336,15 +329,6 @@ export const COMMAND_FLAG_SUGGESTIONS: Readonly<Record<string, readonly string[]
   tokens: TOKENS_FLAGS,
   update: ['--force', '--beta', '--dev', '--help', '-h'],
 };
-
-export const CURSOR_COMPLETION_SUBCOMMANDS = [
-  '--auth',
-  '--accounts',
-  '--config',
-  '--logout',
-  '--help',
-  '-h',
-] as const;
 export const COPILOT_COMPLETION_SUBCOMMANDS = [...COPILOT_SUBCOMMANDS, 'help'] as const;
 
 export function getPublicRootCommands(): readonly RootCommandEntry[] {

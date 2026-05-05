@@ -1,10 +1,10 @@
-import { DeltaAccumulator } from '../../glmt/delta-accumulator';
-import { GlmtTransformer } from '../../glmt/glmt-transformer';
-import { SSEParser } from '../../glmt/sse-parser';
-import type { OpenAIResponse, SSEEvent } from '../../glmt/pipeline';
-
-const JSON_TRANSLATION_ERROR_MESSAGE = 'Failed to translate OpenAI-compatible JSON response';
-const STREAM_TRANSLATION_ERROR_MESSAGE = 'Failed to translate OpenAI-compatible SSE response';
+/**
+ * Proxy SSE Stream Transformer
+ *
+ * Previously translated OpenAI-compatible responses into Anthropic format.
+ * Now performs a direct passthrough since the proxy speaks native OpenAI.
+ * Only error-response formatting is retained.
+ */
 
 type ResponseHeaders = Headers | Record<string, string> | Array<[string, string]>;
 
@@ -38,7 +38,7 @@ function formatErrorForLog(error: unknown): string {
   }
 }
 
-function logTranslationError(context: string, error: unknown): void {
+function logProxyError(context: string, error: unknown): void {
   console.error(`[proxy-sse-transformer] ${context}: ${formatErrorForLog(error)}`);
 }
 
@@ -56,38 +56,6 @@ export function createAnthropicErrorResponse(
     status,
     headers: responseHeaders,
   });
-}
-
-function formatSseEvent(event: string, data: unknown): string {
-  return `event: ${event}\ndata: ${JSON.stringify(data)}\n\n`;
-}
-
-function hasTranslatableChoices(value: unknown): value is OpenAIResponse {
-  if (typeof value !== 'object' || value === null) {
-    return false;
-  }
-
-  const { choices } = value as OpenAIResponse;
-  if (!Array.isArray(choices) || choices.length === 0) {
-    return false;
-  }
-
-  const firstChoice = choices[0];
-  if (typeof firstChoice !== 'object' || firstChoice === null) {
-    return false;
-  }
-
-  const message = (firstChoice as { message?: unknown }).message;
-  return typeof message === 'object' && message !== null;
-}
-
-function isSyntheticTransformationFallback(value: unknown): boolean {
-  return (
-    typeof value === 'object' &&
-    value !== null &&
-    typeof (value as { id?: unknown }).id === 'string' &&
-    (value as { id: string }).id.startsWith('msg_error_')
-  );
 }
 
 async function createAnthropicErrorProxyResponse(response: Response): Promise<Response> {
@@ -129,124 +97,23 @@ async function createAnthropicErrorProxyResponse(response: Response): Promise<Re
       }
     }
   } catch (error) {
-    logTranslationError('Failed to parse upstream error response', error);
+    logProxyError('Failed to parse upstream error response', error);
   }
 
   return createAnthropicErrorResponse(response.status, type, message, headers);
 }
 
-async function createAnthropicJsonResponse(response: Response): Promise<Response> {
-  try {
-    const openAIResponse = await response.json();
-    if (!hasTranslatableChoices(openAIResponse)) {
-      return createAnthropicErrorResponse(502, 'api_error', JSON_TRANSLATION_ERROR_MESSAGE);
-    }
-
-    const anthropicResponse = new GlmtTransformer().transformResponse(openAIResponse);
-    if (isSyntheticTransformationFallback(anthropicResponse)) {
-      logTranslationError(
-        'OpenAI-compatible JSON translation produced synthetic fallback response',
-        anthropicResponse
-      );
-      return createAnthropicErrorResponse(502, 'api_error', JSON_TRANSLATION_ERROR_MESSAGE);
-    }
-
-    return new Response(JSON.stringify(anthropicResponse), {
-      status: response.status,
-      headers: { 'Content-Type': 'application/json' },
-    });
-  } catch (error) {
-    logTranslationError('OpenAI-compatible JSON translation failed', error);
-    return createAnthropicErrorResponse(502, 'api_error', JSON_TRANSLATION_ERROR_MESSAGE);
-  }
-}
-
-function createAnthropicStreamingResponse(response: Response): Response {
-  const body = response.body;
-  if (!body) {
-    return createAnthropicErrorResponse(
-      502,
-      'api_error',
-      'Upstream stream ended before a response body was available'
-    );
-  }
-
-  const parser = new SSEParser({ throwOnMalformedJson: true });
-  const transformer = new GlmtTransformer();
-  const accumulator = new DeltaAccumulator({});
-  const encoder = new TextEncoder();
-
-  const readable = new ReadableStream<Uint8Array>({
-    async start(controller) {
-      const reader = body.getReader();
-
-      try {
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) {
-            break;
-          }
-          if (!value) {
-            continue;
-          }
-
-          const events = parser.parse(Buffer.from(value));
-          for (const event of events) {
-            const anthropicEvents = transformer.transformDelta(event as SSEEvent, accumulator);
-            for (const anthropicEvent of anthropicEvents) {
-              controller.enqueue(
-                encoder.encode(formatSseEvent(anthropicEvent.event, anthropicEvent.data))
-              );
-            }
-          }
-        }
-
-        if (!accumulator.isFinalized() && accumulator.isMessageStarted()) {
-          for (const anthropicEvent of transformer.finalizeDelta(accumulator)) {
-            controller.enqueue(
-              encoder.encode(formatSseEvent(anthropicEvent.event, anthropicEvent.data))
-            );
-          }
-        }
-      } catch (error) {
-        logTranslationError('OpenAI-compatible SSE translation failed', error);
-        controller.enqueue(
-          encoder.encode(
-            formatSseEvent(
-              'error',
-              createAnthropicErrorPayload('api_error', STREAM_TRANSLATION_ERROR_MESSAGE)
-            )
-          )
-        );
-      } finally {
-        reader.releaseLock();
-        controller.close();
-      }
-    },
-  });
-
-  return new Response(readable, {
-    status: response.status,
-    headers: {
-      'Content-Type': 'text/event-stream',
-      'Cache-Control': 'no-cache',
-      Connection: 'keep-alive',
-    },
-  });
-}
-
+/**
+ * Passthrough the upstream response directly without format translation.
+ * Only non-OK responses get enriched with Anthropic-style error payloads.
+ */
 export async function createAnthropicProxyResponse(response: Response): Promise<Response> {
   if (!response.ok) {
     return createAnthropicErrorProxyResponse(response);
   }
 
-  const contentType = (response.headers.get('content-type') || '').toLowerCase();
-  const isEventStream =
-    contentType === 'text/event-stream' || contentType.startsWith('text/event-stream;');
-
-  return isEventStream
-    ? createAnthropicStreamingResponse(response)
-    : createAnthropicJsonResponse(response);
+  // Direct passthrough — no OpenAI-to-Anthropic translation needed
+  return response;
 }
 
 export class ProxySseStreamTransformer {

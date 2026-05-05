@@ -20,10 +20,9 @@ $script:E_CLAUDE_VERSION_INCOMPATIBLE = "E302"
 $script:E_CLAUDE_EXECUTION_FAILED = "E303"
 
 # Network/API Errors (E400-E499)
-$script:E_GLMT_PROXY_TIMEOUT = "E401"
-$script:E_API_KEY_MISSING = "E402"
-$script:E_API_AUTH_FAILED = "E403"
-$script:E_API_RATE_LIMIT = "E404"
+$script:E_API_KEY_MISSING = "E401"
+$script:E_API_AUTH_FAILED = "E402"
+$script:E_API_RATE_LIMIT = "E403"
 
 # File System Errors (E500-E599)
 $script:E_FS_CANNOT_CREATE_DIR = "E501"

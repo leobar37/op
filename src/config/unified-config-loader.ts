@@ -15,7 +15,6 @@ import {
   createEmptyUnifiedConfig,
   UNIFIED_CONFIG_VERSION,
   DEFAULT_COPILOT_CONFIG,
-  DEFAULT_CURSOR_CONFIG,
   DEFAULT_GLOBAL_ENV,
   DEFAULT_CLIPROXY_SERVER_CONFIG,
   DEFAULT_CLIPROXY_SAFETY_CONFIG,
@@ -41,7 +40,6 @@ import type {
   BrowserToolPolicy,
   ImageAnalysisConfig,
   LoggingConfig,
-  CursorConfig,
   ContinuityConfig,
 } from './unified-config-types';
 import { validateCompositeTiers } from '../cliproxy/config/composite-validator';
@@ -563,17 +561,6 @@ function mergeWithDefaults(partial: Partial<UnifiedConfig>): UnifiedConfig {
       rate_limit: partial.copilot?.rate_limit ?? DEFAULT_COPILOT_CONFIG.rate_limit,
       wait_on_limit: partial.copilot?.wait_on_limit ?? DEFAULT_COPILOT_CONFIG.wait_on_limit,
       model: partial.copilot?.model ?? DEFAULT_COPILOT_CONFIG.model,
-    },
-    // Cursor config - disabled by default, merge with defaults
-    cursor: {
-      enabled: partial.cursor?.enabled ?? DEFAULT_CURSOR_CONFIG.enabled,
-      port: partial.cursor?.port ?? DEFAULT_CURSOR_CONFIG.port,
-      auto_start: partial.cursor?.auto_start ?? DEFAULT_CURSOR_CONFIG.auto_start,
-      ghost_mode: partial.cursor?.ghost_mode ?? DEFAULT_CURSOR_CONFIG.ghost_mode,
-      model: partial.cursor?.model ?? DEFAULT_CURSOR_CONFIG.model,
-      opus_model: partial.cursor?.opus_model,
-      sonnet_model: partial.cursor?.sonnet_model,
-      haiku_model: partial.cursor?.haiku_model,
     },
     // Global env - injected into all non-Claude subscription profiles
     global_env: {
@@ -1496,13 +1483,4 @@ export function getLoggingConfig(): LoggingConfig {
     redact: config.logging?.redact ?? DEFAULT_LOGGING_CONFIG.redact,
     live_buffer_size: config.logging?.live_buffer_size ?? DEFAULT_LOGGING_CONFIG.live_buffer_size,
   };
-}
-
-/**
- * Get cursor configuration.
- * Returns defaults if not configured.
- */
-export function getCursorConfig(): CursorConfig {
-  const config = loadOrCreateUnifiedConfig();
-  return config.cursor ?? { ...DEFAULT_CURSOR_CONFIG };
 }

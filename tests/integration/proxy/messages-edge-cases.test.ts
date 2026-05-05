@@ -144,7 +144,7 @@ describe('openai proxy message edge cases', () => {
     });
   });
 
-  it('returns api_error when the upstream JSON response has no usable choices', async () => {
+  it('passes through upstream JSON responses with empty choices', async () => {
     await startProxyWithHandler((_req, res) => {
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ id: 'chatcmpl_empty', choices: [] }));
@@ -155,17 +155,13 @@ describe('openai proxy message edge cases', () => {
       messages: [{ role: 'user', content: 'hello' }],
     });
 
-    expect(response.status).toBe(502);
-    await expect(response.json()).resolves.toMatchObject({
-      type: 'error',
-      error: {
-        type: 'api_error',
-        message: 'Failed to translate OpenAI-compatible JSON response',
-      },
-    });
+    expect(response.status).toBe(200);
+    const body = (await response.json()) as { id: string; choices: unknown[] };
+    expect(body.id).toBe('chatcmpl_empty');
+    expect(body.choices).toEqual([]);
   });
 
-  it('streams thinking deltas and chunked tool-call arguments back as Anthropic SSE', async () => {
+  it('passes through thinking deltas and chunked tool-call arguments as upstream SSE', async () => {
     await startProxyWithHandler((_req, res) => {
       res.writeHead(200, { 'Content-Type': 'text/event-stream' });
       res.write(
@@ -194,11 +190,10 @@ describe('openai proxy message edge cases', () => {
 
     const body = await response.text();
     expect(response.status).toBe(200);
-    expect(body).toContain('"type":"thinking_delta"');
-    expect(body).toContain('"type":"tool_use"');
-    expect(body).toContain('"partial_json":"{\\"q\\":\\""');
-    expect(body).toContain('"partial_json":"docs\\"}"');
-    expect(body).toContain('event: message_stop');
+    // Passthrough: upstream OpenAI SSE forwarded as-is
+    expect(body).toContain('reasoning_content');
+    expect(body).toContain('tool_calls');
+    expect(body).toContain('[DONE]');
   });
 
   it('returns a timeout error when the upstream does not respond in time', async () => {
@@ -222,7 +217,7 @@ describe('openai proxy message edge cases', () => {
     });
   });
 
-  it('emits an SSE error if the upstream stalls after response headers are sent', async () => {
+  it('passes through SSE even when the upstream stalls after headers', async () => {
     process.env.CCS_OPENAI_PROXY_REQUEST_TIMEOUT_MS = '50';
     await startProxyWithHandler((_req, res) => {
       res.writeHead(200, { 'Content-Type': 'text/event-stream' });
@@ -239,9 +234,8 @@ describe('openai proxy message edge cases', () => {
 
     expect(response.status).toBe(200);
     const body = await response.text();
-    expect(body).toContain('event: message_start');
-    expect(body).toContain('event: error');
-    expect(body).toContain('"message":"Failed to translate OpenAI-compatible SSE response"');
+    expect(body).toContain('data:');
+    expect(body).toContain('partial');
   });
 
   it.skipIf(typeof Bun !== 'undefined')(

@@ -52,7 +52,6 @@ export interface ProviderPresetDefinition {
  * Keep this minimal and explicit to avoid hidden implicit behavior.
  */
 export const PROVIDER_PRESET_ALIASES: Readonly<Record<string, ProviderPresetId>> = Object.freeze({
-  glmt: 'glm',
   kimi: 'km',
   hf: 'huggingface',
 });

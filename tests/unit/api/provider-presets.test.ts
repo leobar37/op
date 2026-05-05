@@ -27,12 +27,6 @@ describe('provider-presets', () => {
     expect(preset?.id).toBe('km');
   });
 
-  it('resolves legacy glmt preset alias to glm', () => {
-    const preset = getPresetById('glmt');
-    expect(preset?.id).toBe('glm');
-    expect(preset?.baseUrl).toBe('https://api.z.ai/api/anthropic');
-  });
-
   it('resolves preset id with extra whitespace', () => {
     const preset = getPresetById('  km  ');
     expect(preset?.id).toBe('km');
@@ -45,11 +39,6 @@ describe('provider-presets', () => {
 
   it('treats legacy kimi alias as a valid preset id', () => {
     expect(isValidPresetId('kimi')).toBe(true);
-  });
-
-  it('keeps glmt out of the canonical preset catalog while preserving alias compatibility', () => {
-    expect(PROVIDER_PRESETS.some((preset) => preset.id === 'glmt')).toBe(false);
-    expect(isValidPresetId('glmt')).toBe(true);
   });
 
   it('uses non-reserved default profile name for qwen API preset', () => {

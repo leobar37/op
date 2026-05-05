@@ -6,6 +6,8 @@
 
 ### The multi-provider profile and runtime manager for Claude Code and compatible CLIs
 
+> **Fork notice:** This project is a community fork of the original Claude Code Switch, extended with additional providers, dashboard features, and profile management capabilities.
+
 Run Claude, Codex, Droid-routed profiles, GLM, local models, and
 Anthropic-compatible APIs without config thrash.
 

@@ -5,7 +5,6 @@
 ```
 tests/
 ├── unit/              # Module unit tests (Mocha)
-│   ├── glmt/          # Legacy GLMT transformer/internal compatibility tests
 │   └── delegation/    # Delegation module tests
 ├── npm/               # npm package tests (Mocha)
 ├── native/            # Native installation tests (bash/PowerShell)
@@ -14,7 +13,6 @@ tests/
 ├── integration/       # Integration + smoke tests
 └── shared/            # Shared utilities
     ├── fixtures/      # Test configuration and environment
-    ├── unit/          # Helper function tests
     ├── helpers.sh     # Bash test utilities
     └── test-data.js   # Test data for npm tests
 ```
@@ -32,7 +30,6 @@ bun run test:native    # Native Unix tests (bash)
 
 ### Unit Tests (`unit/`)
 Module-level tests using Mocha framework:
-- `unit/glmt/` - Legacy transformer internals kept for Cursor translation compatibility
 - `unit/delegation/` - Permission mode, session manager, result formatter
 
 ### npm Tests (`npm/`)
@@ -53,7 +50,6 @@ Integration and smoke coverage for scenarios that exercise multiple layers:
 - Shell and standalone probe scripts remain on-demand for targeted debugging
 - `cursor-daemon-lifecycle.test.ts` - local daemon process + HTTP smoke coverage
 - `image-analyzer-hook.test.ts` - hook integration coverage
-- `glmt-integration-test.sh` - legacy GLMT compatibility smoke probe
 - `symlink-chain-test.sh` - Symlink chain handling
 - `ux-integration-test.sh` - CLI UX integration
 

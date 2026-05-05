@@ -6,7 +6,7 @@
  * only string and object values are redacted.
  */
 const SENSITIVE_KEY_PATTERN =
-  /^(authorization|proxy[_-]?authorization|cookie|set-cookie|password|password_hash|secret|client[_-]?secret|token|auth[_-]?token|access[_-]?token|refresh[_-]?token|id[_-]?token|bearer|assertion|api[_-]?key|x[_-]?api[_-]?key|x[_-]?goog[_-]?api[_-]?key|management[_-]?key|copilot[_-]?token|cursor[_-]?session[_-]?key|oauth[_-]?code|auth[_-]?code)$/i;
+  /^(authorization|proxy[_-]?authorization|cookie|set-cookie|password|password_hash|secret|client[_-]?secret|token|auth[_-]?token|access[_-]?token|refresh[_-]?token|id[_-]?token|bearer|assertion|api[_-]?key|x[_-]?api[_-]?key|x[_-]?goog[_-]?api[_-]?key|management[_-]?key|copilot[_-]?token|oauth[_-]?code|auth[_-]?code)$/i;
 
 /** CLI flags whose following argument should be redacted in argv arrays. */
 const SENSITIVE_ARGV_FLAG_PATTERN =

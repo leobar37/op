@@ -101,7 +101,8 @@ export const PROVIDER_ASSETS: Partial<Record<ProviderVisualId, string>> = {
   qwen: '/assets/providers/qwen-color.svg',
   iflow: '/assets/providers/iflow.png',
   kiro: '/assets/providers/kiro.png',
-  cursor: '/assets/sidebar/cursor.svg',
+
+  cursor: '/assets/providers/cursor.svg',
   gitlab: '/assets/providers/gitlab.svg',
   codebuddy: '/assets/providers/codebuddy.png',
   kilo: '/assets/providers/kilo.png',

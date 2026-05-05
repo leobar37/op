@@ -6,7 +6,6 @@ import {
   ProxyRequestTransformer,
   type ProxyOpenAIRequest,
 } from '../transformers/request-transformer';
-import { ProxySseStreamTransformer } from '../transformers/sse-stream-transformer';
 import { resolveOpenAIChatCompletionsUrl } from '../upstream-url';
 import { createLogger } from '../../services/logging';
 import { pipeWebResponseToNode, readJsonBody, writeJson } from './http-helpers';
@@ -206,7 +205,6 @@ export async function handleProxyMessagesRequest(
   expectedAuthToken: string,
   insecureDispatcher?: Dispatcher
 ): Promise<void> {
-  const transformer = new ProxySseStreamTransformer();
   const startedAt = Date.now();
 
   logger.stage('intake', 'request.received', 'Proxy /v1/messages request received', {
@@ -224,8 +222,13 @@ export async function handleProxyMessagesRequest(
       },
       { level: 'warn' }
     );
+    const { createAnthropicErrorResponse } = await import('../transformers/sse-stream-transformer');
     await pipeWebResponseToNode(
-      transformer.error(401, 'authentication_error', 'Missing or invalid local proxy token'),
+      createAnthropicErrorResponse(
+        401,
+        'authentication_error',
+        'Missing or invalid local proxy token'
+      ),
       res
     );
     return;
@@ -280,8 +283,7 @@ export async function handleProxyMessagesRequest(
         routedProfileName: upstream.route.profile.profileName,
         status: upstreamResponse.status,
       });
-      const response = await transformer.transform(upstreamResponse);
-      await pipeWebResponseToNode(response, res);
+      await pipeWebResponseToNode(upstreamResponse, res);
       logger.stage('respond', 'request.respond', 'Proxy response written', undefined, {
         latencyMs: Date.now() - startedAt,
       });
@@ -320,8 +322,9 @@ export async function handleProxyMessagesRequest(
               ? 400
               : 502;
     const type = status >= 500 ? 'api_error' : 'invalid_request_error';
+    const { createAnthropicErrorResponse } = await import('../transformers/sse-stream-transformer');
     await pipeWebResponseToNode(
-      transformer.error(
+      createAnthropicErrorResponse(
         status,
         type,
         error instanceof Error && error.name === 'AbortError'

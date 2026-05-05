@@ -8,6 +8,15 @@ export type DroidByokProviderKind =
   | 'unknown';
 
 const DROID_CUSTOM_MODEL_ROOT_KEYS: DroidCustomModelRootKey[] = ['customModels', 'custom_models'];
+const DROID_SESSION_DEFAULT_SETTING_KEYS = [
+  'model',
+  'reasoningEffort',
+  'interactionMode',
+  'autonomyLevel',
+  'autonomyMode',
+  'specModeModel',
+  'specModeReasoningEffort',
+] as const;
 const DROID_ANTHROPIC_BUDGET_BY_EFFORT: Record<string, number> = {
   low: 4000,
   medium: 12000,
@@ -16,7 +25,20 @@ const DROID_ANTHROPIC_BUDGET_BY_EFFORT: Record<string, number> = {
   xhigh: 64000,
 };
 
-export const DROID_REASONING_EFFORT_OPTIONS = ['low', 'medium', 'high', 'max', 'xhigh'] as const;
+export const DROID_REASONING_EFFORT_OPTIONS = [
+  'none',
+  'low',
+  'medium',
+  'high',
+  'max',
+  'xhigh',
+] as const;
+export const DROID_INTERACTION_MODE_OPTIONS = ['auto', 'spec'] as const;
+export const DROID_AUTONOMY_LEVEL_OPTIONS = ['off', 'low', 'medium', 'high'] as const;
+
+export type DroidSessionDefaultSettingKey = (typeof DROID_SESSION_DEFAULT_SETTING_KEYS)[number];
+
+export type DroidSessionDefaultSettings = Partial<Record<DroidSessionDefaultSettingKey, string>>;
 
 export interface DroidByokModelView {
   id: string;
@@ -29,6 +51,7 @@ export interface DroidByokModelView {
   providerKind: DroidByokProviderKind;
   effort: string | null;
   anthropicBudgetTokens: number | null;
+  sessionDefaultSettings: DroidSessionDefaultSettings;
 }
 
 interface DroidByokModelLookup {
@@ -122,6 +145,23 @@ function resolveExtraArgsKey(modelEntry: Record<string, unknown>): 'extraArgs' |
 
 function cloneSettings(settings: Record<string, unknown>): Record<string, unknown> {
   return JSON.parse(JSON.stringify(settings)) as Record<string, unknown>;
+}
+
+export function buildDroidCustomModelSelector(displayName: string, index: number): string {
+  const normalizedDisplayName = displayName.trim().replace(/\s+/g, '-');
+  return `custom:${normalizedDisplayName}-${index}`;
+}
+
+export function getDroidDefaultModelSelector(
+  modelEntry: Record<string, unknown>
+): string | null {
+  const displayName =
+    asNonEmptyString(modelEntry.displayName) ??
+    asNonEmptyString(modelEntry.model_display_name) ??
+    null;
+  const index = asFiniteNumber(modelEntry.__index);
+  if (!displayName || index === null) return null;
+  return buildDroidCustomModelSelector(displayName, index);
 }
 
 function listEntryRecords(settings: Record<string, unknown>): Array<{
@@ -232,6 +272,24 @@ function extractReasoningDetails(
   };
 }
 
+export function extractDroidSessionDefaultSettings(
+  modelEntry: Record<string, unknown>
+): DroidSessionDefaultSettings {
+  const source = isRecord(modelEntry.sessionDefaultSettings)
+    ? modelEntry.sessionDefaultSettings
+    : {};
+  const settings: DroidSessionDefaultSettings = {};
+
+  for (const key of DROID_SESSION_DEFAULT_SETTING_KEYS) {
+    const value = asNonEmptyString(source[key]);
+    if (value) {
+      settings[key] = value;
+    }
+  }
+
+  return settings;
+}
+
 function sanitizeEffortInput(value: string | null): string | null {
   if (!value) return null;
   const normalized = value.trim().toLowerCase();
@@ -272,6 +330,7 @@ export function extractDroidByokModels(settings: Record<string, unknown>): Droid
     const provider = asNonEmptyString(entry.provider) ?? 'unknown';
     const providerKind = normalizeProviderKind(provider);
     const reasoning = extractReasoningDetails(providerKind, entry);
+    const sessionDefaultSettings = extractDroidSessionDefaultSettings(entry);
 
     return {
       id: buildModelId(rootKey, locationType, locationKey),
@@ -284,6 +343,7 @@ export function extractDroidByokModels(settings: Record<string, unknown>): Droid
       providerKind,
       effort: reasoning.effort,
       anthropicBudgetTokens: reasoning.anthropicBudgetTokens,
+      sessionDefaultSettings,
     };
   });
 }

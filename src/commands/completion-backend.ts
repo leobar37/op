@@ -17,7 +17,6 @@ import {
   getPublicRootCommandTokens,
   CLIPROXY_SUBCOMMANDS,
   MIGRATE_FLAGS,
-  CURSOR_COMPLETION_SUBCOMMANDS,
 } from './command-catalog';
 
 export interface CompletionSuggestion {
@@ -231,8 +230,6 @@ function getSuggestionsForCommand(tokensBeforeCurrent: string[]): CompletionSugg
         return completeSubcommands([], ['--help', '-h']);
       }
       return completeSubcommands([], ['--help', '-h']);
-    case 'cursor':
-      return completeSubcommands(CURSOR_COMPLETION_SUBCOMMANDS);
     case 'proxy':
       if (lastToken === '--shell')
         return completeSubcommands(['auto', 'bash', 'zsh', 'fish', 'powershell']);
