@@ -245,7 +245,14 @@ function getModelDefaultToggleState(
   const displayName = asString(entry.displayName) || asString(entry.model_display_name);
   if (!displayName) return false;
   const selector = buildDroidCustomModelSelector(displayName, index);
-  console.log('[getModelDefaultToggleState]', { mode, currentValue, selector, match: currentValue === selector, displayName, index });
+  console.log('[getModelDefaultToggleState]', {
+    mode,
+    currentValue,
+    selector,
+    match: currentValue === selector,
+    displayName,
+    index,
+  });
   return currentValue === selector;
 }
 

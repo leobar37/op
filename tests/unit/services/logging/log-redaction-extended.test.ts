@@ -14,8 +14,6 @@ describe('log redaction (extended sensitive keys)', () => {
     'assertion',
     'copilot_token',
     'copilot-token',
-    'cursor_session_key',
-    'cursor-session-key',
     'x-api-key',
     'x_goog_api_key',
     'proxy-authorization',

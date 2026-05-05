@@ -881,25 +881,6 @@ function generateYamlWithComments(config: UnifiedConfig): string {
     lines.push('');
   }
 
-  // Cursor section (Cursor IDE proxy daemon)
-  if (config.cursor) {
-    lines.push('# ----------------------------------------------------------------------------');
-    lines.push('# Cursor: Cursor IDE proxy daemon');
-    lines.push('# Enables Cursor IDE integration via local proxy daemon.');
-    lines.push('#');
-    lines.push('# enabled: Enable/disable Cursor integration (default: false)');
-    lines.push('# port: Port for cursor proxy daemon (default: 20129)');
-    lines.push('# auto_start: Auto-start daemon when CCS starts (default: false)');
-    lines.push('# ghost_mode: Disable telemetry for privacy (default: true)');
-    lines.push('# model: Default model ID (used for ANTHROPIC_MODEL)');
-    lines.push('# opus_model/sonnet_model/haiku_model: Optional tier model mapping');
-    lines.push('# ----------------------------------------------------------------------------');
-    lines.push(
-      yaml.dump({ cursor: config.cursor }, { indent: 2, lineWidth: -1, quotingType: '"' }).trim()
-    );
-    lines.push('');
-  }
-
   // Global env section
   if (config.global_env) {
     lines.push('# ----------------------------------------------------------------------------');

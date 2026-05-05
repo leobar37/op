@@ -396,16 +396,6 @@ function resolveBackend(
     };
   }
 
-  if (profileType === 'cursor') {
-    return {
-      backendId: null,
-      backendDisplayName: null,
-      resolutionSource: 'unresolved',
-      reason:
-        'Cursor image analysis does not inherit the global fallback backend. Set image_analysis.profile_backends.cursor to an explicit provider to enable transformer-backed image analysis.',
-    };
-  }
-
   if (profileType === 'copilot' || profileName === 'copilot') {
     const backendId = normalizeImageAnalysisBackendId('ghcp', Object.keys(config.provider_models));
     return {

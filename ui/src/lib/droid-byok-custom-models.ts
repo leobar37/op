@@ -152,9 +152,7 @@ export function buildDroidCustomModelSelector(displayName: string, index: number
   return `custom:${normalizedDisplayName}-${index}`;
 }
 
-export function getDroidDefaultModelSelector(
-  modelEntry: Record<string, unknown>
-): string | null {
+export function getDroidDefaultModelSelector(modelEntry: Record<string, unknown>): string | null {
   const displayName =
     asNonEmptyString(modelEntry.displayName) ??
     asNonEmptyString(modelEntry.model_display_name) ??
