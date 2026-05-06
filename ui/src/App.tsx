@@ -20,6 +20,9 @@ const AnalyticsPage = lazy(() =>
   import('@/pages/analytics').then((m) => ({ default: m.AnalyticsPage }))
 );
 const ApiPage = lazy(() => import('@/pages/api').then((m) => ({ default: m.ApiPage })));
+const ApiKeysPage = lazy(() =>
+  import('@/pages/api-keys').then((m) => ({ default: m.ApiKeysPage }))
+);
 const CliproxyProvidersPage = lazy(() =>
   import('@/pages/cliproxy-providers').then((m) => ({ default: m.CliproxyProvidersPage }))
 );
@@ -92,6 +95,14 @@ export default function App() {
                       element={
                         <Suspense fallback={<PageLoader />}>
                           <ApiPage />
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/api-keys"
+                      element={
+                        <Suspense fallback={<PageLoader />}>
+                          <ApiKeysPage />
                         </Suspense>
                       }
                     />

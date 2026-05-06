@@ -283,6 +283,7 @@ export async function handleHelpCommand(writeLine: HelpWriter = console.log): Pr
       { name: 'ccs help completion', summary: getTopicSummary('completion') },
       { name: 'ccs help targets', summary: getTopicSummary('targets') },
       { name: 'ccs api --help', summary: 'Deep help for API profile lifecycle commands' },
+      { name: 'ccs api-key --help', summary: 'Deep help for API key profile management' },
       {
         name: 'ccs cliproxy --help',
         summary: 'Deep help for variants, routing, quota, and lifecycle',
@@ -340,6 +341,7 @@ export async function handleHelpRoute(
 
   const commandHandlers: Partial<Record<string, () => Promise<void>>> = {
     api: async () => (await import('./api-command/help')).showApiCommandHelp(writeLine),
+    'api-key': async () => (await import('./api-key-command')).showApiKeyHelp(),
     auth: async () => {
       const authModule = await import('../auth/auth-commands');
       const AuthCommands = authModule.default;

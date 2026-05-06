@@ -343,6 +343,39 @@ export interface CreateProfile {
   target?: CliTarget;
 }
 
+export interface ApiKeyProfile {
+  id: string;
+  provider: string;
+  baseUrl: string;
+  defaultModel: string;
+  models: string[];
+  target: CliTarget;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ApiKeyProviderPreset {
+  id: string;
+  name: string;
+  baseUrl: string;
+  defaultModel: string;
+}
+
+export interface CreateApiKeyProfileRequest {
+  id: string;
+  provider: string;
+  apiKey: string;
+  baseUrl?: string;
+  defaultModel?: string;
+  models?: string[];
+  target?: CliTarget;
+}
+
+export interface ApplyApiKeyRequest {
+  target: CliTarget;
+  strategy: 'direct' | 'proxy';
+}
+
 export interface UpdateProfile {
   baseUrl?: string;
   apiKey?: string;
@@ -1611,5 +1644,25 @@ export const api = {
     /** Fetch Gemini CLI quota for a specific account */
     getGemini: (accountId: string) =>
       request<GeminiCliQuotaResult>(`/cliproxy/quota/gemini/${encodeURIComponent(accountId)}`),
+  },
+  /** API Key profiles */
+  apiKeys: {
+    list: () => request<{ profiles: ApiKeyProfile[] }>('/api-keys'),
+    get: (id: string) => request<{ profile: ApiKeyProfile }>(`/api-keys/${id}`),
+    create: (data: CreateApiKeyProfileRequest) =>
+      request<{ profile: ApiKeyProfile }>('/api-keys', {
+        method: 'POST',
+        body: JSON.stringify(data),
+      }),
+    delete: (id: string) => request(`/api-keys/${id}`, { method: 'DELETE' }),
+    apply: (id: string, data: ApplyApiKeyRequest) =>
+      request<{ id: string; target: string; strategy: string; configPath?: string }>(
+        `/api-keys/${id}/apply`,
+        {
+          method: 'POST',
+          body: JSON.stringify(data),
+        }
+      ),
+    providers: () => request<{ providers: ApiKeyProviderPreset[] }>('/api-keys/providers'),
   },
 };

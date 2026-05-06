@@ -36,6 +36,7 @@ import persistRoutes from './persist-routes';
 import catalogRoutes from './catalog-routes';
 import claudeExtensionRoutes from './claude-extension-routes';
 import logsRoutes from './logs-routes';
+import apiKeyRoutes from './api-key-routes';
 
 // Create the main API router
 export const apiRoutes = Router();
@@ -115,6 +116,9 @@ apiRoutes.use('/codex', codexRoutes);
 
 // ==================== CLIProxy Server Settings ====================
 apiRoutes.use('/cliproxy-server', cliproxyServerRoutes);
+
+// ==================== API Keys ====================
+apiRoutes.use('/api-keys', apiKeyRoutes);
 
 // ==================== Misc (File API, Global Env) ====================
 apiRoutes.use('/', miscRoutes);

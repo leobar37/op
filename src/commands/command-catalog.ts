@@ -84,6 +84,12 @@ export const ROOT_COMMAND_CATALOG: readonly RootCommandEntry[] = [
     visibility: 'public',
   },
   {
+    name: 'api-key',
+    summary: 'Manage API key profiles - source of truth for provider credentials',
+    group: 'manage',
+    visibility: 'public',
+  },
+  {
     name: 'cliproxy',
     summary: 'Manage CLIProxy variants, quota, and local lifecycle',
     group: 'manage',
@@ -255,6 +261,7 @@ export const API_SUBCOMMANDS = [
   'import',
   'remove',
 ] as const;
+export const API_KEY_SUBCOMMANDS = ['create', 'list', 'remove', 'apply'] as const;
 export const CLIPROXY_SUBCOMMANDS = [
   'create',
   'edit',
@@ -319,6 +326,16 @@ export const COMMAND_FLAG_SUGGESTIONS: Readonly<Record<string, readonly string[]
   '--shell-completion': ['--bash', '--zsh', '--fish', '--powershell', '--force', '-f'],
   auth: ['--help', '-h'],
   api: ['--help', '-h'],
+  'api-key': [
+    '--help',
+    '-h',
+    '--provider',
+    '--key',
+    '--base-url',
+    '--model',
+    '--target',
+    '--strategy',
+  ],
   cleanup: CLEANUP_FLAGS,
   config: ['--help', '-h', '--port', '-p', '--host', '-H', '--dev'],
   doctor: ['--fix', '-f', '--help', '-h'],

@@ -77,6 +77,14 @@ function buildNavGroups(t: (key: string) => string): SidebarGroupDef[] {
       title: t('nav.identityAccess'),
       items: [
         {
+          path: '/api-keys',
+          icon: Key,
+          label: t('nav.apiKeys'),
+          badge: {
+            icons: ['/icons/ollama.svg'],
+          },
+        },
+        {
           path: '/providers',
           icon: Key,
           label: t('nav.apiProfiles'),
