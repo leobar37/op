@@ -2,21 +2,21 @@
  * API Key Profile Service
  *
  * CRUD operations for API Key profiles.
- * API Keys are stored in unified config under `api_key_profiles` section.
- * They serve as the source of truth for provider credentials.
+ * API Keys are stored in a separate JSON file (~/.ccs/api-keys.json)
+ * to avoid triggering the config file watcher.
  */
 
 import * as fs from 'fs';
 import * as path from 'path';
-import {
-  loadOrCreateUnifiedConfig,
-  mutateUnifiedConfig,
-  isUnifiedMode,
-} from '../../config/unified-config-loader';
-import { getCcsDir, getConfigPath, loadConfigSafe } from '../../utils/config-manager';
+import { getCcsDir } from '../../utils/config-manager';
 import { resolveDroidProvider } from '../../targets/droid-provider';
 import { upsertCcsModel } from '../../droid-settings';
 import { getPresetById } from './provider-presets';
+import {
+  addOpenAICompatProvider,
+  getOpenAICompatProvider,
+  updateOpenAICompatProvider,
+} from '../../cliproxy/ai-providers/openai-compat-manager';
 import type {
   ApiKeyProfile,
   CreateApiKeyInput,
@@ -28,10 +28,35 @@ import type {
 import type { TargetType } from '../../targets/target-adapter';
 import type { ApiKeyStrategy } from './api-key-types';
 
-const API_KEY_PROFILES_SECTION = 'api_key_profiles';
+const API_KEYS_FILE = 'api-keys.json';
 
-function getApiKeyProfilesSection(config: Record<string, unknown>): Record<string, ApiKeyProfile> {
-  return (config[API_KEY_PROFILES_SECTION] as Record<string, ApiKeyProfile>) || {};
+function getApiKeysFilePath(): string {
+  return path.join(getCcsDir(), API_KEYS_FILE);
+}
+
+function loadApiKeys(): Record<string, ApiKeyProfile> {
+  const filePath = getApiKeysFilePath();
+  if (!fs.existsSync(filePath)) {
+    return {};
+  }
+  try {
+    const content = fs.readFileSync(filePath, 'utf8');
+    const data = JSON.parse(content) as { profiles?: Record<string, ApiKeyProfile> };
+    return data.profiles || {};
+  } catch {
+    return {};
+  }
+}
+
+function saveApiKeys(profiles: Record<string, ApiKeyProfile>): void {
+  const filePath = getApiKeysFilePath();
+  const dir = path.dirname(filePath);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+  const tempPath = filePath + '.tmp';
+  fs.writeFileSync(tempPath, JSON.stringify({ profiles }, null, 2) + '\n', 'utf8');
+  fs.renameSync(tempPath, filePath);
 }
 
 function validateApiKeyId(id: string): string | null {
@@ -82,33 +107,14 @@ function resolveModels(provider: string, providedModels?: string[]): string[] {
 
 /** List all API key profiles */
 export function listApiKeyProfiles(): ListApiKeysResult {
-  if (isUnifiedMode()) {
-    const config = loadOrCreateUnifiedConfig();
-    const profiles = getApiKeyProfilesSection(config as unknown as Record<string, unknown>);
-    return { profiles: Object.values(profiles) };
-  }
-
-  // Legacy config support
-  const config = loadConfigSafe();
-  const profiles = (config as unknown as Record<string, unknown>)[API_KEY_PROFILES_SECTION] as
-    | Record<string, ApiKeyProfile>
-    | undefined;
-  return { profiles: profiles ? Object.values(profiles) : [] };
+  const profiles = loadApiKeys();
+  return { profiles: Object.values(profiles) };
 }
 
 /** Get a single API key profile by ID */
 export function getApiKeyProfile(id: string): ApiKeyProfile | null {
-  if (isUnifiedMode()) {
-    const config = loadOrCreateUnifiedConfig();
-    const profiles = getApiKeyProfilesSection(config as unknown as Record<string, unknown>);
-    return profiles[id] || null;
-  }
-
-  const config = loadConfigSafe();
-  const profiles = (config as unknown as Record<string, unknown>)[API_KEY_PROFILES_SECTION] as
-    | Record<string, ApiKeyProfile>
-    | undefined;
-  return profiles?.[id] || null;
+  const profiles = loadApiKeys();
+  return profiles[id] || null;
 }
 
 /** Check if an API key profile exists */
@@ -145,28 +151,9 @@ export function createApiKeyProfile(input: CreateApiKeyInput): CreateApiKeyResul
   };
 
   try {
-    if (isUnifiedMode()) {
-      mutateUnifiedConfig((config) => {
-        const cfg = config as unknown as Record<string, unknown>;
-        if (!cfg[API_KEY_PROFILES_SECTION]) {
-          cfg[API_KEY_PROFILES_SECTION] = {};
-        }
-        (cfg[API_KEY_PROFILES_SECTION] as Record<string, ApiKeyProfile>)[input.id] = profile;
-      });
-    } else {
-      const configPath = getConfigPath();
-      const config = loadConfigSafe();
-      const cfg = config as unknown as Record<string, unknown>;
-      if (!cfg[API_KEY_PROFILES_SECTION]) {
-        cfg[API_KEY_PROFILES_SECTION] = {};
-      }
-      (cfg[API_KEY_PROFILES_SECTION] as Record<string, ApiKeyProfile>)[input.id] = profile;
-
-      const tempPath = configPath + '.tmp';
-      fs.writeFileSync(tempPath, JSON.stringify(config, null, 2) + '\n', 'utf8');
-      fs.renameSync(tempPath, configPath);
-    }
-
+    const profiles = loadApiKeys();
+    profiles[input.id] = profile;
+    saveApiKeys(profiles);
     return { success: true, profile };
   } catch (error) {
     return { success: false, error: (error as Error).message };
@@ -180,24 +167,9 @@ export function removeApiKeyProfile(id: string): RemoveApiKeyResult {
   }
 
   try {
-    if (isUnifiedMode()) {
-      mutateUnifiedConfig((config) => {
-        const cfg = config as unknown as Record<string, unknown>;
-        const profiles = getApiKeyProfilesSection(cfg);
-        delete profiles[id];
-      });
-    } else {
-      const configPath = getConfigPath();
-      const config = loadConfigSafe();
-      const cfg = config as unknown as Record<string, unknown>;
-      const profiles = getApiKeyProfilesSection(cfg);
-      delete profiles[id];
-
-      const tempPath = configPath + '.tmp';
-      fs.writeFileSync(tempPath, JSON.stringify(config, null, 2) + '\n', 'utf8');
-      fs.renameSync(tempPath, configPath);
-    }
-
+    const profiles = loadApiKeys();
+    delete profiles[id];
+    saveApiKeys(profiles);
     return { success: true };
   } catch (error) {
     return { success: false, error: (error as Error).message };
@@ -237,18 +209,43 @@ async function applyToDroidDirect(profile: ApiKeyProfile): Promise<ApplyApiKeyRe
 }
 
 /** Apply an API key profile to Droid with proxy strategy */
-async function applyToDroidProxy(_profile: ApiKeyProfile): Promise<ApplyApiKeyResult> {
-  // For proxy strategy, we need CLIProxy to manage the route
-  // This is a placeholder - full implementation requires cliproxy integration
+async function applyToDroidProxy(profile: ApiKeyProfile): Promise<ApplyApiKeyResult> {
   try {
-    // TODO: Integrate with CLIProxy to create a managed route
-    // For now, fall back to direct with a warning
+    const proxyBaseUrl = `http://127.0.0.1:8317/api/provider/${profile.provider}`;
+
+    // Register or update the provider in CLIProxy openai-compatibility
+    const existing = getOpenAICompatProvider(profile.provider);
+    const models = profile.models.map((m) => ({ name: m, alias: m }));
+
+    if (existing) {
+      updateOpenAICompatProvider(profile.provider, {
+        baseUrl: profile.baseUrl,
+        apiKey: profile.apiKey,
+        models,
+      });
+    } else {
+      addOpenAICompatProvider({
+        name: profile.provider,
+        baseUrl: profile.baseUrl,
+        apiKey: profile.apiKey,
+        models,
+      });
+    }
+
+    // Write Droid settings pointing to local CLIProxy
+    await upsertCcsModel(profile.id, {
+      model: profile.defaultModel,
+      displayName: `CCS ${profile.id}`,
+      baseUrl: proxyBaseUrl,
+      apiKey: profile.apiKey,
+      provider: 'generic-chat-completion-api',
+    });
+
     return {
-      success: false,
+      success: true,
       target: 'droid',
       strategy: 'proxy',
-      error:
-        'Proxy strategy for Droid requires CLIProxy route management. Use --strategy direct instead.',
+      configPath: '~/.factory/settings.json',
     };
   } catch (error) {
     return {

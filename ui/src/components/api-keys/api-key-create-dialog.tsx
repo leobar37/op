@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Badge } from '@/components/ui/badge';
 import {
   Dialog,
   DialogContent,
@@ -10,60 +11,51 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { useCreateApiKey, useApiKeyProviders } from '@/hooks/use-api-keys';
-import type { ApiKeyProviderPreset } from '@/lib/api-client';
 import { useTranslation } from 'react-i18next';
 
 interface ApiKeyCreateDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  providers: ApiKeyProviderPreset[];
 }
 
-export function ApiKeyCreateDialog({ open, onOpenChange, providers }: ApiKeyCreateDialogProps) {
+export function ApiKeyCreateDialog({ open, onOpenChange }: ApiKeyCreateDialogProps) {
   const { t } = useTranslation();
   const createMutation = useCreateApiKey();
-  const { data: providersData } = useApiKeyProviders();
-  const availableProviders = providersData?.providers || providers;
+  const { data: providersData, isLoading: providersLoading, refetch } = useApiKeyProviders();
+  const availableProviders = providersData?.providers || [];
 
-  const [id, setId] = useState('');
+  // Force refetch when dialog opens
+  useEffect(() => {
+    if (open) {
+      refetch();
+    }
+  }, [open, refetch]);
+
   const [provider, setProvider] = useState('');
   const [apiKey, setApiKey] = useState('');
   const [baseUrl, setBaseUrl] = useState('');
-  const [defaultModel, setDefaultModel] = useState('');
-  const [target, setTarget] = useState<'claude' | 'droid'>('droid');
 
-  const _selectedProvider = availableProviders.find((p) => p.id === provider);
+  const selectedPreset = availableProviders.find((p) => p.id === provider);
 
   const handleProviderChange = (value: string) => {
     setProvider(value);
     const preset = availableProviders.find((p) => p.id === value);
     if (preset) {
       setBaseUrl(preset.baseUrl);
-      setDefaultModel(preset.defaultModel);
-      setId(`${value}-api`);
     }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!id || !provider || !apiKey) return;
+    if (!provider || !apiKey) return;
 
     createMutation.mutate(
       {
-        id,
+        id: provider,
         provider,
         apiKey,
         baseUrl: baseUrl || undefined,
-        defaultModel: defaultModel || undefined,
-        target,
       },
       {
         onSuccess: () => {
@@ -75,17 +67,14 @@ export function ApiKeyCreateDialog({ open, onOpenChange, providers }: ApiKeyCrea
   };
 
   const resetForm = () => {
-    setId('');
     setProvider('');
     setApiKey('');
     setBaseUrl('');
-    setDefaultModel('');
-    setTarget('droid');
   };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[500px]">
+      <DialogContent className="sm:max-w-[480px]">
         <form onSubmit={handleSubmit}>
           <DialogHeader>
             <DialogTitle>{t('apiKeys.createDialog.title')}</DialogTitle>
@@ -93,33 +82,52 @@ export function ApiKeyCreateDialog({ open, onOpenChange, providers }: ApiKeyCrea
           </DialogHeader>
 
           <div className="grid gap-4 py-4">
+            {/* Provider selector */}
             <div className="grid gap-2">
-              <Label htmlFor="provider">{t('apiKeys.createDialog.provider')}</Label>
-              <Select value={provider} onValueChange={handleProviderChange}>
-                <SelectTrigger>
-                  <SelectValue placeholder={t('apiKeys.createDialog.selectProvider')} />
-                </SelectTrigger>
-                <SelectContent>
+              <Label>{t('apiKeys.createDialog.provider')}</Label>
+              {providersLoading ? (
+                <div className="text-sm text-muted-foreground">Loading providers...</div>
+              ) : availableProviders.length === 0 ? (
+                <div className="text-sm text-muted-foreground">No providers available</div>
+              ) : (
+                <div className="flex flex-wrap gap-2">
                   {availableProviders.map((p) => (
-                    <SelectItem key={p.id} value={p.id}>
-                      {p.name}
-                    </SelectItem>
+                    <Button
+                      key={p.id}
+                      type="button"
+                      variant={provider === p.id ? 'default' : 'outline'}
+                      size="sm"
+                      onClick={() => handleProviderChange(p.id)}
+                      className="h-auto py-1.5 px-3"
+                    >
+                      <span className="flex items-center gap-1.5">
+                        {p.name}
+                        {p.badge && (
+                          <Badge variant="secondary" className="text-[10px] px-1 py-0">
+                            {p.badge}
+                          </Badge>
+                        )}
+                      </span>
+                    </Button>
                   ))}
-                </SelectContent>
-              </Select>
+                </div>
+              )}
             </div>
 
-            <div className="grid gap-2">
-              <Label htmlFor="id">{t('apiKeys.createDialog.id')}</Label>
-              <Input
-                id="id"
-                value={id}
-                onChange={(e) => setId(e.target.value)}
-                placeholder="deepseek-prod"
-                required
-              />
-            </div>
+            {/* Provider info card */}
+            {selectedPreset && (
+              <div className="rounded-lg border bg-muted/50 p-3 text-sm space-y-1">
+                <div className="font-medium">{selectedPreset.name}</div>
+                <div className="text-muted-foreground">{selectedPreset.description}</div>
+                {selectedPreset.apiKeyHint && (
+                  <div className="text-xs text-muted-foreground">
+                    <span className="font-medium">Tip:</span> {selectedPreset.apiKeyHint}
+                  </div>
+                )}
+              </div>
+            )}
 
+            {/* API Key */}
             <div className="grid gap-2">
               <Label htmlFor="apiKey">{t('apiKeys.createDialog.apiKey')}</Label>
               <Input
@@ -127,42 +135,25 @@ export function ApiKeyCreateDialog({ open, onOpenChange, providers }: ApiKeyCrea
                 type="password"
                 value={apiKey}
                 onChange={(e) => setApiKey(e.target.value)}
-                placeholder="sk-..."
+                placeholder={selectedPreset?.apiKeyPlaceholder || 'sk-...'}
                 required
               />
             </div>
 
+            {/* Base URL */}
             <div className="grid gap-2">
               <Label htmlFor="baseUrl">{t('apiKeys.createDialog.baseUrl')}</Label>
               <Input
                 id="baseUrl"
                 value={baseUrl}
                 onChange={(e) => setBaseUrl(e.target.value)}
-                placeholder="https://api.example.com"
+                placeholder={
+                  selectedPreset
+                    ? selectedPreset.baseUrl || 'No base URL needed'
+                    : 'Select a provider first'
+                }
+                disabled={!provider}
               />
-            </div>
-
-            <div className="grid gap-2">
-              <Label htmlFor="model">{t('apiKeys.createDialog.model')}</Label>
-              <Input
-                id="model"
-                value={defaultModel}
-                onChange={(e) => setDefaultModel(e.target.value)}
-                placeholder="claude-sonnet-4-5"
-              />
-            </div>
-
-            <div className="grid gap-2">
-              <Label htmlFor="target">{t('apiKeys.createDialog.target')}</Label>
-              <Select value={target} onValueChange={(v) => setTarget(v as 'claude' | 'droid')}>
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="droid">Droid</SelectItem>
-                  <SelectItem value="claude">Claude</SelectItem>
-                </SelectContent>
-              </Select>
             </div>
           </div>
 
@@ -177,7 +168,7 @@ export function ApiKeyCreateDialog({ open, onOpenChange, providers }: ApiKeyCrea
             >
               {t('common.cancel')}
             </Button>
-            <Button type="submit" disabled={createMutation.isPending}>
+            <Button type="submit" disabled={createMutation.isPending || !provider || !apiKey}>
               {createMutation.isPending ? t('common.creating') : t('apiKeys.createDialog.create')}
             </Button>
           </DialogFooter>

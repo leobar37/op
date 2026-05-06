@@ -13,6 +13,7 @@ import {
   removeApiKeyProfile,
   applyApiKeyProfile,
 } from '../../api/services/api-key-service';
+import { PROVIDER_PRESET_DEFINITIONS } from '../../shared/provider-preset-catalog';
 
 import { getPersistedTargetChoices } from '../../targets/target-metadata';
 import { parseTarget } from './route-helpers';
@@ -35,6 +36,30 @@ function validatePayloadShape(
 }
 
 // ==================== API Key Profile CRUD ====================
+
+/**
+ * GET /api/api-keys/providers - List available provider presets
+ * MUST be before /:id to avoid being caught as an ID
+ */
+router.get('/providers', (_req: Request, res: Response): void => {
+  try {
+    const presets = PROVIDER_PRESET_DEFINITIONS.map((p) => ({
+      id: p.id,
+      name: p.name,
+      description: p.description,
+      baseUrl: p.baseUrl,
+      defaultModel: p.defaultModel,
+      apiKeyPlaceholder: p.apiKeyPlaceholder,
+      apiKeyHint: p.apiKeyHint,
+      badge: p.badge,
+      category: p.category,
+      requiresApiKey: p.requiresApiKey,
+    }));
+    res.json({ providers: presets });
+  } catch (error) {
+    res.status(500).json({ error: (error as Error).message });
+  }
+});
 
 /**
  * GET /api/api-keys - List all API key profiles
@@ -213,73 +238,6 @@ router.post('/:id/apply', async (req: Request, res: Response): Promise<void> => 
       strategy: result.strategy,
       configPath: result.configPath,
     });
-  } catch (error) {
-    res.status(500).json({ error: (error as Error).message });
-  }
-});
-
-/**
- * GET /api/api-keys/providers - List available provider presets
- */
-router.get('/providers', (_req: Request, res: Response): void => {
-  try {
-    const presets = [
-      {
-        id: 'deepseek',
-        name: 'DeepSeek',
-        baseUrl: 'https://api.deepseek.com/anthropic',
-        defaultModel: 'deepseek-chat',
-      },
-      {
-        id: 'kimi',
-        name: 'Kimi (Moonshot)',
-        baseUrl: 'https://api.kimi.com/coding/',
-        defaultModel: 'kimi-k2-thinking-turbo',
-      },
-      {
-        id: 'glm',
-        name: 'GLM (Z.AI)',
-        baseUrl: 'https://api.z.ai/api/anthropic',
-        defaultModel: 'glm-5',
-      },
-      {
-        id: 'mm',
-        name: 'Minimax',
-        baseUrl: 'https://api.minimax.io/anthropic',
-        defaultModel: 'MiniMax-M2.1',
-      },
-      {
-        id: 'qwen',
-        name: 'Qwen (Alibaba)',
-        baseUrl: 'https://dashscope-intl.aliyuncs.com/apps/anthropic',
-        defaultModel: 'qwen3-coder-plus',
-      },
-      {
-        id: 'anthropic',
-        name: 'Anthropic (Direct)',
-        baseUrl: '',
-        defaultModel: 'claude-sonnet-4-5-20250929',
-      },
-      {
-        id: 'huggingface',
-        name: 'Hugging Face',
-        baseUrl: 'https://router.huggingface.co/v1',
-        defaultModel: 'openai/gpt-oss-120b:fastest',
-      },
-      {
-        id: 'foundry',
-        name: 'Azure Foundry',
-        baseUrl: 'https://<your-resource>.services.ai.azure.com/api/anthropic',
-        defaultModel: 'claude-sonnet-4-5',
-      },
-      {
-        id: 'novita',
-        name: 'Novita AI',
-        baseUrl: 'https://api.novita.ai/anthropic',
-        defaultModel: 'deepseek/deepseek-v3.2',
-      },
-    ];
-    res.json({ providers: presets });
   } catch (error) {
     res.status(500).json({ error: (error as Error).message });
   }

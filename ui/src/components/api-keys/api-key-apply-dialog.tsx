@@ -81,16 +81,16 @@ export function ApiKeyApplyDialog({ open, onOpenChange, profile }: ApiKeyApplyDi
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="direct">Direct (pegado al provider)</SelectItem>
-                  <SelectItem value="proxy">Proxy (via CLIProxy)</SelectItem>
+                  <SelectItem value="direct">Direct</SelectItem>
+                  <SelectItem value="proxy">Proxy</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
             <div className="text-xs text-muted-foreground">
               {strategy === 'direct'
-                ? 'Escribe credenciales directamente en el target (ej: ~/.factory/settings.json para Droid)'
-                : 'Pasa por CLIProxy para manejo de tokens y routing'}
+                ? t('apiKeys.applyDialog.directHint')
+                : t('apiKeys.applyDialog.proxyHint')}
             </div>
           </div>
 

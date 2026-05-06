@@ -16,7 +16,8 @@ export type CLIProxyProvider =
   | 'cursor'
   | 'gitlab'
   | 'codebuddy'
-  | 'kilo';
+  | 'kilo'
+  | 'deepseek';
 
 /** CLIProxy backend selection */
 export type CLIProxyBackend = 'original' | 'plus';

@@ -26,7 +26,7 @@ import type { CLIProxyProvider } from '../../cliproxy/types';
 const router = Router();
 
 /** Chinese providers that support API key configuration in the dashboard */
-const CHINESE_PROVIDERS = new Set(['deepseek', 'glm', 'kimi', 'mm']);
+const CHINESE_PROVIDERS = new Set(['deepseek', 'glm', 'kimi', 'mm', 'deepseek']);
 
 /** Resolve the API key storage path for a provider */
 function resolveProviderApiKeyPath(provider: string): string {

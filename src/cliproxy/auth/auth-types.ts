@@ -306,6 +306,13 @@ export const OAUTH_CONFIGS: Record<CLIProxyProvider, ProviderOAuthConfig> = {
     scopes: [],
     authFlag: '--kilo-login',
   },
+  deepseek: {
+    provider: 'deepseek',
+    displayName: 'DeepSeek',
+    authUrl: 'https://platform.deepseek.com/api_keys',
+    scopes: [],
+    authFlag: '--deepseek-login',
+  },
 };
 
 /**

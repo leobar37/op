@@ -357,8 +357,14 @@ export interface ApiKeyProfile {
 export interface ApiKeyProviderPreset {
   id: string;
   name: string;
+  description: string;
   baseUrl: string;
   defaultModel: string;
+  apiKeyPlaceholder: string;
+  apiKeyHint: string;
+  badge?: string;
+  category: string;
+  requiresApiKey: boolean;
 }
 
 export interface CreateApiKeyProfileRequest {

@@ -4,12 +4,7 @@ import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Badge } from '@/components/ui/badge';
 import { Plus, Search, Trash2, Key, CheckCircle2, AlertCircle, Rocket } from 'lucide-react';
-import {
-  useApiKeys,
-  useDeleteApiKey,
-  useApplyApiKey,
-  useApiKeyProviders,
-} from '@/hooks/use-api-keys';
+import { useApiKeys, useDeleteApiKey, useApplyApiKey } from '@/hooks/use-api-keys';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import { ApiKeyCreateDialog } from '@/components/api-keys/api-key-create-dialog';
 import { ApiKeyApplyDialog } from '@/components/api-keys/api-key-apply-dialog';
@@ -21,8 +16,7 @@ export function ApiKeysPage() {
   const { t } = useTranslation();
   const { data, isLoading, isError, refetch } = useApiKeys();
   const deleteMutation = useDeleteApiKey();
-  const _applyMutation = useApplyApiKey();
-  const { data: providersData } = useApiKeyProviders();
+  useApplyApiKey();
   const [searchQuery, setSearchQuery] = useState('');
   const [isCreateDialogOpen, setCreateDialogOpen] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
@@ -141,11 +135,7 @@ export function ApiKeysPage() {
         </div>
       )}
 
-      <ApiKeyCreateDialog
-        open={isCreateDialogOpen}
-        onOpenChange={setCreateDialogOpen}
-        providers={providersData?.providers || []}
-      />
+      <ApiKeyCreateDialog open={isCreateDialogOpen} onOpenChange={setCreateDialogOpen} />
 
       <ApiKeyApplyDialog
         open={!!applyDialog}
