@@ -26,37 +26,122 @@ import type { CLIProxyProvider } from '../../cliproxy/types';
 const router = Router();
 
 /** Chinese providers that support API key configuration in the dashboard */
-const CHINESE_PROVIDERS = new Set(['deepseek', 'glm', 'kimi', 'mm', 'deepseek']);
+const CHINESE_PROVIDERS = new Set(['deepseek', 'glm', 'kimi', 'mm']);
 
-/** Resolve the API key storage path for a provider */
-function resolveProviderApiKeyPath(provider: string): string {
-  return path.join(getCcsDir(), `${provider}.apikey`);
+/** API keys are stored in a single JSON file to avoid triggering the config file watcher */
+const API_KEYS_FILE = 'api-keys.json';
+
+function getApiKeysFilePath(): string {
+  return path.join(getCcsDir(), API_KEYS_FILE);
 }
 
-/** Read a provider's API key from disk */
+interface ApiKeyProfile {
+  id: string;
+  provider: string;
+  apiKey: string;
+  baseUrl: string;
+  defaultModel: string;
+  models: string[];
+  target: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+function loadApiKeys(): Record<string, ApiKeyProfile> {
+  const filePath = getApiKeysFilePath();
+  if (!fs.existsSync(filePath)) {
+    return {};
+  }
+  try {
+    const content = fs.readFileSync(filePath, 'utf8');
+    const data = JSON.parse(content) as { profiles?: Record<string, ApiKeyProfile> };
+    return data.profiles || {};
+  } catch {
+    return {};
+  }
+}
+
+function saveApiKeys(profiles: Record<string, ApiKeyProfile>): void {
+  const filePath = getApiKeysFilePath();
+  const dir = path.dirname(filePath);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+  const tempPath = filePath + '.tmp';
+  fs.writeFileSync(tempPath, JSON.stringify({ profiles }, null, 2) + '\n', 'utf8');
+  fs.renameSync(tempPath, filePath);
+}
+
+/** Read a provider's API key from the unified api-keys.json */
 function readProviderApiKey(provider: string): string | null {
   try {
-    const keyPath = resolveProviderApiKeyPath(provider);
-    if (!fs.existsSync(keyPath)) return null;
-    return fs.readFileSync(keyPath, 'utf-8').trim();
+    const profiles = loadApiKeys();
+    // Find any profile matching this provider (by provider field or id prefix)
+    for (const profile of Object.values(profiles)) {
+      if (profile.provider === provider && profile.apiKey) {
+        return profile.apiKey;
+      }
+    }
+    return null;
   } catch {
     return null;
   }
 }
 
-/** Write a provider's API key to disk */
+/** Write a provider's API key to the unified api-keys.json */
 function writeProviderApiKey(provider: string, apiKey: string): void {
-  const keyPath = resolveProviderApiKeyPath(provider);
-  fs.mkdirSync(path.dirname(keyPath), { recursive: true });
-  fs.writeFileSync(keyPath, apiKey, { mode: 0o600 });
+  const profiles = loadApiKeys();
+  const now = new Date().toISOString();
+
+  // Find existing profile for this provider
+  let existingId: string | null = null;
+  for (const [id, profile] of Object.entries(profiles)) {
+    if (profile.provider === provider) {
+      existingId = id;
+      break;
+    }
+  }
+
+  if (existingId) {
+    profiles[existingId].apiKey = apiKey;
+    profiles[existingId].updatedAt = now;
+  } else {
+    // Create a new profile
+    const id = provider;
+    profiles[id] = {
+      id,
+      provider,
+      apiKey,
+      baseUrl: '',
+      defaultModel: '',
+      models: [],
+      target: 'droid',
+      createdAt: now,
+      updatedAt: now,
+    };
+  }
+
+  saveApiKeys(profiles);
 }
 
-/** Delete a provider's API key from disk */
+/** Delete a provider's API key from the unified api-keys.json */
 function deleteProviderApiKey(provider: string): void {
   try {
-    const keyPath = resolveProviderApiKeyPath(provider);
-    if (fs.existsSync(keyPath)) {
-      fs.unlinkSync(keyPath);
+    const profiles = loadApiKeys();
+    const idsToDelete: string[] = [];
+
+    for (const [id, profile] of Object.entries(profiles)) {
+      if (profile.provider === provider) {
+        idsToDelete.push(id);
+      }
+    }
+
+    for (const id of idsToDelete) {
+      delete profiles[id];
+    }
+
+    if (idsToDelete.length > 0) {
+      saveApiKeys(profiles);
     }
   } catch {
     // ignore
@@ -242,8 +327,9 @@ router.get('/:provider/models', async (req: Request, res: Response): Promise<voi
 // ==================== API Key Management for Chinese Providers ====================
 
 /**
- * GET /api/provider-models/:provider/apikey - Get API key status (masked)
- * Returns: { provider, secretConfigured, maskedKey }
+ * GET /api/provider-models/:provider/apikey - Get API key status
+ * Returns: { provider, secretConfigured, apiKey, maskedKey }
+ * Note: apiKey is returned for local dashboard use only
  */
 router.get('/:provider/apikey', async (req: Request, res: Response): Promise<void> => {
   try {
@@ -262,6 +348,7 @@ router.get('/:provider/apikey', async (req: Request, res: Response): Promise<voi
     res.json({
       provider,
       secretConfigured,
+      apiKey: secretConfigured ? apiKey : null,
       maskedKey: secretConfigured && apiKey ? maskSensitiveValue(apiKey) : null,
     });
   } catch (error) {

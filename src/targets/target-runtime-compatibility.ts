@@ -40,6 +40,13 @@ export function evaluateTargetRuntimeCompatibility(
     return { supported: true };
   }
 
+  if (input.target === 'pi') {
+    return unsupported(
+      'Pi runtime execution is not implemented in CCS yet.',
+      'Use Pi directly or choose claude, droid, or codex for CCS runtime execution.'
+    );
+  }
+
   if (input.profileType === 'account') {
     return unsupported(
       'Codex CLI does not support Claude account-based profiles.',

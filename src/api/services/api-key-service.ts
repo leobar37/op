@@ -12,11 +12,6 @@ import { getCcsDir } from '../../utils/config-manager';
 import { resolveDroidProvider } from '../../targets/droid-provider';
 import { upsertCcsModel } from '../../droid-settings';
 import { getPresetById } from './provider-presets';
-import {
-  addOpenAICompatProvider,
-  getOpenAICompatProvider,
-  updateOpenAICompatProvider,
-} from '../../cliproxy/ai-providers/openai-compat-manager';
 import type {
   ApiKeyProfile,
   CreateApiKeyInput,
@@ -211,34 +206,23 @@ async function applyToDroidDirect(profile: ApiKeyProfile): Promise<ApplyApiKeyRe
 /** Apply an API key profile to Droid with proxy strategy */
 async function applyToDroidProxy(profile: ApiKeyProfile): Promise<ApplyApiKeyResult> {
   try {
-    const proxyBaseUrl = `http://127.0.0.1:8317/api/provider/${profile.provider}`;
+    // Resolve the correct Droid provider from base URL + model
+    // DeepSeek uses /anthropic endpoint -> provider should be 'anthropic'
+    const droidProvider = resolveDroidProvider({
+      baseUrl: profile.baseUrl,
+      model: profile.defaultModel,
+    });
 
-    // Register or update the provider in CLIProxy openai-compatibility
-    const existing = getOpenAICompatProvider(profile.provider);
-    const models = profile.models.map((m) => ({ name: m, alias: m }));
-
-    if (existing) {
-      updateOpenAICompatProvider(profile.provider, {
-        baseUrl: profile.baseUrl,
-        apiKey: profile.apiKey,
-        models,
-      });
-    } else {
-      addOpenAICompatProvider({
-        name: profile.provider,
-        baseUrl: profile.baseUrl,
-        apiKey: profile.apiKey,
-        models,
-      });
-    }
-
-    // Write Droid settings pointing to local CLIProxy
+    // For API-key providers (deepseek, glm, etc.), CLIProxy does not have
+    // native routing for these models. The proxy strategy falls back to
+    // direct connection since there is no local proxy that can route
+    // Anthropic-compatible third-party providers.
     await upsertCcsModel(profile.id, {
       model: profile.defaultModel,
       displayName: `CCS ${profile.id}`,
-      baseUrl: proxyBaseUrl,
+      baseUrl: profile.baseUrl,
       apiKey: profile.apiKey,
-      provider: 'generic-chat-completion-api',
+      provider: droidProvider,
     });
 
     return {

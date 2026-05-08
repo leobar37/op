@@ -11,7 +11,7 @@
  */
 import type { ProfileType } from '../types/profile';
 
-export type TargetType = 'claude' | 'droid' | 'codex';
+export type TargetType = 'claude' | 'droid' | 'codex' | 'pi';
 
 /**
  * Credentials resolved by CCS profile system, ready for delivery to target CLI.

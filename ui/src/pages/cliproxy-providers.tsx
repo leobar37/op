@@ -221,13 +221,13 @@ export function CliproxyProvidersPage() {
   const [selectedProvider, setSelectedProvider] = useState<string | null>(null);
   const [selectedModel, setSelectedModel] = useState<string | null>(null);
   const [displayName, setDisplayName] = useState('');
-  const [apiKey, setApiKey] = useState('ccs-internal-managed');
   const [noImageSupport, setNoImageSupport] = useState(false);
   const [modelIndex, setModelIndex] = useState(0);
   const [hasCopied, setHasCopied] = useState(false);
   const [appliedHashVersion, setAppliedHashVersion] = useState(0);
   const [apiKeyInput, setApiKeyInput] = useState('');
   const [showApiKey, setShowApiKey] = useState(false);
+  const [applyStrategy, setApplyStrategy] = useState<'direct' | 'proxy'>('direct');
 
   const {
     data: modelsData,
@@ -252,19 +252,37 @@ export function CliproxyProvidersPage() {
   const generatedEntry = useMemo(() => {
     if (!selectedProvider || !selectedModel || !baseUrl) return null;
 
+    const isDirect = applyStrategy === 'direct';
+    const directBaseUrl = `https://api.${selectedProvider}.com/anthropic`;
+    // Use input key if user typed one, otherwise fall back to saved key from server
+    const savedKey = apiKeyData?.apiKey || '';
+    const effectiveApiKey = isDirect
+      ? apiKeyInput || savedKey || 'ccs-internal-managed'
+      : 'ccs-internal-managed';
+
     const entry: DroidCustomModelEntry = {
       model: selectedModel,
       id: `custom:${selectedProvider.toUpperCase()}:${selectedModel}`,
       index: modelIndex,
-      baseUrl,
-      apiKey,
+      baseUrl: isDirect ? directBaseUrl : baseUrl,
+      apiKey: effectiveApiKey,
       displayName: displayName || selectedModel,
       noImageSupport,
       provider: resolveDroidProviderForModel(selectedProvider, selectedModel),
     };
 
     return entry;
-  }, [selectedProvider, selectedModel, baseUrl, apiKey, displayName, noImageSupport, modelIndex]);
+  }, [
+    selectedProvider,
+    selectedModel,
+    baseUrl,
+    apiKeyInput,
+    apiKeyData,
+    displayName,
+    noImageSupport,
+    modelIndex,
+    applyStrategy,
+  ]);
 
   const generatedJson = useMemo(() => {
     if (!generatedEntry) return '';
@@ -315,6 +333,7 @@ export function CliproxyProvidersPage() {
     setDisplayName('');
     setApiKeyInput('');
     setShowApiKey(false);
+    setApplyStrategy('direct');
   };
 
   const handleModelSelect = (modelId: string) => {
@@ -360,7 +379,6 @@ export function CliproxyProvidersPage() {
         apiKey: apiKeyInput.trim(),
       });
       toast.success(t('cliproxyProviders.apiKeySaved'));
-      setApiKeyInput('');
       setShowApiKey(false);
     } catch (error) {
       toast.error((error as Error).message || t('cliproxyProviders.apiKeySaveFailed'));
@@ -637,10 +655,21 @@ export function CliproxyProvidersPage() {
                                 {t('cliproxyProviders.apiKey')}
                               </label>
                               <Input
-                                value={apiKey}
-                                onChange={(e) => setApiKey(e.target.value)}
+                                value={
+                                  applyStrategy === 'direct'
+                                    ? apiKeyInput || apiKeyData?.apiKey || 'ccs-internal-managed'
+                                    : 'ccs-internal-managed'
+                                }
+                                disabled
                                 placeholder="ccs-internal-managed"
                               />
+                              <p className="text-xs text-muted-foreground">
+                                {applyStrategy === 'direct'
+                                  ? apiKeyInput || apiKeyData?.apiKey
+                                    ? 'Using API key from saved profile'
+                                    : 'Using default ccs-internal-managed'
+                                  : 'Proxy mode: CLIProxy handles authentication'}
+                              </p>
                             </div>
                             <div className="space-y-2">
                               <label className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
@@ -693,6 +722,27 @@ export function CliproxyProvidersPage() {
                               )}
                             </CardTitle>
                             <div className="flex items-center gap-2">
+                              {/* Strategy toggle for API-key providers */}
+                              {selectedProviderData?.secretConfigured && (
+                                <div className="flex items-center gap-1 mr-2">
+                                  <Button
+                                    size="sm"
+                                    variant={applyStrategy === 'direct' ? 'default' : 'outline'}
+                                    onClick={() => setApplyStrategy('direct')}
+                                    className="h-7 text-xs"
+                                  >
+                                    Direct
+                                  </Button>
+                                  <Button
+                                    size="sm"
+                                    variant={applyStrategy === 'proxy' ? 'default' : 'outline'}
+                                    onClick={() => setApplyStrategy('proxy')}
+                                    className="h-7 text-xs"
+                                  >
+                                    Proxy
+                                  </Button>
+                                </div>
+                              )}
                               <Button
                                 size="sm"
                                 variant={applyState === 'applied' ? 'outline' : 'default'}

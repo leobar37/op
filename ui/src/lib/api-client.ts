@@ -675,6 +675,7 @@ export interface CliproxyGlobalProvidersResponse {
 export interface ProviderApiKeyResponse {
   provider: string;
   secretConfigured: boolean;
+  apiKey: string | null;
   maskedKey: string | null;
 }
 
