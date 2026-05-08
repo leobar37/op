@@ -343,6 +343,45 @@ export interface CreateProfile {
   target?: CliTarget;
 }
 
+export interface ApiKeyProfile {
+  id: string;
+  provider: string;
+  baseUrl: string;
+  defaultModel: string;
+  models: string[];
+  target: CliTarget;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ApiKeyProviderPreset {
+  id: string;
+  name: string;
+  description: string;
+  baseUrl: string;
+  defaultModel: string;
+  apiKeyPlaceholder: string;
+  apiKeyHint: string;
+  badge?: string;
+  category: string;
+  requiresApiKey: boolean;
+}
+
+export interface CreateApiKeyProfileRequest {
+  id: string;
+  provider: string;
+  apiKey: string;
+  baseUrl?: string;
+  defaultModel?: string;
+  models?: string[];
+  target?: CliTarget;
+}
+
+export interface ApplyApiKeyRequest {
+  target: CliTarget;
+  strategy: 'direct' | 'proxy';
+}
+
 export interface UpdateProfile {
   baseUrl?: string;
   apiKey?: string;
@@ -624,11 +663,20 @@ export interface CliproxyGlobalProvider {
   authenticated: boolean;
   accountCount: number;
   modelCount: number;
+  secretConfigured?: boolean;
 }
 
 /** CLIProxy global providers response */
 export interface CliproxyGlobalProvidersResponse {
   providers: CliproxyGlobalProvider[];
+}
+
+/** Provider API key status response */
+export interface ProviderApiKeyResponse {
+  provider: string;
+  secretConfigured: boolean;
+  apiKey: string | null;
+  maskedKey: string | null;
 }
 
 /** CLIProxy provider model entry */
@@ -1493,6 +1541,20 @@ export const api = {
         request<CliproxyProviderModelsResponse>(
           `/provider-models/${encodeURIComponent(provider)}/models`
         ),
+      /** Get API key status for a provider */
+      getApiKey: (provider: string) =>
+        request<ProviderApiKeyResponse>(`/provider-models/${encodeURIComponent(provider)}/apikey`),
+      /** Save API key for a provider */
+      saveApiKey: (provider: string, apiKey: string) =>
+        request<ProviderApiKeyResponse>(`/provider-models/${encodeURIComponent(provider)}/apikey`, {
+          method: 'PUT',
+          body: JSON.stringify({ apiKey }),
+        }),
+      /** Clear API key for a provider */
+      clearApiKey: (provider: string) =>
+        request<ProviderApiKeyResponse>(`/provider-models/${encodeURIComponent(provider)}/apikey`, {
+          method: 'DELETE',
+        }),
     },
   },
   accounts: {
@@ -1589,5 +1651,25 @@ export const api = {
     /** Fetch Gemini CLI quota for a specific account */
     getGemini: (accountId: string) =>
       request<GeminiCliQuotaResult>(`/cliproxy/quota/gemini/${encodeURIComponent(accountId)}`),
+  },
+  /** API Key profiles */
+  apiKeys: {
+    list: () => request<{ profiles: ApiKeyProfile[] }>('/api-keys'),
+    get: (id: string) => request<{ profile: ApiKeyProfile }>(`/api-keys/${id}`),
+    create: (data: CreateApiKeyProfileRequest) =>
+      request<{ profile: ApiKeyProfile }>('/api-keys', {
+        method: 'POST',
+        body: JSON.stringify(data),
+      }),
+    delete: (id: string) => request(`/api-keys/${id}`, { method: 'DELETE' }),
+    apply: (id: string, data: ApplyApiKeyRequest) =>
+      request<{ id: string; target: string; strategy: string; configPath?: string }>(
+        `/api-keys/${id}/apply`,
+        {
+          method: 'POST',
+          body: JSON.stringify(data),
+        }
+      ),
+    providers: () => request<{ providers: ApiKeyProviderPreset[] }>('/api-keys/providers'),
   },
 };

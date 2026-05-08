@@ -28,10 +28,6 @@ describe('resolvePresetApiKeyValue', () => {
 });
 
 describe('provider preset metadata', () => {
-  it('maps legacy glmt preset requests to glm', () => {
-    expect(getPresetById('glmt')?.id).toBe('glm');
-  });
-
   it('maps hf alias to the Hugging Face preset', () => {
     const preset = getPresetById('hf');
     expect(preset?.id).toBe('huggingface');

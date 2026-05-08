@@ -74,7 +74,12 @@ export async function pipeWebResponseToNode(
 
   const nodeStream = Readable.fromWeb(response.body as unknown as ReadableStream<Uint8Array>);
   await new Promise<void>((resolve, reject) => {
-    nodeStream.on('error', reject);
+    nodeStream.on('error', (err) => {
+      if (!res.writableEnded) {
+        res.end();
+      }
+      reject(err);
+    });
     nodeStream.on('end', resolve);
     nodeStream.pipe(res);
   });

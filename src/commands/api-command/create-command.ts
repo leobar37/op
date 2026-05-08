@@ -48,17 +48,6 @@ function resolvePresetOrExit(presetId?: string): ProviderPreset | null {
   process.exit(1);
 }
 
-function showPresetDeprecationNotice(presetId?: string): void {
-  if ((presetId || '').trim().toLowerCase() !== 'glmt') {
-    return;
-  }
-
-  console.log(warn('Preset "glmt" is deprecated and now maps to the direct "glm" preset.'));
-  console.log(dim('  Z.AI models already expose thinking natively, so CCS no longer needs GLMT.'));
-  console.log(dim('  Update scripts/docs to: ccs api create --preset glm'));
-  console.log('');
-}
-
 async function resolveProfileName(
   providedName: string | undefined,
   preset: ProviderPreset | null
@@ -429,7 +418,6 @@ export async function handleApiCreateCommand(args: string[]): Promise<void> {
     return;
   }
 
-  showPresetDeprecationNotice(parsedArgs.preset);
   const preset = resolvePresetOrExit(parsedArgs.preset);
   const name = await resolveProfileName(parsedArgs.name, preset);
 

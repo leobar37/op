@@ -8,8 +8,8 @@
  *   GlobalEnvConfig, ContinuityConfig, ImageAnalysisConfig + defaults
  */
 
-export type { CopilotAccountType, CopilotConfig, CursorConfig } from './copilot-cursor';
-export { DEFAULT_COPILOT_CONFIG, DEFAULT_CURSOR_CONFIG } from './copilot-cursor';
+export type { CopilotAccountType, CopilotConfig } from './copilot-cursor';
+export { DEFAULT_COPILOT_CONFIG } from './copilot-cursor';
 
 export type {
   ProxyRemoteConfig,

@@ -27,7 +27,6 @@ import cliproxySyncRoutes from './cliproxy-sync-routes';
 import cliproxyProvidersRoutes from './cliproxy-providers-routes';
 import aiProviderRoutes from './ai-provider-routes';
 import copilotRoutes from './copilot-routes';
-import cursorRoutes from './cursor-routes';
 import droidRoutes from './droid-routes';
 import codexRoutes from './codex-routes';
 import miscRoutes from './misc-routes';
@@ -37,6 +36,7 @@ import persistRoutes from './persist-routes';
 import catalogRoutes from './catalog-routes';
 import claudeExtensionRoutes from './claude-extension-routes';
 import logsRoutes from './logs-routes';
+import apiKeyRoutes from './api-key-routes';
 
 // Create the main API router
 export const apiRoutes = Router();
@@ -108,10 +108,6 @@ apiRoutes.use('/image-analysis', imageAnalysisRoutes);
 // ==================== Copilot ====================
 apiRoutes.use('/copilot', copilotRoutes);
 
-// ==================== Cursor ====================
-apiRoutes.use('/cursor', cursorRoutes);
-apiRoutes.use('/legacy/cursor', cursorRoutes);
-
 // ==================== Droid ====================
 apiRoutes.use('/droid', droidRoutes);
 
@@ -120,6 +116,9 @@ apiRoutes.use('/codex', codexRoutes);
 
 // ==================== CLIProxy Server Settings ====================
 apiRoutes.use('/cliproxy-server', cliproxyServerRoutes);
+
+// ==================== API Keys ====================
+apiRoutes.use('/api-keys', apiKeyRoutes);
 
 // ==================== Misc (File API, Global Env) ====================
 apiRoutes.use('/', miscRoutes);

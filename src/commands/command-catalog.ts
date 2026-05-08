@@ -84,6 +84,12 @@ export const ROOT_COMMAND_CATALOG: readonly RootCommandEntry[] = [
     visibility: 'public',
   },
   {
+    name: 'api-key',
+    summary: 'Manage API key profiles - source of truth for provider credentials',
+    group: 'manage',
+    visibility: 'public',
+  },
+  {
     name: 'cliproxy',
     summary: 'Manage CLIProxy variants, quota, and local lifecycle',
     group: 'manage',
@@ -107,12 +113,6 @@ export const ROOT_COMMAND_CATALOG: readonly RootCommandEntry[] = [
     summary: 'Move legacy JSON config to unified YAML config',
     group: 'manage',
     aliases: ['--migrate'],
-    visibility: 'public',
-  },
-  {
-    name: 'cursor',
-    summary: 'Run Cursor via CLIProxy or manage Cursor provider auth',
-    group: 'runtime',
     visibility: 'public',
   },
   {
@@ -205,6 +205,7 @@ export const BUILTIN_PROVIDER_SHORTCUTS: readonly ShortcutEntry[] = CLIPROXY_PRO
         gitlab: 'GitLab Duo via CLIProxy OAuth',
         codebuddy: 'CodeBuddy via CLIProxy OAuth',
         kilo: 'Kilo AI via CLIProxy OAuth',
+        deepseek: 'DeepSeek via CLIProxy OAuth',
       }[name] || 'CLIProxy OAuth provider',
   })
 );
@@ -261,6 +262,7 @@ export const API_SUBCOMMANDS = [
   'import',
   'remove',
 ] as const;
+export const API_KEY_SUBCOMMANDS = ['create', 'list', 'remove', 'apply'] as const;
 export const CLIPROXY_SUBCOMMANDS = [
   'create',
   'edit',
@@ -325,9 +327,18 @@ export const COMMAND_FLAG_SUGGESTIONS: Readonly<Record<string, readonly string[]
   '--shell-completion': ['--bash', '--zsh', '--fish', '--powershell', '--force', '-f'],
   auth: ['--help', '-h'],
   api: ['--help', '-h'],
+  'api-key': [
+    '--help',
+    '-h',
+    '--provider',
+    '--key',
+    '--base-url',
+    '--model',
+    '--target',
+    '--strategy',
+  ],
   cleanup: CLEANUP_FLAGS,
   config: ['--help', '-h', '--port', '-p', '--host', '-H', '--dev'],
-  cursor: ['--help', '-h'],
   doctor: ['--fix', '-f', '--help', '-h'],
   browser: ['setup', 'status', 'doctor', 'policy', 'enable', 'disable', '--help', '-h'],
   docker: ['--help', '-h', '--host'],
@@ -336,15 +347,6 @@ export const COMMAND_FLAG_SUGGESTIONS: Readonly<Record<string, readonly string[]
   tokens: TOKENS_FLAGS,
   update: ['--force', '--beta', '--dev', '--help', '-h'],
 };
-
-export const CURSOR_COMPLETION_SUBCOMMANDS = [
-  '--auth',
-  '--accounts',
-  '--config',
-  '--logout',
-  '--help',
-  '-h',
-] as const;
 export const COPILOT_COMPLETION_SUBCOMMANDS = [...COPILOT_SUBCOMMANDS, 'help'] as const;
 
 export function getPublicRootCommands(): readonly RootCommandEntry[] {

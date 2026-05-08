@@ -4,6 +4,7 @@ export interface TargetMetadata {
   displayName: string;
   runtimeAliases: readonly string[];
   legacyAliasEnvVar?: string;
+  runtimeTarget?: boolean;
   persistedTarget: boolean;
 }
 
@@ -25,14 +26,24 @@ export const TARGET_METADATA: Record<TargetType, TargetMetadata> = {
     legacyAliasEnvVar: 'CCS_CODEX_ALIASES',
     persistedTarget: false,
   },
+  pi: {
+    displayName: 'Pi Coding Agent',
+    runtimeAliases: [],
+    runtimeTarget: false,
+    persistedTarget: true,
+  },
 } satisfies Record<TargetType, TargetMetadata>;
 
 export const RUNTIME_TARGET_TYPES = Object.freeze(
-  Object.keys(TARGET_METADATA) as TargetType[]
+  (Object.keys(TARGET_METADATA) as TargetType[]).filter(
+    (target) => TARGET_METADATA[target].runtimeTarget !== false
+  )
 ) as readonly TargetType[];
 
 export const PERSISTED_TARGET_TYPES = Object.freeze(
-  RUNTIME_TARGET_TYPES.filter((target) => TARGET_METADATA[target].persistedTarget)
+  (Object.keys(TARGET_METADATA) as TargetType[]).filter(
+    (target) => TARGET_METADATA[target].persistedTarget
+  )
 ) as readonly TargetType[];
 
 const RUNTIME_TARGET_SET = new Set<TargetType>(RUNTIME_TARGET_TYPES);

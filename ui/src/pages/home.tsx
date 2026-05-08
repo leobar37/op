@@ -148,7 +148,7 @@ export function HomePage() {
               value={overview?.cliproxy ?? 0}
               icon={Zap}
               variant="accent"
-              onClick={() => navigate('/cliproxy')}
+              onClick={() => navigate('/provider-models')}
             />
             <InlineStat
               title={t('home.accounts')}

@@ -2,7 +2,7 @@
  * Retry Strategy Utility
  *
  * Reusable exponential-backoff retry wrapper extracted from
- * scattered retry logic in glmt-proxy and binary/downloader.
+ * scattered retry logic in binary/downloader.
  *
  * Usage:
  *   const data = await withRetry(() => fetch(url), { maxRetries: 3, baseDelayMs: 100 });

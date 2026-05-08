@@ -44,42 +44,19 @@ describe('image-analysis-backend-resolver', () => {
     expect(status.resolutionSource).toBe('copilot-alias');
   });
 
-  it('does not route cursor image analysis through the fallback backend by default', () => {
+  it('routes cliproxy cursor image analysis through fallback backend like other cliproxy providers', () => {
     const status = resolveImageAnalysisStatus(
       {
         profileName: 'cursor',
-        profileType: 'cursor',
+        profileType: 'cliproxy',
       },
       DEFAULT_IMAGE_ANALYSIS_CONFIG
     );
 
-    expect(status.supported).toBe(false);
-    expect(status.backendId).toBeNull();
-    expect(status.status).toBe('skipped');
-    expect(status.resolutionSource).toBe('unresolved');
-    expect(status.reason).toContain('profile_backends.cursor');
-  });
-
-  it('allows cursor image analysis only when explicitly mapped to a backend', () => {
-    const config: ImageAnalysisConfig = {
-      ...DEFAULT_IMAGE_ANALYSIS_CONFIG,
-      profile_backends: {
-        cursor: 'ghcp',
-      },
-    };
-
-    const status = resolveImageAnalysisStatus(
-      {
-        profileName: 'cursor',
-        profileType: 'cursor',
-      },
-      config
-    );
-
     expect(status.supported).toBe(true);
-    expect(status.backendId).toBe('ghcp');
-    expect(status.status).toBe('mapped');
-    expect(status.resolutionSource).toBe('profile-backend');
+    expect(status.backendId).toBe('gemini');
+    expect(status.status).toBe('active');
+    expect(status.resolutionSource).toBe('fallback-backend');
   });
 
   it('treats cliproxy cursor as a provider-backed profile rather than a legacy bridge alias', () => {

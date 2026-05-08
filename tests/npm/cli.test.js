@@ -86,10 +86,10 @@ describe('npm CLI', () => {
       }
     });
 
-    it('routes cursor probe through the cursor command handler', function() {
+    it('routes cursor as cliproxy provider since legacy cursor bridge was removed', function() {
       let output = '';
       try {
-        output = execSync(`bun "${srcCcsPath}" cursor probe`, {
+        output = execSync(`bun "${srcCcsPath}" cursor --help`, {
           encoding: 'utf8',
           stdio: 'pipe',
           timeout: 3000,
@@ -100,8 +100,8 @@ describe('npm CLI', () => {
       }
       assert(!output.includes("Profile 'cursor' not found"), 'Should not fall through to profile lookup');
       assert(
-        output.includes('Cursor Live Probe') || output.includes('legacy cursor probe'),
-        'Should route through the legacy cursor compatibility handler'
+        output.includes('CCS cursor Shortcut Help') || output.includes('cliproxy'),
+        'Should route cursor as a CLIProxy provider shortcut'
       );
     });
 
@@ -122,8 +122,7 @@ describe('npm CLI', () => {
 
   describe('Profile handling', () => {
     // Note: GLM/Kimi profiles are no longer auto-created (v6.0).
-    // Legacy GLMT files may still exist, but new supported API profiles are created
-    // via UI presets or CLI: ccs api create --preset glm
+    // New supported API profiles are created via UI presets or CLI: ccs api create --preset glm
 
     it('shows helpful error for non-existent profile', function() {
       try {

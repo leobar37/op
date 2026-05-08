@@ -68,6 +68,26 @@ export {
   type LocalRuntimeStatus,
 } from './local-runtime-readiness';
 
+// API Key services
+export {
+  listApiKeyProfiles,
+  getApiKeyProfile,
+  apiKeyProfileExists,
+  createApiKeyProfile,
+  removeApiKeyProfile,
+  applyApiKeyProfile,
+} from './api-key-service';
+export type {
+  ApiKeyProfile,
+  ApiKeyProvider,
+  ApiKeyStrategy,
+  CreateApiKeyInput,
+  CreateApiKeyResult,
+  RemoveApiKeyResult,
+  ApplyApiKeyResult,
+  ListApiKeysResult,
+} from './api-key-types';
+
 // Provider presets for CLI
 export {
   PROVIDER_PRESETS,

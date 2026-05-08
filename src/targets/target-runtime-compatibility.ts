@@ -37,10 +37,14 @@ export function evaluateTargetRuntimeCompatibility(
     if (input.profileType === 'copilot') {
       return unsupported('Factory Droid does not support Copilot profiles.');
     }
-    if (input.profileType === 'cursor') {
-      return unsupported('Factory Droid does not support Cursor local-proxy profiles.');
-    }
     return { supported: true };
+  }
+
+  if (input.target === 'pi') {
+    return unsupported(
+      'Pi runtime execution is not implemented in CCS yet.',
+      'Use Pi directly or choose claude, droid, or codex for CCS runtime execution.'
+    );
   }
 
   if (input.profileType === 'account') {
@@ -52,10 +56,6 @@ export function evaluateTargetRuntimeCompatibility(
 
   if (input.profileType === 'copilot') {
     return unsupported('Codex CLI does not support Copilot profiles.');
-  }
-
-  if (input.profileType === 'cursor') {
-    return unsupported('Codex CLI does not support Cursor local-proxy profiles.');
   }
 
   if (input.profileType === 'default') {

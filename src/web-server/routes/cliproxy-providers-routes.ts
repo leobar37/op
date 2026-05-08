@@ -4,6 +4,8 @@
  */
 
 import { Router, Request, Response } from 'express';
+import * as fs from 'fs';
+import * as path from 'path';
 import {
   getAllAuthStatus,
   getOAuthConfig,
@@ -17,9 +19,139 @@ import { requireLocalAccessWhenAuthDisabled } from '../middleware/auth-middlewar
 import { CLIPROXY_PROFILES } from '../../auth/profile-detector';
 import { MODEL_CATALOG } from '../../cliproxy/model-catalog';
 import { PROVIDER_OWNER_HINTS } from '../../shared/cliproxy-model-routing';
+import { getCcsDir } from '../../utils/config-manager';
+import { maskSensitiveValue } from '../../utils/sensitive-keys';
 import type { CLIProxyProvider } from '../../cliproxy/types';
 
 const router = Router();
+
+/** Chinese providers that support API key configuration in the dashboard */
+const CHINESE_PROVIDERS = new Set(['deepseek', 'glm', 'kimi', 'mm']);
+
+/** API keys are stored in a single JSON file to avoid triggering the config file watcher */
+const API_KEYS_FILE = 'api-keys.json';
+
+function getApiKeysFilePath(): string {
+  return path.join(getCcsDir(), API_KEYS_FILE);
+}
+
+interface ApiKeyProfile {
+  id: string;
+  provider: string;
+  apiKey: string;
+  baseUrl: string;
+  defaultModel: string;
+  models: string[];
+  target: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+function loadApiKeys(): Record<string, ApiKeyProfile> {
+  const filePath = getApiKeysFilePath();
+  if (!fs.existsSync(filePath)) {
+    return {};
+  }
+  try {
+    const content = fs.readFileSync(filePath, 'utf8');
+    const data = JSON.parse(content) as { profiles?: Record<string, ApiKeyProfile> };
+    return data.profiles || {};
+  } catch {
+    return {};
+  }
+}
+
+function saveApiKeys(profiles: Record<string, ApiKeyProfile>): void {
+  const filePath = getApiKeysFilePath();
+  const dir = path.dirname(filePath);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+  const tempPath = filePath + '.tmp';
+  fs.writeFileSync(tempPath, JSON.stringify({ profiles }, null, 2) + '\n', 'utf8');
+  fs.renameSync(tempPath, filePath);
+}
+
+/** Read a provider's API key from the unified api-keys.json */
+function readProviderApiKey(provider: string): string | null {
+  try {
+    const profiles = loadApiKeys();
+    // Find any profile matching this provider (by provider field or id prefix)
+    for (const profile of Object.values(profiles)) {
+      if (profile.provider === provider && profile.apiKey) {
+        return profile.apiKey;
+      }
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+/** Write a provider's API key to the unified api-keys.json */
+function writeProviderApiKey(provider: string, apiKey: string): void {
+  const profiles = loadApiKeys();
+  const now = new Date().toISOString();
+
+  // Find existing profile for this provider
+  let existingId: string | null = null;
+  for (const [id, profile] of Object.entries(profiles)) {
+    if (profile.provider === provider) {
+      existingId = id;
+      break;
+    }
+  }
+
+  if (existingId) {
+    profiles[existingId].apiKey = apiKey;
+    profiles[existingId].updatedAt = now;
+  } else {
+    // Create a new profile
+    const id = provider;
+    profiles[id] = {
+      id,
+      provider,
+      apiKey,
+      baseUrl: '',
+      defaultModel: '',
+      models: [],
+      target: 'droid',
+      createdAt: now,
+      updatedAt: now,
+    };
+  }
+
+  saveApiKeys(profiles);
+}
+
+/** Delete a provider's API key from the unified api-keys.json */
+function deleteProviderApiKey(provider: string): void {
+  try {
+    const profiles = loadApiKeys();
+    const idsToDelete: string[] = [];
+
+    for (const [id, profile] of Object.entries(profiles)) {
+      if (profile.provider === provider) {
+        idsToDelete.push(id);
+      }
+    }
+
+    for (const id of idsToDelete) {
+      delete profiles[id];
+    }
+
+    if (idsToDelete.length > 0) {
+      saveApiKeys(profiles);
+    }
+  } catch {
+    // ignore
+  }
+}
+
+/** Check if a provider is a Chinese provider that supports API keys */
+function isChineseProvider(provider: string): boolean {
+  return CHINESE_PROVIDERS.has(provider.toLowerCase());
+}
 
 router.use((req: Request, res: Response, next) => {
   if (
@@ -82,13 +214,20 @@ router.get('/', async (_req: Request, res: Response): Promise<void> => {
       }
     }
 
-    const providers = authStatus.map((status) => ({
-      provider: status.provider,
-      displayName: status.displayName,
-      authenticated: status.authenticated,
-      accountCount: status.accounts.length,
-      modelCount: modelCounts[status.provider.toLowerCase()] || 0,
-    }));
+    const providers = authStatus.map((status) => {
+      const providerLower = status.provider.toLowerCase();
+      const apiKey = readProviderApiKey(status.provider);
+      return {
+        provider: status.provider,
+        displayName: status.displayName,
+        authenticated: status.authenticated,
+        accountCount: status.accounts.length,
+        modelCount: modelCounts[providerLower] || 0,
+        secretConfigured: isChineseProvider(status.provider)
+          ? Boolean(apiKey && apiKey.length > 0)
+          : undefined,
+      };
+    });
 
     res.json({ providers });
   } catch (error) {
@@ -180,6 +319,97 @@ router.get('/:provider/models', async (req: Request, res: Response): Promise<voi
     }
 
     res.json({ provider, models: providerModels });
+  } catch (error) {
+    res.status(500).json({ error: (error as Error).message });
+  }
+});
+
+// ==================== API Key Management for Chinese Providers ====================
+
+/**
+ * GET /api/provider-models/:provider/apikey - Get API key status
+ * Returns: { provider, secretConfigured, apiKey, maskedKey }
+ * Note: apiKey is returned for local dashboard use only
+ */
+router.get('/:provider/apikey', async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { provider } = req.params;
+
+    if (!isChineseProvider(provider)) {
+      res
+        .status(400)
+        .json({ error: `Provider ${provider} does not support API key configuration` });
+      return;
+    }
+
+    const apiKey = readProviderApiKey(provider);
+    const secretConfigured = Boolean(apiKey && apiKey.length > 0);
+
+    res.json({
+      provider,
+      secretConfigured,
+      apiKey: secretConfigured ? apiKey : null,
+      maskedKey: secretConfigured && apiKey ? maskSensitiveValue(apiKey) : null,
+    });
+  } catch (error) {
+    res.status(500).json({ error: (error as Error).message });
+  }
+});
+
+/**
+ * PUT /api/provider-models/:provider/apikey - Save or update API key
+ * Body: { apiKey: string }
+ */
+router.put('/:provider/apikey', async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { provider } = req.params;
+    const { apiKey } = req.body ?? {};
+
+    if (!isChineseProvider(provider)) {
+      res
+        .status(400)
+        .json({ error: `Provider ${provider} does not support API key configuration` });
+      return;
+    }
+
+    if (typeof apiKey !== 'string' || !apiKey.trim()) {
+      res.status(400).json({ error: 'apiKey is required and must be a non-empty string' });
+      return;
+    }
+
+    writeProviderApiKey(provider, apiKey.trim());
+
+    res.json({
+      provider,
+      secretConfigured: true,
+      maskedKey: maskSensitiveValue(apiKey.trim()),
+    });
+  } catch (error) {
+    res.status(500).json({ error: (error as Error).message });
+  }
+});
+
+/**
+ * DELETE /api/provider-models/:provider/apikey - Clear API key
+ */
+router.delete('/:provider/apikey', async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { provider } = req.params;
+
+    if (!isChineseProvider(provider)) {
+      res
+        .status(400)
+        .json({ error: `Provider ${provider} does not support API key configuration` });
+      return;
+    }
+
+    deleteProviderApiKey(provider);
+
+    res.json({
+      provider,
+      secretConfigured: false,
+      maskedKey: null,
+    });
   } catch (error) {
     res.status(500).json({ error: (error as Error).message });
   }

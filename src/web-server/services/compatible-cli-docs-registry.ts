@@ -163,6 +163,75 @@ const COMPATIBLE_CLI_DOCS_REGISTRY: Record<string, CompatibleCliDocsRegistryEntr
       ],
     },
   },
+  pi: {
+    cliId: 'pi',
+    displayName: 'Pi Coding Agent',
+    docsReference: {
+      providerValues: [
+        'subscription providers',
+        'API-key providers',
+        'custom providers',
+        'custom models',
+      ],
+      settingsHierarchy: [
+        'global agent config (~/.pi/agent)',
+        'project context files (AGENTS.md or CLAUDE.md)',
+        'CLI flags and environment variables',
+      ],
+      notes: [
+        'Pi is distributed as @earendil-works/pi-coding-agent and launched with the pi binary',
+        'Pi can authenticate through /login or API-key environment variables',
+        'API-key provider credentials may be stored by Pi in ~/.pi/agent/auth.json',
+        'CCS declares pi as a persisted apply target for future integration but does not write Pi auth credentials yet',
+      ],
+      links: [
+        {
+          id: 'pi-quickstart',
+          label: 'Pi Quickstart',
+          url: 'https://pi.dev/docs/latest/quickstart',
+          category: 'overview',
+          source: 'provider',
+          description: 'Install, authenticate, start sessions, and use basic Pi CLI modes.',
+        },
+        {
+          id: 'pi-providers',
+          label: 'Pi Providers',
+          url: 'https://pi.dev/docs/latest/providers',
+          category: 'byok',
+          source: 'provider',
+          description: 'Supported providers, authentication modes, and API-key setup.',
+        },
+        {
+          id: 'pi-settings',
+          label: 'Pi Settings',
+          url: 'https://pi.dev/docs/latest/settings',
+          category: 'configuration',
+          source: 'provider',
+          description: 'Pi configuration files, settings, and environment variable behavior.',
+        },
+      ],
+      providerDocs: [
+        {
+          provider: 'anthropic',
+          label: 'Anthropic Messages API',
+          apiFormat: 'Messages API',
+          url: 'https://docs.anthropic.com/en/api/messages',
+        },
+        {
+          provider: 'openai',
+          label: 'OpenAI Responses API',
+          apiFormat: 'Responses API',
+          url: 'https://platform.openai.com/docs/api-reference/responses',
+        },
+        {
+          provider: 'generic-chat-completion-api',
+          label: 'OpenAI Chat Completions Spec',
+          apiFormat: 'Chat Completions API',
+          url: 'https://platform.openai.com/docs/api-reference/chat',
+        },
+      ],
+    },
+  },
 };
 
 export function getCompatibleCliDocsReference(cliId: string): CompatibleCliDocsReference {

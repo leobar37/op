@@ -137,6 +137,13 @@ export const ROOT_COMMAND_ROUTES: readonly NamedCommandRoute[] = [
     },
   },
   {
+    name: 'api-key',
+    handle: async (args) => {
+      const { handleApiKeyCommand } = await import('./api-key-command');
+      await handleApiKeyCommand(args);
+    },
+  },
+  {
     name: 'cliproxy',
     handle: async (args) => {
       const { handleCliproxyCommand } = await import('./cliproxy-command');

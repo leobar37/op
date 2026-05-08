@@ -182,6 +182,18 @@ export const PROVIDER_CAPABILITIES: Record<CLIProxyProvider, ProviderCapabilitie
     tokenTypeValues: ['kilo'],
     aliases: [],
   },
+  deepseek: {
+    displayName: 'DeepSeek',
+    description: 'DeepSeek V4 Pro/Flash models',
+    oauthFlow: 'device_code',
+    callbackPort: null,
+    callbackProviderName: 'deepseek',
+    authUrlProviderName: 'deepseek',
+    refreshOwnership: 'unsupported',
+    authFilePrefixes: ['deepseek-'],
+    tokenTypeValues: ['deepseek'],
+    aliases: [],
+  },
 };
 
 export const CLIPROXY_PROVIDER_IDS = Object.freeze(

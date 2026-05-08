@@ -52,7 +52,6 @@ export interface ProviderPresetDefinition {
  * Keep this minimal and explicit to avoid hidden implicit behavior.
  */
 export const PROVIDER_PRESET_ALIASES: Readonly<Record<string, ProviderPresetId>> = Object.freeze({
-  glmt: 'glm',
   kimi: 'km',
   hf: 'huggingface',
 });
@@ -177,10 +176,10 @@ const RAW_PROVIDER_PRESET_DEFINITIONS: readonly ProviderPresetDefinition[] = [
   {
     id: 'deepseek',
     name: 'DeepSeek',
-    description: 'V3.2 and R1 reasoning model (128K context)',
+    description: 'V4 Pro and V4 Flash - latest coding models (1M context)',
     baseUrl: 'https://api.deepseek.com/anthropic',
     defaultProfileName: 'deepseek',
-    defaultModel: 'deepseek-chat',
+    defaultModel: 'deepseek-v4-pro',
     apiKeyPlaceholder: 'sk-...',
     apiKeyHint: 'Get your API key at platform.deepseek.com',
     category: 'alternative',

@@ -34,21 +34,6 @@ export type {
   DelegationEvent,
 } from './delegation';
 
-// Legacy GLMT transformer types
-export type {
-  AnthropicMessage,
-  ContentBlock,
-  AnthropicRequest,
-  AnthropicTool,
-  OpenAIMessage,
-  OpenAIToolCall,
-  OpenAIRequest,
-  OpenAITool,
-  SSEEvent,
-  DeltaChunk,
-  TransformationContext,
-} from './glmt';
-
 // Utility types
 export { LogLevel } from './utils';
 export type { ErrorCode, ColorName, TerminalInfo, Result } from './utils';

@@ -29,13 +29,24 @@ export interface DroidCustomModelEntry {
   maxOutputTokens?: number;
   extraArgs?: Record<string, unknown>;
   extra_args?: Record<string, unknown>;
+  sessionDefaultSettings?: DroidSessionDefaultSettings;
   [key: string]: unknown;
+}
+
+export interface DroidSessionDefaultSettings {
+  model?: string;
+  reasoningEffort?: string;
+  interactionMode?: 'auto' | 'spec' | string;
+  autonomyLevel?: 'off' | 'low' | 'medium' | 'high' | string;
+  autonomyMode?: string;
+  specModeModel?: string;
+  specModeReasoningEffort?: string;
 }
 
 export interface DroidSettings {
   model?: string;
   customModels?: DroidCustomModelEntry[];
-  sessionDefaultSettings?: Record<string, unknown>;
+  sessionDefaultSettings?: DroidSessionDefaultSettings;
   hooks?: Record<string, unknown>;
   [key: string]: unknown;
 }

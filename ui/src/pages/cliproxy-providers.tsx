@@ -4,7 +4,7 @@
  * and Droid JSON export integration
  */
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { toast } from 'sonner';
 import {
   Check,
@@ -17,6 +17,8 @@ import {
   Zap,
   Rocket,
   AlertTriangle,
+  Eye,
+  EyeOff,
 } from 'lucide-react';
 import { ProviderLogo } from '@/components/cliproxy/provider-logo';
 import { CodeEditor } from '@/components/shared/code-editor';
@@ -32,9 +34,14 @@ import {
   useCliproxyGlobalProviders,
   useCliproxyProvidersConfig,
   useCliproxyProviderModels,
+  useProviderApiKey,
+  useSaveProviderApiKey,
+  useClearProviderApiKey,
 } from '@/hooks/use-cliproxy-providers';
 import { useDroid } from '@/hooks/use-droid';
 import type { DroidCustomModelEntry } from '@/lib/api-client';
+import { resolveDroidProviderForModel } from '@/lib/provider-mapping';
+import { computeModelHash } from '@/lib/hash';
 import { cn } from '@/lib/utils';
 import { useTranslation } from 'react-i18next';
 
@@ -49,6 +56,7 @@ function ProviderCard({
     authenticated: boolean;
     accountCount: number;
     modelCount: number;
+    secretConfigured?: boolean;
   };
   isSelected: boolean;
   onSelect: () => void;
@@ -80,6 +88,24 @@ function ProviderCard({
             ) : (
               <Badge variant="secondary" className="text-[10px] h-4 px-1.5">
                 Not connected
+              </Badge>
+            )}
+            {provider.secretConfigured === true && (
+              <Badge
+                variant="default"
+                className="text-[10px] h-4 px-1.5 bg-blue-600 hover:bg-blue-600"
+              >
+                <Check className="w-2.5 h-2.5 mr-0.5" />
+                Configured
+              </Badge>
+            )}
+            {provider.secretConfigured === false && (
+              <Badge
+                variant="outline"
+                className="text-[10px] h-4 px-1.5 border-amber-500 text-amber-600"
+              >
+                <AlertTriangle className="w-2.5 h-2.5 mr-0.5" />
+                Missing secret
               </Badge>
             )}
           </div>
@@ -176,24 +202,9 @@ function setAppliedHash(provider: string, modelId: string, hash: string): void {
   }
 }
 
-function computeClientHash(entry: Record<string, unknown>): string {
-  const normalized = Object.keys(entry)
-    .sort()
-    .reduce(
-      (acc, key) => {
-        acc[key] = entry[key];
-        return acc;
-      },
-      {} as Record<string, unknown>
-    );
-  let hash = 0;
-  const str = JSON.stringify(normalized);
-  for (let i = 0; i < str.length; i++) {
-    const char = str.charCodeAt(i);
-    hash = (hash << 5) - hash + char;
-    hash = hash & hash;
-  }
-  return Math.abs(hash).toString(16).padStart(8, '0');
+/** Check if a provider is a Chinese provider that supports API key configuration */
+function isChineseProvider(provider: string): boolean {
+  return ['deepseek', 'glm', 'kimi', 'mm'].includes(provider.toLowerCase());
 }
 
 export function CliproxyProvidersPage() {
@@ -210,16 +221,24 @@ export function CliproxyProvidersPage() {
   const [selectedProvider, setSelectedProvider] = useState<string | null>(null);
   const [selectedModel, setSelectedModel] = useState<string | null>(null);
   const [displayName, setDisplayName] = useState('');
-  const [apiKey, setApiKey] = useState('ccs-internal-managed');
   const [noImageSupport, setNoImageSupport] = useState(false);
   const [modelIndex, setModelIndex] = useState(0);
   const [hasCopied, setHasCopied] = useState(false);
+  const [appliedHashVersion, setAppliedHashVersion] = useState(0);
+  const [apiKeyInput, setApiKeyInput] = useState('');
+  const [showApiKey, setShowApiKey] = useState(false);
+  const [applyStrategy, setApplyStrategy] = useState<'direct' | 'proxy'>('direct');
 
   const {
     data: modelsData,
     isLoading: modelsLoading,
     isError: modelsError,
   } = useCliproxyProviderModels(selectedProvider || '');
+
+  const { data: apiKeyData, isLoading: apiKeyLoading } = useProviderApiKey(selectedProvider || '');
+
+  const saveApiKeyMutation = useSaveProviderApiKey();
+  const clearApiKeyMutation = useClearProviderApiKey();
 
   const providers = providersData?.providers || [];
 
@@ -233,45 +252,88 @@ export function CliproxyProvidersPage() {
   const generatedEntry = useMemo(() => {
     if (!selectedProvider || !selectedModel || !baseUrl) return null;
 
+    const isDirect = applyStrategy === 'direct';
+    const directBaseUrl = `https://api.${selectedProvider}.com/anthropic`;
+    // Use input key if user typed one, otherwise fall back to saved key from server
+    const savedKey = apiKeyData?.apiKey || '';
+    const effectiveApiKey = isDirect
+      ? apiKeyInput || savedKey || 'ccs-internal-managed'
+      : 'ccs-internal-managed';
+
     const entry: DroidCustomModelEntry = {
       model: selectedModel,
       id: `custom:${selectedProvider.toUpperCase()}:${selectedModel}`,
       index: modelIndex,
-      baseUrl,
-      apiKey,
+      baseUrl: isDirect ? directBaseUrl : baseUrl,
+      apiKey: effectiveApiKey,
       displayName: displayName || selectedModel,
       noImageSupport,
-      provider: 'anthropic',
+      provider: resolveDroidProviderForModel(selectedProvider, selectedModel),
     };
 
     return entry;
-  }, [selectedProvider, selectedModel, baseUrl, apiKey, displayName, noImageSupport, modelIndex]);
+  }, [
+    selectedProvider,
+    selectedModel,
+    baseUrl,
+    apiKeyInput,
+    apiKeyData,
+    displayName,
+    noImageSupport,
+    modelIndex,
+    applyStrategy,
+  ]);
 
   const generatedJson = useMemo(() => {
     if (!generatedEntry) return '';
     return JSON.stringify(generatedEntry, null, 2);
   }, [generatedEntry]);
 
-  const currentHash = useMemo(() => {
-    if (!generatedEntry) return '';
-    return computeClientHash(generatedEntry as unknown as Record<string, unknown>);
+  // Async hash computation to match server-side SHA-256
+  const [currentHash, setCurrentHash] = useState('');
+  const [hashReady, setHashReady] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    const updateHash = async () => {
+      if (!generatedEntry) {
+        setCurrentHash('');
+        setHashReady(true);
+        return;
+      }
+      setHashReady(false);
+      const hash = await computeModelHash(generatedEntry as unknown as Record<string, unknown>);
+      if (!cancelled) {
+        setCurrentHash(hash);
+        setHashReady(true);
+      }
+    };
+    void updateHash();
+    return () => {
+      cancelled = true;
+    };
   }, [generatedEntry]);
 
   const appliedHash = useMemo(() => {
     if (!selectedProvider || !selectedModel) return null;
     return getAppliedHash(selectedProvider, selectedModel);
-  }, [selectedProvider, selectedModel]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedProvider, selectedModel, appliedHashVersion]);
 
   const applyState = useMemo(() => {
+    if (!hashReady || !currentHash) return 'not-applied';
     if (!appliedHash) return 'not-applied';
     if (appliedHash === currentHash) return 'applied';
     return 'modified';
-  }, [appliedHash, currentHash]);
+  }, [appliedHash, currentHash, hashReady]);
 
   const handleProviderSelect = (provider: string) => {
     setSelectedProvider(provider);
     setSelectedModel(null);
     setDisplayName('');
+    setApiKeyInput('');
+    setShowApiKey(false);
+    setApplyStrategy('direct');
   };
 
   const handleModelSelect = (modelId: string) => {
@@ -295,6 +357,7 @@ export function CliproxyProvidersPage() {
         hash: currentHash,
       });
       setAppliedHash(selectedProvider, selectedModel, result.meta.appliedHash);
+      setAppliedHashVersion((v) => v + 1);
       toast.success(t('cliproxyProviders.appliedToDroid'));
     } catch (error) {
       toast.error((error as Error).message || t('cliproxyProviders.applyFailed'));
@@ -303,6 +366,34 @@ export function CliproxyProvidersPage() {
 
   const handleRefresh = () => {
     void refetchProviders();
+  };
+
+  const handleSaveApiKey = async () => {
+    if (!selectedProvider || !apiKeyInput.trim()) {
+      toast.error(t('cliproxyProviders.apiKeyRequired'));
+      return;
+    }
+    try {
+      await saveApiKeyMutation.mutateAsync({
+        provider: selectedProvider,
+        apiKey: apiKeyInput.trim(),
+      });
+      toast.success(t('cliproxyProviders.apiKeySaved'));
+      setShowApiKey(false);
+    } catch (error) {
+      toast.error((error as Error).message || t('cliproxyProviders.apiKeySaveFailed'));
+    }
+  };
+
+  const handleClearApiKey = async () => {
+    if (!selectedProvider) return;
+    try {
+      await clearApiKeyMutation.mutateAsync(selectedProvider);
+      toast.success(t('cliproxyProviders.apiKeyCleared'));
+      setApiKeyInput('');
+    } catch (error) {
+      toast.error((error as Error).message || t('cliproxyProviders.apiKeyClearFailed'));
+    }
   };
 
   return (
@@ -453,6 +544,90 @@ export function CliproxyProvidersPage() {
                     </CardContent>
                   </Card>
 
+                  {/* Provider API Key Configuration - Only for Chinese providers */}
+                  {selectedProvider && isChineseProvider(selectedProvider) && (
+                    <Card>
+                      <CardHeader className="pb-2">
+                        <CardTitle className="text-sm flex items-center gap-2">
+                          <KeyRound className="h-4 w-4 text-primary" />
+                          {t('cliproxyProviders.providerApiKey')}
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        {apiKeyLoading ? (
+                          <Skeleton className="h-10 w-full" />
+                        ) : (
+                          <>
+                            <div className="flex items-center gap-2">
+                              <div className="relative flex-1">
+                                <Input
+                                  type={showApiKey ? 'text' : 'password'}
+                                  value={apiKeyInput}
+                                  onChange={(e) => setApiKeyInput(e.target.value)}
+                                  placeholder={
+                                    apiKeyData?.secretConfigured
+                                      ? t('cliproxyProviders.apiKeyPlaceholderConfigured')
+                                      : t('cliproxyProviders.apiKeyPlaceholder')
+                                  }
+                                  className="pr-10"
+                                />
+                                <button
+                                  type="button"
+                                  onClick={() => setShowApiKey((v) => !v)}
+                                  className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                                  tabIndex={-1}
+                                >
+                                  {showApiKey ? (
+                                    <EyeOff className="w-4 h-4" />
+                                  ) : (
+                                    <Eye className="w-4 h-4" />
+                                  )}
+                                </button>
+                              </div>
+                              <Button
+                                size="sm"
+                                onClick={handleSaveApiKey}
+                                disabled={!apiKeyInput.trim() || saveApiKeyMutation.isPending}
+                              >
+                                {saveApiKeyMutation.isPending ? (
+                                  <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                                ) : (
+                                  t('cliproxyProviders.saveApiKey')
+                                )}
+                              </Button>
+                              {apiKeyData?.secretConfigured && (
+                                <Button
+                                  size="sm"
+                                  variant="outline"
+                                  onClick={handleClearApiKey}
+                                  disabled={clearApiKeyMutation.isPending}
+                                >
+                                  {clearApiKeyMutation.isPending ? (
+                                    <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                                  ) : (
+                                    t('cliproxyProviders.clearApiKey')
+                                  )}
+                                </Button>
+                              )}
+                            </div>
+                            {apiKeyData?.secretConfigured && (
+                              <p className="text-xs text-green-600 flex items-center gap-1">
+                                <Check className="w-3 h-3" />
+                                {t('cliproxyProviders.apiKeyConfigured')}
+                              </p>
+                            )}
+                            {apiKeyData?.secretConfigured === false && (
+                              <p className="text-xs text-amber-600 flex items-center gap-1">
+                                <AlertTriangle className="w-3 h-3" />
+                                {t('cliproxyProviders.apiKeyMissing')}
+                              </p>
+                            )}
+                          </>
+                        )}
+                      </CardContent>
+                    </Card>
+                  )}
+
                   {/* Configuration Form */}
                   {selectedModel && (
                     <>
@@ -480,10 +655,21 @@ export function CliproxyProvidersPage() {
                                 {t('cliproxyProviders.apiKey')}
                               </label>
                               <Input
-                                value={apiKey}
-                                onChange={(e) => setApiKey(e.target.value)}
+                                value={
+                                  applyStrategy === 'direct'
+                                    ? apiKeyInput || apiKeyData?.apiKey || 'ccs-internal-managed'
+                                    : 'ccs-internal-managed'
+                                }
+                                disabled
                                 placeholder="ccs-internal-managed"
                               />
+                              <p className="text-xs text-muted-foreground">
+                                {applyStrategy === 'direct'
+                                  ? apiKeyInput || apiKeyData?.apiKey
+                                    ? 'Using API key from saved profile'
+                                    : 'Using default ccs-internal-managed'
+                                  : 'Proxy mode: CLIProxy handles authentication'}
+                              </p>
                             </div>
                             <div className="space-y-2">
                               <label className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
@@ -536,6 +722,27 @@ export function CliproxyProvidersPage() {
                               )}
                             </CardTitle>
                             <div className="flex items-center gap-2">
+                              {/* Strategy toggle for API-key providers */}
+                              {selectedProviderData?.secretConfigured && (
+                                <div className="flex items-center gap-1 mr-2">
+                                  <Button
+                                    size="sm"
+                                    variant={applyStrategy === 'direct' ? 'default' : 'outline'}
+                                    onClick={() => setApplyStrategy('direct')}
+                                    className="h-7 text-xs"
+                                  >
+                                    Direct
+                                  </Button>
+                                  <Button
+                                    size="sm"
+                                    variant={applyStrategy === 'proxy' ? 'default' : 'outline'}
+                                    onClick={() => setApplyStrategy('proxy')}
+                                    className="h-7 text-xs"
+                                  >
+                                    Proxy
+                                  </Button>
+                                </div>
+                              )}
                               <Button
                                 size="sm"
                                 variant={applyState === 'applied' ? 'outline' : 'default'}

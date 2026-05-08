@@ -37,11 +37,6 @@ describe('help command parity', () => {
     }
   });
 
-  test('root help no longer markets deprecated glmt directly', async () => {
-    const rendered = await renderLines((writeLine) => handleHelpCommand(writeLine));
-    expect(rendered.includes('ccs glmt')).toBe(false);
-  });
-
   test('root help documents native Claude session effort override', async () => {
     const rendered = await renderLines((writeLine) => handleHelpCommand(writeLine));
 

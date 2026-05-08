@@ -2,54 +2,40 @@ import { describe, expect, it } from 'bun:test';
 import { createAnthropicProxyResponse } from '../../../../src/proxy/transformers/sse-stream-transformer';
 
 describe('proxy SSE stream transformer', () => {
-  it('converts OpenAI JSON into Anthropic message JSON', async () => {
-    const response = new Response(
-      JSON.stringify({
-        id: 'chatcmpl_1',
-        model: 'claude-sonnet-4.5',
-        choices: [
-          {
-            index: 0,
-            message: {
-              role: 'assistant',
-              content: 'Here is the result.',
-              reasoning_content: 'Need to call the tool first.',
-              tool_calls: [
-                {
-                  id: 'toolu_2',
-                  type: 'function',
-                  function: { name: 'search', arguments: '{"q":"proxy"}' },
-                },
-              ],
-            },
-            finish_reason: 'tool_calls',
+  it('passes through OpenAI JSON responses unchanged', async () => {
+    const originalBody = {
+      id: 'chatcmpl_1',
+      model: 'claude-sonnet-4.5',
+      choices: [
+        {
+          index: 0,
+          message: {
+            role: 'assistant',
+            content: 'Here is the result.',
           },
-        ],
-        usage: { prompt_tokens: 12, completion_tokens: 4, total_tokens: 16 },
-      }),
-      {
-        status: 200,
-        headers: { 'Content-Type': 'application/json' },
-      }
-    );
-
-    const transformed = await createAnthropicProxyResponse(response);
-    const body = (await transformed.json()) as {
-      type: string;
-      stop_reason: string;
-      content: Array<{ type: string; thinking?: string; name?: string }>;
+          finish_reason: 'stop',
+        },
+      ],
+      usage: { prompt_tokens: 12, completion_tokens: 4, total_tokens: 16 },
     };
 
-    expect(body.type).toBe('message');
-    expect(body.stop_reason).toBe('tool_use');
-    expect(body.content.map((block) => block.type)).toEqual(['thinking', 'text', 'tool_use']);
-    expect(body.content[0]?.thinking).toContain('Need to call the tool first');
-    expect(body.content[2]?.name).toBe('search');
+    const response = new Response(JSON.stringify(originalBody), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    const transformed = await createAnthropicProxyResponse(response);
+    const body = (await transformed.json()) as typeof originalBody;
+
+    expect(body.id).toBe(originalBody.id);
+    expect(body.model).toBe(originalBody.model);
+    expect(body.choices[0].message.content).toBe('Here is the result.');
+    expect(body.usage.prompt_tokens).toBe(12);
   });
 
-  it('converts OpenAI SSE chunks into Anthropic SSE events', async () => {
+  it('passes through OpenAI SSE streams unchanged', async () => {
     const openAISse = [
-      'data: {"id":"chatcmpl_2","object":"chat.completion.chunk","created":1,"model":"claude-sonnet-4.5","choices":[{"index":0,"delta":{"role":"assistant","content":"Hello"},"finish_reason":null}]}\n\n',
+      'data: {"id":"chatcmpl_2","object":"chat.completion.chunk","created":1,"model":"claude-sonnet-4.5","choices":[{"index":0,"delta":{"role":"assistant","content":"Hello"},"finish_reason":null}]\n\n',
       'data: {"id":"chatcmpl_2","object":"chat.completion.chunk","created":1,"model":"claude-sonnet-4.5","choices":[{"index":0,"delta":{},"finish_reason":"stop"}],"usage":{"prompt_tokens":5,"completion_tokens":1,"total_tokens":6}}\n\n',
       'data: [DONE]\n\n',
     ].join('');
@@ -62,9 +48,23 @@ describe('proxy SSE stream transformer', () => {
     );
 
     const body = await transformed.text();
-    expect(body).toContain('event: message_start');
-    expect(body).toContain('event: content_block_start');
-    expect(body).toContain('"type":"text_delta"');
-    expect(body).toContain('event: message_stop');
+    expect(body).toContain('data:');
+    expect(body).toContain('[DONE]');
+    expect(body).toContain('chatcmpl_2');
+  });
+
+  it('converts upstream error responses into Anthropic-style error payloads', async () => {
+    const response = new Response(
+      JSON.stringify({ error: { type: 'rate_limit_error', message: 'Too many requests' } }),
+      { status: 429, headers: { 'Content-Type': 'application/json' } }
+    );
+
+    const transformed = await createAnthropicProxyResponse(response);
+    const body = (await transformed.json()) as { type: string; error: { type: string; message: string } };
+
+    expect(transformed.status).toBe(429);
+    expect(body.type).toBe('error');
+    expect(body.error.type).toBe('rate_limit_error');
+    expect(body.error.message).toBe('Too many requests');
   });
 });

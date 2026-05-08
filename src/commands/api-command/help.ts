@@ -5,6 +5,7 @@ import {
   getPresetIds,
   type ProviderPreset,
 } from '../../api/services';
+import { getPersistedTargetChoices } from '../../targets/target-metadata';
 import { color, dim, fail, header, initUI, subheader } from '../../utils/ui';
 import { sanitizeHelpText } from './shared';
 
@@ -62,7 +63,7 @@ export async function showApiCommandHelp(writeLine: HelpWriter = console.log): P
     `  ${color('--1m / --no-1m', 'command')}         Write or clear [1m] on compatible Claude mappings`
   );
   writeLine(
-    `  ${color('--target <cli>', 'command')}       Default target: claude or droid (create)`
+    `  ${color('--target <cli>', 'command')}       Default target: ${getPersistedTargetChoices()} (create/import)`
   );
   writeLine(`  ${color('--register', 'command')}           Register discovered orphan settings`);
   writeLine(`  ${color('--json', 'command')}               JSON output for discover command`);

@@ -670,6 +670,36 @@ export const MODEL_CATALOGS: Record<string, ProviderCatalog> = {
       },
     ],
   },
+  deepseek: {
+    provider: 'deepseek',
+    displayName: 'DeepSeek',
+    defaultModel: 'deepseek-v4-pro',
+    models: [
+      {
+        id: 'deepseek-v4-pro',
+        name: 'DeepSeek V4 Pro',
+        description: '1.6T total params, 49B active, 1M context, reasoning',
+        extendedContext: true,
+        presetMapping: {
+          default: 'deepseek-v4-pro',
+          opus: 'deepseek-v4-pro',
+          sonnet: 'deepseek-v4-pro',
+          haiku: 'deepseek-v4-flash',
+        },
+      },
+      {
+        id: 'deepseek-v4-flash',
+        name: 'DeepSeek V4 Flash',
+        description: 'Fast inference, high-throughput coding optimized',
+        presetMapping: {
+          default: 'deepseek-v4-flash',
+          opus: 'deepseek-v4-pro',
+          sonnet: 'deepseek-v4-flash',
+          haiku: 'deepseek-v4-flash',
+        },
+      },
+    ],
+  },
   claude: {
     provider: 'claude',
     displayName: 'Claude (Anthropic)',

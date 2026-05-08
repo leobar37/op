@@ -693,10 +693,6 @@ router.put('/', (req: Request, res: Response): void => {
         currentConfig.copilot = config.copilot;
       }
 
-      if (config.cursor !== undefined) {
-        currentConfig.cursor = config.cursor;
-      }
-
       if (config.quota_management !== undefined) {
         currentConfig.quota_management = config.quota_management;
       }

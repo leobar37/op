@@ -146,7 +146,7 @@ afterEach(async () => {
 });
 
 describe('openai proxy messages endpoint', () => {
-  it('translates Anthropic requests to OpenAI upstream and streams Anthropic SSE back', async () => {
+  it('translates Anthropic requests to OpenAI upstream and passes through SSE', async () => {
     const response = await requestProxy({
       model: 'hf-model',
       stream: true,
@@ -156,10 +156,10 @@ describe('openai proxy messages endpoint', () => {
 
     const body = await response.text();
     expect(response.status).toBe(200);
-    expect(body).toContain('event: message_start');
-    expect(body).toContain('content_block_delta');
-    expect(body).toContain('tool_use');
-    expect(body).toContain('message_stop');
+    // Passthrough: upstream OpenAI SSE is forwarded as-is
+    expect(body).toContain('data:');
+    expect(body).toContain('chatcmpl_1');
+    expect(body).toContain('[DONE]');
 
     const parsedUpstream = upstreamBody as {
       messages?: Array<{ role: string; content: string }>;
@@ -220,19 +220,19 @@ describe('openai proxy messages endpoint', () => {
     });
   });
 
-  it('falls back to Anthropic JSON for non-streaming requests', async () => {
+  it('passes through non-streaming JSON responses unchanged', async () => {
     const response = await requestProxy({
       model: 'hf-model',
       messages: [{ role: 'user', content: 'hello' }],
     });
     const body = (await response.json()) as {
-      type?: string;
-      content?: Array<{ type?: string; text?: string }>;
+      id?: string;
+      choices?: Array<{ message?: { content?: string } }>;
     };
 
     expect(response.status).toBe(200);
-    expect(body.type).toBe('message');
-    expect(body.content?.[0]).toEqual({ type: 'text', text: 'Plain answer' });
+    expect(body.id).toBe('chatcmpl_1');
+    expect(body.choices?.[0]?.message?.content).toBe('Plain answer');
   });
 
   it('returns invalid_request_error for malformed JSON', async () => {
@@ -517,7 +517,7 @@ describe('openai proxy messages endpoint', () => {
     expect(toolMsgs?.[1]?.tool_call_id).toBe('toolu_02');
   });
 
-  it('streams interleaved tool call fragments without premature block stops', async () => {
+  it('streams interleaved tool call fragments as passthrough SSE', async () => {
     const response = await requestProxy({
       model: 'hf-model',
       stream: true,
@@ -538,14 +538,10 @@ describe('openai proxy messages endpoint', () => {
 
     const body = await response.text();
     expect(response.status).toBe(200);
-    expect(body.match(/event: content_block_start/g)?.length).toBe(2);
-    expect(body.match(/event: content_block_stop/g)?.length).toBe(2);
-
-    const stopIndex = body.indexOf('event: content_block_stop');
-    const deltaAIndex = body.indexOf('"partial_json":"{\\"path\\":\\"a.ts\\"}"');
-    const deltaBIndex = body.indexOf('"partial_json":"{\\"path\\":\\"b.ts\\"}"');
-    expect(deltaAIndex).toBeGreaterThan(-1);
-    expect(deltaBIndex).toBeGreaterThan(-1);
-    expect(stopIndex).toBeGreaterThan(deltaBIndex);
+    // Passthrough: upstream OpenAI SSE forwarded as-is
+    expect(body).toContain('data:');
+    expect(body).toContain('tool_calls');
+    expect(body).toContain('finish_reason');
+    expect(body).toContain('[DONE]');
   });
 });

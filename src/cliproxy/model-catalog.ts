@@ -261,6 +261,38 @@ export const MODEL_CATALOG: Partial<Record<CLIProxyProvider, ProviderCatalog>> =
       },
     ],
   },
+  deepseek: {
+    provider: 'deepseek',
+    displayName: 'DeepSeek',
+    defaultModel: 'deepseek-v4-pro',
+    models: [
+      {
+        id: 'deepseek-v4-pro',
+        name: 'DeepSeek V4 Pro',
+        description: '1.6T total params, 49B active, 1M context, reasoning',
+        thinking: {
+          type: 'budget',
+          min: 1024,
+          max: 128000,
+          zeroAllowed: true,
+          dynamicAllowed: true,
+        },
+        extendedContext: true,
+      },
+      {
+        id: 'deepseek-v4-flash',
+        name: 'DeepSeek V4 Flash',
+        description: 'Fast inference, high-throughput coding optimized',
+        thinking: {
+          type: 'budget',
+          min: 1024,
+          max: 64000,
+          zeroAllowed: true,
+          dynamicAllowed: true,
+        },
+      },
+    ],
+  },
   kimi: {
     provider: 'kimi',
     displayName: 'Kimi (Moonshot)',

@@ -1,9 +1,8 @@
 /**
- * Copilot and Cursor IDE integration configuration types and defaults.
+ * Copilot integration configuration types and defaults.
  *
  * Covers:
  * - CopilotConfig: GitHub Copilot proxy integration (strictly opt-in)
- * - CursorConfig: Cursor IDE proxy daemon
  */
 
 /**
@@ -43,29 +42,6 @@ export interface CopilotConfig {
 }
 
 /**
- * Cursor IDE integration configuration.
- * Enables Cursor IDE usage via cursor proxy daemon.
- */
-export interface CursorConfig {
-  /** Enable Cursor integration (default: false) */
-  enabled: boolean;
-  /** Port for cursor proxy daemon (default: 20129) */
-  port: number;
-  /** Auto-start daemon when CCS starts (default: false) */
-  auto_start: boolean;
-  /** Enable ghost mode to disable telemetry (default: true) */
-  ghost_mode: boolean;
-  /** Default model ID used by Cursor integration */
-  model: string;
-  /** Optional tier mapping for Claude-compatible model routing */
-  opus_model?: string;
-  /** Optional tier mapping for Claude-compatible model routing */
-  sonnet_model?: string;
-  /** Optional tier mapping for Claude-compatible model routing */
-  haiku_model?: string;
-}
-
-/**
  * Default Copilot configuration.
  * Strictly opt-in - disabled by default.
  * Uses gpt-4.1 as default model (free tier compatible).
@@ -78,16 +54,4 @@ export const DEFAULT_COPILOT_CONFIG: CopilotConfig = {
   rate_limit: null,
   wait_on_limit: true,
   model: 'gpt-4.1',
-};
-
-/**
- * Default Cursor configuration.
- * Disabled by default, ghost mode enabled for privacy.
- */
-export const DEFAULT_CURSOR_CONFIG: CursorConfig = {
-  enabled: false,
-  port: 20129,
-  auto_start: false,
-  ghost_mode: true,
-  model: 'gpt-5.3-codex',
 };

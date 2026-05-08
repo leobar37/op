@@ -101,7 +101,9 @@ export const PROVIDER_ASSETS: Partial<Record<ProviderVisualId, string>> = {
   qwen: '/assets/providers/qwen-color.svg',
   iflow: '/assets/providers/iflow.png',
   kiro: '/assets/providers/kiro.png',
-  cursor: '/assets/sidebar/cursor.svg',
+  deepseek: '/assets/providers/deepseek.svg',
+
+  cursor: '/assets/providers/cursor.svg',
   gitlab: '/assets/providers/gitlab.svg',
   codebuddy: '/assets/providers/codebuddy.png',
   kilo: '/assets/providers/kilo.png',
@@ -131,6 +133,7 @@ export const PROVIDER_FALLBACK_VISUALS: Record<ProviderVisualId, ProviderFallbac
   qwen: { textClass: 'text-cyan-600', letter: 'Q' },
   iflow: { textClass: 'text-indigo-600', letter: 'i' },
   kiro: { textClass: 'text-teal-600', letter: 'K' },
+  deepseek: { textClass: 'text-blue-500', letter: 'D' },
   cursor: { textClass: 'text-slate-900', letter: 'C' },
   gitlab: { textClass: 'text-orange-600', letter: 'G' },
   codebuddy: { textClass: 'text-blue-600', letter: 'B' },

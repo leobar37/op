@@ -42,7 +42,6 @@ export {
   getBrowserConfig,
   getImageAnalysisConfig,
   getLoggingConfig,
-  getCursorConfig,
 } from './unified-config-loader';
 
 // Re-export types from unified-config-loader

@@ -283,13 +283,13 @@ export async function handleHelpCommand(writeLine: HelpWriter = console.log): Pr
       { name: 'ccs help completion', summary: getTopicSummary('completion') },
       { name: 'ccs help targets', summary: getTopicSummary('targets') },
       { name: 'ccs api --help', summary: 'Deep help for API profile lifecycle commands' },
+      { name: 'ccs api-key --help', summary: 'Deep help for API key profile management' },
       {
         name: 'ccs cliproxy --help',
         summary: 'Deep help for variants, routing, quota, and lifecycle',
       },
       { name: 'ccs proxy --help', summary: 'Deep help for the OpenAI-compatible local proxy' },
       { name: 'ccs docker --help', summary: 'Deep help for Docker deployment commands' },
-      { name: 'ccs cursor --help', summary: 'Deep help for Cursor runtime/admin commands' },
       { name: 'ccs copilot --help', summary: 'Deep help for GitHub Copilot commands' },
     ],
     writeLine
@@ -341,6 +341,7 @@ export async function handleHelpRoute(
 
   const commandHandlers: Partial<Record<string, () => Promise<void>>> = {
     api: async () => (await import('./api-command/help')).showApiCommandHelp(writeLine),
+    'api-key': async () => (await import('./api-key-command')).showApiKeyHelp(),
     auth: async () => {
       const authModule = await import('../auth/auth-commands');
       const AuthCommands = authModule.default;
@@ -351,7 +352,6 @@ export async function handleHelpRoute(
     cliproxy: async () => (await import('./cliproxy/help-subcommand')).showHelp(),
     copilot: async () =>
       process.exit(await (await import('./copilot-command')).handleCopilotCommand(['--help'])),
-    cursor: async () => await showProviderShortcutHelp('cursor', writeLine),
     proxy: async () =>
       process.exit(await (await import('./proxy-command')).handleProxyCommand(['--help'])),
     docker: async () => (await import('./docker/help-subcommand')).showHelp(),

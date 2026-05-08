@@ -20,20 +20,15 @@ const AnalyticsPage = lazy(() =>
   import('@/pages/analytics').then((m) => ({ default: m.AnalyticsPage }))
 );
 const ApiPage = lazy(() => import('@/pages/api').then((m) => ({ default: m.ApiPage })));
-const CliproxyPage = lazy(() =>
-  import('@/pages/cliproxy').then((m) => ({ default: m.CliproxyPage }))
-);
-const CliproxyAiProvidersPage = lazy(() =>
-  import('@/pages/cliproxy-ai-providers').then((m) => ({ default: m.CliproxyAiProvidersPage }))
-);
-const CliproxyControlPanelPage = lazy(() =>
-  import('@/pages/cliproxy-control-panel').then((m) => ({ default: m.CliproxyControlPanelPage }))
+const ApiKeysPage = lazy(() =>
+  import('@/pages/api-keys').then((m) => ({ default: m.ApiKeysPage }))
 );
 const CliproxyProvidersPage = lazy(() =>
   import('@/pages/cliproxy-providers').then((m) => ({ default: m.CliproxyProvidersPage }))
 );
-const CopilotPage = lazy(() => import('@/pages/copilot').then((m) => ({ default: m.CopilotPage })));
-const CursorPage = lazy(() => import('@/pages/cursor').then((m) => ({ default: m.CursorPage })));
+const DeprecatedRedirectPage = lazy(() =>
+  import('@/pages/deprecated-redirect').then((m) => ({ default: m.DeprecatedRedirectPage }))
+);
 const ClaudeExtensionPage = lazy(() =>
   import('@/pages/claude-extension').then((m) => ({ default: m.ClaudeExtensionPage }))
 );
@@ -104,28 +99,35 @@ export default function App() {
                       }
                     />
                     <Route
+                      path="/api-keys"
+                      element={
+                        <Suspense fallback={<PageLoader />}>
+                          <ApiKeysPage />
+                        </Suspense>
+                      }
+                    />
+                    <Route
                       path="/cliproxy"
                       element={
                         <Suspense fallback={<PageLoader />}>
-                          <CliproxyPage />
+                          <DeprecatedRedirectPage
+                            target="/provider-models"
+                            title="CLI Proxy Plus"
+                          />
                         </Suspense>
                       }
                     />
                     <Route
                       path="/cliproxy/ai-providers"
-                      element={
-                        <Suspense fallback={<PageLoader />}>
-                          <CliproxyAiProvidersPage />
-                        </Suspense>
-                      }
+                      element={<Navigate to="/provider-models" replace />}
                     />
                     <Route
                       path="/cliproxy/control-panel"
-                      element={
-                        <Suspense fallback={<PageLoader />}>
-                          <CliproxyControlPanelPage />
-                        </Suspense>
-                      }
+                      element={<Navigate to="/provider-models" replace />}
+                    />
+                    <Route
+                      path="/cliproxy/*"
+                      element={<Navigate to="/provider-models" replace />}
                     />
                     <Route
                       path="/provider-models"
@@ -139,22 +141,11 @@ export default function App() {
                       path="/copilot"
                       element={
                         <Suspense fallback={<PageLoader />}>
-                          <CopilotPage />
+                          <DeprecatedRedirectPage target="/providers" title="GitHub Copilot" />
                         </Suspense>
                       }
                     />
-                    <Route
-                      path="/cursor"
-                      element={<Navigate to="/cliproxy?provider=cursor" replace />}
-                    />
-                    <Route
-                      path="/legacy/cursor"
-                      element={
-                        <Suspense fallback={<PageLoader />}>
-                          <CursorPage />
-                        </Suspense>
-                      }
-                    />
+
                     <Route
                       path="/claude-extension"
                       element={

@@ -58,7 +58,6 @@ import {
 import {
   applyImageAnalysisRuntimeOverrides,
   getImageAnalysisHookEnv,
-  installImageAnalyzerHook,
   prepareImageAnalysisFallbackHook,
   resolveImageAnalysisRuntimeConnection,
   resolveImageAnalysisRuntimeStatus,
@@ -72,7 +71,6 @@ import {
   resolveOfficialChannelsLaunchPlan,
 } from './channels/official-channels-runtime';
 import { getOfficialChannelReadiness } from './channels/official-channels-store';
-import { isCursorSubcommandToken, LEGACY_CURSOR_PROFILE_NAME } from './cursor/constants';
 import { isCLIProxyProvider } from './cliproxy/provider-capabilities';
 
 // Import centralized error handling
@@ -81,7 +79,6 @@ import { tryHandleRootCommand } from './commands/root-command-router';
 
 // Import extracted utility functions
 import { execClaude, stripAnthropicRoutingEnv, stripBrowserEnv } from './utils/shell-executor';
-import { isDeprecatedGlmtProfileName, normalizeDeprecatedGlmtEnv } from './utils/glmt-deprecation';
 import { createOpenAICompatLaunchSettings } from './utils/openai-compat-launch-settings';
 import { maybeWarnAboutResumeLaneMismatch } from './auth/resume-lane-warning';
 import { createLogger, runWithRequestId } from './services/logging';
@@ -173,26 +170,6 @@ function detectProfile(args: string[]): DetectedProfile {
     // First arg doesn't start with '-' → treat as profile name
     return { profile: args[0], remainingArgs: args.slice(1) };
   }
-}
-
-function normalizeLegacyCursorArgs(args: string[]): string[] {
-  if (args[0] === 'legacy' && args[1] === 'cursor') {
-    return [LEGACY_CURSOR_PROFILE_NAME, ...args.slice(2)];
-  }
-
-  return args;
-}
-
-function printCursorLegacySubcommandDeprecation(subcommand: string): void {
-  console.error(
-    info(`\`ccs cursor ${subcommand}\` is deprecated for the legacy Cursor IDE bridge.`)
-  );
-  console.error(
-    info(
-      `Use \`ccs legacy cursor ${subcommand}\` for the old bridge, or \`ccs cursor --auth|--accounts|--config\` for the CLIProxy provider.`
-    )
-  );
-  console.error('');
 }
 
 function resolveRuntimeReasoningFlags(
@@ -508,7 +485,6 @@ async function main(): Promise<void> {
     return;
   }
 
-  args = normalizeLegacyCursorArgs(args);
   let browserLaunchOverride: BrowserLaunchOverride | undefined;
   try {
     const browserLaunchFlags = resolveBrowserLaunchFlagResolution(args);
@@ -607,30 +583,6 @@ async function main(): Promise<void> {
     if (shouldRouteToCopilotCommand) {
       const { handleCopilotCommand } = await import('./commands/copilot-command');
       const exitCode = await handleCopilotCommand(args.slice(1));
-      process.exit(exitCode);
-    }
-  }
-
-  // Special case: explicit legacy Cursor bridge namespace.
-  if (firstArg === LEGACY_CURSOR_PROFILE_NAME && args.length > 1) {
-    const { handleCursorCommand } = await import('./commands/cursor-command');
-    const cursorToken = args[1];
-
-    if (isCursorSubcommandToken(cursorToken)) {
-      const exitCode = await handleCursorCommand(args.slice(1));
-      process.exit(exitCode);
-    }
-  }
-
-  // Compatibility shim: old `ccs cursor <subcommand>` still forwards to the legacy bridge
-  // for one migration window, but bare/positional `ccs cursor` now belongs to CLIProxy.
-  if (firstArg === 'cursor' && args.length > 1) {
-    const { handleCursorCommand } = await import('./commands/cursor-command');
-    const cursorToken = args[1];
-
-    if (isCursorSubcommandToken(cursorToken) && cursorToken !== '--help' && cursorToken !== '-h') {
-      printCursorLegacySubcommandDeprecation(cursorToken);
-      const exitCode = await handleCursorCommand(args.slice(1));
       process.exit(exitCode);
     }
   }
@@ -1123,42 +1075,8 @@ async function main(): Promise<void> {
         claudeCli
       );
       process.exit(exitCode);
-    } else if (profileInfo.type === 'cursor') {
-      // CURSOR FLOW: local Cursor daemon profile
-      ensureWebSearchMcpOrThrow();
-      installImageAnalyzerHook();
-      ensureImageAnalyzerHooks({
-        profileName: profileInfo.name,
-        profileType: profileInfo.type,
-      });
-
-      const { executeCursorProfile } = await import('./cursor');
-      const cursorConfig = profileInfo.cursorConfig;
-      if (!cursorConfig) {
-        console.error(fail('Cursor configuration not found'));
-        process.exit(1);
-      }
-      const continuityInheritance = await resolveProfileContinuityInheritance({
-        profileName: profileInfo.name,
-        profileType: profileInfo.type,
-        target: resolvedTarget,
-      });
-      if (continuityInheritance.sourceAccount && process.env.CCS_DEBUG) {
-        console.error(
-          info(
-            `Continuity inheritance active: profile "${profileInfo.name}" -> account "${continuityInheritance.sourceAccount}"`
-          )
-        );
-      }
-      const exitCode = await executeCursorProfile(
-        cursorConfig,
-        remainingArgs,
-        continuityInheritance.claudeConfigDir,
-        claudeCli
-      );
-      process.exit(exitCode);
     } else if (profileInfo.type === 'settings') {
-      // Settings-based profiles (glm, glmt) are third-party providers
+      // Settings-based profiles (glm) are third-party providers
       const imageAnalysisMcpReady =
         resolvedTarget === 'claude' ? ensureImageAnalysisMcpOrThrow() : true;
       const browserAttachRuntime =
@@ -1251,21 +1169,10 @@ async function main(): Promise<void> {
           process.exit(1);
         }
       }
-      const rawSettingsEnv = profileInfo.env ?? settings.env ?? {};
-      const isDeprecatedGlmtProfile = isDeprecatedGlmtProfileName(profileInfo.name);
-      const glmtNormalization = isDeprecatedGlmtProfile
-        ? normalizeDeprecatedGlmtEnv(rawSettingsEnv)
-        : null;
-      const settingsEnv = glmtNormalization?.env ?? rawSettingsEnv;
-
-      if (glmtNormalization) {
-        for (const message of glmtNormalization.warnings) {
-          console.error(warn(message));
-        }
-      }
+      const settingsEnv = profileInfo.env ?? settings.env ?? {};
 
       // Pre-flight validation for Z.AI-compatible profiles.
-      if (profileInfo.name === 'glm' || isDeprecatedGlmtProfile) {
+      if (profileInfo.name === 'glm') {
         const apiKey = settingsEnv['ANTHROPIC_AUTH_TOKEN'];
 
         if (apiKey) {

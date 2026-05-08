@@ -15,7 +15,6 @@ import {
   createEmptyUnifiedConfig,
   UNIFIED_CONFIG_VERSION,
   DEFAULT_COPILOT_CONFIG,
-  DEFAULT_CURSOR_CONFIG,
   DEFAULT_GLOBAL_ENV,
   DEFAULT_CLIPROXY_SERVER_CONFIG,
   DEFAULT_CLIPROXY_SAFETY_CONFIG,
@@ -41,7 +40,6 @@ import type {
   BrowserToolPolicy,
   ImageAnalysisConfig,
   LoggingConfig,
-  CursorConfig,
   ContinuityConfig,
 } from './unified-config-types';
 import { validateCompositeTiers } from '../cliproxy/config/composite-validator';
@@ -564,17 +562,6 @@ function mergeWithDefaults(partial: Partial<UnifiedConfig>): UnifiedConfig {
       wait_on_limit: partial.copilot?.wait_on_limit ?? DEFAULT_COPILOT_CONFIG.wait_on_limit,
       model: partial.copilot?.model ?? DEFAULT_COPILOT_CONFIG.model,
     },
-    // Cursor config - disabled by default, merge with defaults
-    cursor: {
-      enabled: partial.cursor?.enabled ?? DEFAULT_CURSOR_CONFIG.enabled,
-      port: partial.cursor?.port ?? DEFAULT_CURSOR_CONFIG.port,
-      auto_start: partial.cursor?.auto_start ?? DEFAULT_CURSOR_CONFIG.auto_start,
-      ghost_mode: partial.cursor?.ghost_mode ?? DEFAULT_CURSOR_CONFIG.ghost_mode,
-      model: partial.cursor?.model ?? DEFAULT_CURSOR_CONFIG.model,
-      opus_model: partial.cursor?.opus_model,
-      sonnet_model: partial.cursor?.sonnet_model,
-      haiku_model: partial.cursor?.haiku_model,
-    },
     // Global env - injected into all non-Claude subscription profiles
     global_env: {
       enabled: partial.global_env?.enabled ?? true,
@@ -890,25 +877,6 @@ function generateYamlWithComments(config: UnifiedConfig): string {
     lines.push('# ----------------------------------------------------------------------------');
     lines.push(
       yaml.dump({ copilot: config.copilot }, { indent: 2, lineWidth: -1, quotingType: '"' }).trim()
-    );
-    lines.push('');
-  }
-
-  // Cursor section (Cursor IDE proxy daemon)
-  if (config.cursor) {
-    lines.push('# ----------------------------------------------------------------------------');
-    lines.push('# Cursor: Cursor IDE proxy daemon');
-    lines.push('# Enables Cursor IDE integration via local proxy daemon.');
-    lines.push('#');
-    lines.push('# enabled: Enable/disable Cursor integration (default: false)');
-    lines.push('# port: Port for cursor proxy daemon (default: 20129)');
-    lines.push('# auto_start: Auto-start daemon when CCS starts (default: false)');
-    lines.push('# ghost_mode: Disable telemetry for privacy (default: true)');
-    lines.push('# model: Default model ID (used for ANTHROPIC_MODEL)');
-    lines.push('# opus_model/sonnet_model/haiku_model: Optional tier model mapping');
-    lines.push('# ----------------------------------------------------------------------------');
-    lines.push(
-      yaml.dump({ cursor: config.cursor }, { indent: 2, lineWidth: -1, quotingType: '"' }).trim()
     );
     lines.push('');
   }
@@ -1496,13 +1464,4 @@ export function getLoggingConfig(): LoggingConfig {
     redact: config.logging?.redact ?? DEFAULT_LOGGING_CONFIG.redact,
     live_buffer_size: config.logging?.live_buffer_size ?? DEFAULT_LOGGING_CONFIG.live_buffer_size,
   };
-}
-
-/**
- * Get cursor configuration.
- * Returns defaults if not configured.
- */
-export function getCursorConfig(): CursorConfig {
-  const config = loadOrCreateUnifiedConfig();
-  return config.cursor ?? { ...DEFAULT_CURSOR_CONFIG };
 }
