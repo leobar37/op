@@ -4,14 +4,17 @@
  * CRUD operations for API Key profiles.
  * API Keys are stored in a separate JSON file (~/.ccs/api-keys.json)
  * to avoid triggering the config file watcher.
+ *
+ * Apply dispatch is delegated to the extensible applicator registry
+ * in api-key-applicators/ — each target (claude, droid, pi) registers
+ * its own applicator module. No hardcoded if/else branches per target.
  */
 
 import * as fs from 'fs';
 import * as path from 'path';
 import { getCcsDir } from '../../utils/config-manager';
-import { resolveDroidProvider } from '../../targets/droid-provider';
-import { upsertCcsModel } from '../../droid-settings';
 import { getPresetById } from './provider-presets';
+import { dispatchApply } from './api-key-applicators/index';
 import type {
   ApiKeyProfile,
   CreateApiKeyInput,
@@ -171,154 +174,6 @@ export function removeApiKeyProfile(id: string): RemoveApiKeyResult {
   }
 }
 
-/** Apply an API key profile to Droid with direct strategy */
-async function applyToDroidDirect(profile: ApiKeyProfile): Promise<ApplyApiKeyResult> {
-  try {
-    const droidProvider = resolveDroidProvider({
-      baseUrl: profile.baseUrl,
-      model: profile.defaultModel,
-    });
-
-    await upsertCcsModel(profile.id, {
-      model: profile.defaultModel,
-      displayName: `CCS ${profile.id}`,
-      baseUrl: profile.baseUrl,
-      apiKey: profile.apiKey,
-      provider: droidProvider,
-    });
-
-    return {
-      success: true,
-      target: 'droid',
-      strategy: 'direct',
-      configPath: '~/.factory/settings.json',
-    };
-  } catch (error) {
-    return {
-      success: false,
-      target: 'droid',
-      strategy: 'direct',
-      error: (error as Error).message,
-    };
-  }
-}
-
-/** Apply an API key profile to Droid with proxy strategy */
-async function applyToDroidProxy(profile: ApiKeyProfile): Promise<ApplyApiKeyResult> {
-  try {
-    // Resolve the correct Droid provider from base URL + model
-    // DeepSeek uses /anthropic endpoint -> provider should be 'anthropic'
-    const droidProvider = resolveDroidProvider({
-      baseUrl: profile.baseUrl,
-      model: profile.defaultModel,
-    });
-
-    // For API-key providers (deepseek, glm, etc.), CLIProxy does not have
-    // native routing for these models. The proxy strategy falls back to
-    // direct connection since there is no local proxy that can route
-    // Anthropic-compatible third-party providers.
-    await upsertCcsModel(profile.id, {
-      model: profile.defaultModel,
-      displayName: `CCS ${profile.id}`,
-      baseUrl: profile.baseUrl,
-      apiKey: profile.apiKey,
-      provider: droidProvider,
-    });
-
-    return {
-      success: true,
-      target: 'droid',
-      strategy: 'proxy',
-      configPath: '~/.factory/settings.json',
-    };
-  } catch (error) {
-    return {
-      success: false,
-      target: 'droid',
-      strategy: 'proxy',
-      error: (error as Error).message,
-    };
-  }
-}
-
-/** Apply an API key profile to Claude with direct strategy */
-async function applyToClaudeDirect(profile: ApiKeyProfile): Promise<ApplyApiKeyResult> {
-  try {
-    const ccsDir = getCcsDir();
-    const settingsPath = path.join(ccsDir, `${profile.id}.settings.json`);
-
-    const isNativeAnthropic =
-      profile.provider === 'anthropic' ||
-      profile.apiKey.startsWith('sk-ant-') ||
-      profile.baseUrl.includes('api.anthropic.com');
-
-    const settings = {
-      env: isNativeAnthropic
-        ? {
-            ANTHROPIC_API_KEY: profile.apiKey,
-            ANTHROPIC_MODEL: profile.defaultModel,
-          }
-        : {
-            ANTHROPIC_BASE_URL: profile.baseUrl,
-            ANTHROPIC_AUTH_TOKEN: profile.apiKey,
-            ANTHROPIC_MODEL: profile.defaultModel,
-          },
-    };
-
-    fs.mkdirSync(ccsDir, { recursive: true });
-    fs.writeFileSync(settingsPath, JSON.stringify(settings, null, 2) + '\n', 'utf8');
-
-    return {
-      success: true,
-      target: 'claude',
-      strategy: 'direct',
-      configPath: settingsPath,
-    };
-  } catch (error) {
-    return {
-      success: false,
-      target: 'claude',
-      strategy: 'direct',
-      error: (error as Error).message,
-    };
-  }
-}
-
-/** Apply an API key profile to Claude with proxy strategy */
-async function applyToClaudeProxy(profile: ApiKeyProfile): Promise<ApplyApiKeyResult> {
-  // For proxy strategy, we use the existing API profile mechanism
-  try {
-    const ccsDir = getCcsDir();
-    const settingsPath = path.join(ccsDir, `${profile.id}.settings.json`);
-
-    // Create a settings file that will be used by the proxy
-    const settings = {
-      env: {
-        ANTHROPIC_BASE_URL: profile.baseUrl,
-        ANTHROPIC_AUTH_TOKEN: profile.apiKey,
-        ANTHROPIC_MODEL: profile.defaultModel,
-      },
-    };
-
-    fs.mkdirSync(ccsDir, { recursive: true });
-    fs.writeFileSync(settingsPath, JSON.stringify(settings, null, 2) + '\n', 'utf8');
-
-    return {
-      success: true,
-      target: 'claude',
-      strategy: 'proxy',
-      configPath: settingsPath,
-    };
-  } catch (error) {
-    return {
-      success: false,
-      target: 'claude',
-      strategy: 'proxy',
-      error: (error as Error).message,
-    };
-  }
-}
-
 /** Apply an API key profile to a target with a strategy */
 export async function applyApiKeyProfile(
   id: string,
@@ -335,18 +190,5 @@ export async function applyApiKeyProfile(
     };
   }
 
-  if (target === 'droid') {
-    return strategy === 'direct' ? applyToDroidDirect(profile) : applyToDroidProxy(profile);
-  }
-
-  if (target === 'claude') {
-    return strategy === 'direct' ? applyToClaudeDirect(profile) : applyToClaudeProxy(profile);
-  }
-
-  return {
-    success: false,
-    target,
-    strategy,
-    error: `Target '${target}' is not supported for API key application`,
-  };
+  return dispatchApply(profile, target, strategy);
 }

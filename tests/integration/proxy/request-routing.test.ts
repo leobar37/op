@@ -162,7 +162,7 @@ describe('openai proxy request routing', () => {
     });
     expect(response.status).toBe(200);
     expect(await response.json()).toMatchObject({
-      content: [{ type: 'text', text: 'Reply from secondary' }],
+      choices: [{ message: { content: 'Reply from secondary' } }],
     });
     expect(hits).toEqual(['secondary']);
     expect(bodies[0]?.body).toMatchObject({ model: 'deepseek-reasoner' });
@@ -227,7 +227,7 @@ describe('openai proxy request routing', () => {
 
     expect(response.status).toBe(200);
     expect(await response.json()).toMatchObject({
-      content: [{ type: 'text', text: 'Reply from thinker' }],
+      choices: [{ message: { content: 'Reply from thinker' } }],
     });
     expect(hits).toEqual(['thinker']);
     expect(bodies[0]?.body).toMatchObject({ model: 'deepseek-reasoner' });
@@ -293,7 +293,7 @@ describe('openai proxy request routing', () => {
 
     expect(response.status).toBe(200);
     expect(await response.json()).toMatchObject({
-      content: [{ type: 'text', text: 'Reply from thinker' }],
+      choices: [{ message: { content: 'Reply from thinker' } }],
     });
     expect(hits).toEqual(['thinker']);
     expect(bodies[0]?.body).toMatchObject({
@@ -344,7 +344,7 @@ describe('openai proxy request routing', () => {
 
     expect(response.status).toBe(200);
     expect(await response.json()).toMatchObject({
-      content: [{ type: 'text', text: 'Reply from openai' }],
+      choices: [{ message: { content: 'Reply from openai' } }],
     });
     expect(hits).toEqual(['openai']);
     expect(bodies[0]?.body).toMatchObject({
@@ -398,7 +398,7 @@ describe('openai proxy request routing', () => {
 
     expect(response.status).toBe(200);
     expect(await response.json()).toMatchObject({
-      content: [{ type: 'text', text: 'Reply from openai' }],
+      choices: [{ message: { content: 'Reply from openai' } }],
     });
     expect(hits).toEqual(['openai']);
 

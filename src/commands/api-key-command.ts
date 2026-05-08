@@ -285,7 +285,7 @@ async function handleApiKeyList(): Promise<void> {
 
   console.log('');
   console.log(
-    `Apply with: ${color('ccs api-key apply <id> --target <claude|droid> --strategy <direct|proxy>', 'command')}`
+    `Apply with: ${color('ccs api-key apply <id> --target <claude|droid|pi> --strategy <direct|proxy>', 'command')}`
   );
 }
 
@@ -315,7 +315,7 @@ async function handleApiKeyApply(args: string[]): Promise<void> {
   if (!parsed.id) {
     console.log(fail('API key profile ID is required'));
     console.log(
-      `Usage: ${color('ccs api-key apply <id> --target <claude|droid> --strategy <direct|proxy>', 'command')}`
+      `Usage: ${color('ccs api-key apply <id> --target <claude|droid|pi> --strategy <direct|proxy>', 'command')}`
     );
     process.exit(1);
   }
@@ -377,7 +377,7 @@ export async function showApiKeyHelp(): Promise<void> {
   console.log(`  ${color('--key <key>', 'command')}       API key`);
   console.log(`  ${color('--base-url <url>', 'command')}  Base URL for the provider`);
   console.log(`  ${color('--model <model>', 'command')}   Default model`);
-  console.log(`  ${color('--target <cli>', 'command')}   Target: claude or droid`);
+  console.log(`  ${color('--target <type>', 'command')}   Target: claude, droid, or pi`);
   console.log(`  ${color('--strategy <type>', 'command')} Strategy: direct or proxy`);
   console.log(`  ${color('--force, -f', 'command')}      Overwrite existing profile`);
   console.log(`  ${color('--yes, -y', 'command')}        Skip confirmation prompts`);
@@ -397,6 +397,11 @@ export async function showApiKeyHelp(): Promise<void> {
   console.log(`  ${dim('# Apply to Claude with proxy strategy')}`);
   console.log(
     `  ${color('ccs api-key apply deepseek-api --target claude --strategy proxy', 'command')}`
+  );
+  console.log('');
+  console.log(`  ${dim('# Apply to Pi with direct strategy')}`);
+  console.log(
+    `  ${color('ccs api-key apply deepseek-api --target pi --strategy direct', 'command')}`
   );
   console.log('');
 }

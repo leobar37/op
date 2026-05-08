@@ -30,7 +30,7 @@ describe('cliproxy variant arg parser', () => {
     const parsed = parseProfileArgs(['variant-a', '--target', 'codex']);
 
     expect(parsed.target).toBeUndefined();
-    expect(parsed.errors).toEqual(['Invalid --target value "codex". Use: claude or droid']);
+    expect(parsed.errors).toEqual(['Invalid --target value "codex". Use: claude, droid, or pi']);
   });
 
   test('uses last --target value when repeated', () => {

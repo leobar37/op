@@ -17,6 +17,9 @@ repomix-output.xml
 plans/
 *.tgz
 
+# Playwright MCP artifacts
+.playwright-mcp/
+
 # Node.js
 node_modules/
 npm-debug.log*
