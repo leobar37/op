@@ -11,6 +11,7 @@ import { describe, expect, it, afterAll } from 'bun:test';
 import { createTestEnvironment } from '../../shared/fixtures/test-environment';
 import { dispatchApply, getApplicatorRecord, getSupportedApplyTargets } from '../../../src/api/services/api-key-applicators/index';
 import { createApiKeyProfile, removeApiKeyProfile } from '../../../src/api/services/api-key-service';
+import { resolveDroidConfigPaths } from '../../../src/droid-settings/paths';
 import type { ApiKeyProfile } from '../../../src/api/services/api-key-types';
 
 // ==================== Helper: create test profiles ====================
@@ -179,12 +180,13 @@ describe('Droid applicator', () => {
     expect(result.success).toBe(true);
 
     // Verify the model was written to factory settings
-    const factorySettingsPath = path.join(env.testHome, '.factory', 'settings.json');
+    const droidPaths = resolveDroidConfigPaths();
+    const factorySettingsPath = droidPaths.settingsPath;
     expect(fs.existsSync(factorySettingsPath)).toBe(true);
 
     const settings = JSON.parse(fs.readFileSync(factorySettingsPath, 'utf8'));
     const modelEntry = settings.customModels?.find(
-      (m: { name: string }) => m.name === 'test-deepseek'
+      (m: { displayName: string }) => m.displayName === 'CCS test-deepseek'
     );
     expect(modelEntry).toBeDefined();
     expect(modelEntry.baseUrl).toBe('https://api.deepseek.com/v1');
@@ -237,7 +239,8 @@ describe('Pi applicator', () => {
     expect(result.success).toBe(false);
     expect(result.target).toBe('pi');
     expect(result.strategy).toBe('proxy');
-    expect(result.error).toContain('Proxy strategy is not supported');
+    expect(result.error).toContain('not supported');
+    expect(result.error).toContain('pi');
   });
 
   it('returns error for unsupported CCS provider for pi', async () => {
